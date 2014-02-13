@@ -4,13 +4,8 @@ class FileAssetsController < ApplicationController
   end
   
   def create
-    @file_asset = FileAsset.new(user_params)
-    if @file_asset.save
-      flash[:notice] = "File uploaded."
-    else
-      flash[:alert] = "Unable to upload file. Please make sure it is a valid video, audio or subtitle file."
-    end
-    redirect_to file_assets_path
+    @file_asset = FileAsset.create!(user_params)
+    render :ok, nothing: true
   end
   
   def destroy
