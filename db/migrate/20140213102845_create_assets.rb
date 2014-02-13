@@ -1,6 +1,6 @@
 class CreateAssets < ActiveRecord::Migration
   def change
-    create_table :assets do |t|
+    create_table :file_assets do |t|
 
       t.timestamps
     end

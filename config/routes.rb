@@ -6,7 +6,7 @@ EbuOndemand::Application.routes.draw do
   # root 'welcome#index'
   root 'dashboard#index'
   
-  resources :assets
+  resources :file_assets
   
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

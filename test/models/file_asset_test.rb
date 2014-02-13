@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class AssetTest < ActiveSupport::TestCase
+class FileAssetTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

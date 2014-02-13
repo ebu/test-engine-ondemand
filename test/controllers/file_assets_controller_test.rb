@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class AssetsControllerTest < ActionController::TestCase
+class FileAssetsControllerTest < ActionController::TestCase
   # test "the truth" do
   #   assert true
   # end

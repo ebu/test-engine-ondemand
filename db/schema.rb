@@ -13,7 +13,7 @@
 
 ActiveRecord::Schema.define(version: 20140213112738) do
 
-  create_table "assets", force: true do |t|
+  create_table "file_assets", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "resource_file_name"

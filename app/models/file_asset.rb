@@ -1,4 +1,4 @@
-class Asset < ActiveRecord::Base
+class FileAsset < ActiveRecord::Base
   has_attached_file :resource
   
   validates_attachment :resource,

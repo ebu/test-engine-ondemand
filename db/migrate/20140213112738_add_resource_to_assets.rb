@@ -1,9 +1,9 @@
 class AddResourceToAssets < ActiveRecord::Migration
   def up
-    add_attachment :assets, :resource
+    add_attachment :file_assets, :resource
   end
   
   def down
-    remove_attachment :assets, :resource
+    remove_attachment :file_assets, :resource
   end
 end

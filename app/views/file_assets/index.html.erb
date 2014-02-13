@@ -1,0 +1,24 @@
+<%= form_for FileAsset.new, :url => file_assets_path, :html => { :multipart => true, :role => "form" } do |form| %>
+  <div class="form-group">
+    <div class="btn btn-success fileinput-button">
+        <i class="glyphicon glyphicon-plus"></i>
+        <span>Select file</span>
+        <%= form.file_field :resource, class: "btn btn-default" %>
+    </div>
+  </div>
+  <%= form.submit "Upload file", class: "btn btn-primary", disabled: true %>
+<% end %>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Filename</th>
+      <th>Created at</th>
+      <th>Updated at</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= render @file_assets %>
+  </tbody>
+</table>
