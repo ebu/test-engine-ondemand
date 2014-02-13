@@ -1,6 +1,8 @@
 <tr>
   <td><%= file_asset.id %></td>
-  <td><%= file_asset.resource_file_name %>
-  <td><%= file_asset.created_at %></td>
-  <td><%= file_asset.updated_at %></td>
+  <td><%= file_asset.resource_file_name %></td>
+  <td><%= number_to_human_size file_asset.resource_file_size %></td>
+  <td><%= file_asset.resource_content_type %></td>
+  <td><%= l file_asset.created_at, :format => :long %></td>
+  <td><%= link_to "Remove", file_asset_path(file_asset), method: 'delete', data: { confirm: 'This will remove your source file. Are you sure?' }, class: "btn btn-danger btn-sm" %></td>
 </tr>

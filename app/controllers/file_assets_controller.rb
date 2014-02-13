@@ -4,10 +4,21 @@ class FileAssetsController < ApplicationController
   end
   
   def create
-    if FileAsset.create(user_params)
+    @file_asset = FileAsset.new(user_params)
+    if @file_asset.save
       flash[:notice] = "File uploaded."
     else
-      flash[:alert] = "Unable to upload file."
+      flash[:alert] = "Unable to upload file. Please make sure it is a valid video, audio or subtitle file."
+    end
+    redirect_to file_assets_path
+  end
+  
+  def destroy
+    @file_asset = FileAsset.find(params[:id])
+    if @file_asset.destroy
+      flash[:notice] = "File removed."
+    else
+      flash[:alert] = "Unable to remove file."
     end
     redirect_to file_assets_path
   end

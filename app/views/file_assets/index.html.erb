@@ -1,21 +1,29 @@
-<%= form_for FileAsset.new, :url => file_assets_path, :html => { :multipart => true, :role => "form" } do |form| %>
-  <div class="form-group">
-    <div class="btn btn-success fileinput-button">
-        <i class="glyphicon glyphicon-plus"></i>
-        <span>Select file</span>
-        <%= form.file_field :resource, class: "btn btn-default" %>
-    </div>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Upload new file (max. <%= number_to_human_size EBU::UPLOAD_MAX_SIZE %>)</h3>
   </div>
-  <%= form.submit "Upload file", class: "btn btn-primary", disabled: true %>
-<% end %>
+  <div class="panel-body">
+    <div id="file_asset_info"></div>
+    <%= form_for FileAsset.new, url: file_assets_path, html: { multipart: true, role: "form" } do |form| %>
+      <span class="btn btn-success fileinput-button">
+          <i class="glyphicon glyphicon-file"></i>
+          <span>Select file</span>
+          <%= form.file_field :resource, data: { 'size-limit' => EBU::UPLOAD_MAX_SIZE.to_i } %>
+      </span>
+      <%= form.submit "Upload file", class: "btn btn-primary", disabled: true, id: 'submit' %>
+    <% end %>
+  </div>
+</div>
 
 <table class="table table-striped">
   <thead>
     <tr>
       <th>ID</th>
       <th>Filename</th>
-      <th>Created at</th>
-      <th>Updated at</th>
+      <th>Size</th>
+      <th>Type</th>
+      <th>Created</th>
+      <th>Actions</th>
     </tr>
   </thead>
   <tbody>

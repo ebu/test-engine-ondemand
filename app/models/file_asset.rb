@@ -4,5 +4,5 @@ class FileAsset < ActiveRecord::Base
   validates_attachment :resource,
     presence: true,
     size: { in: 0..EBU::UPLOAD_MAX_SIZE },
-    content_type: { content_type: /\Aimage/ }
+    content_type: { content_type: EBU::ALLOWED_CONTENT_TYPES }
 end
