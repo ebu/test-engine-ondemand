@@ -1,0 +1,18 @@
+<%= form_for Asset.new, :url => assets_path, :html => { :multipart => true, :role => "form" } do |form| %>
+  <%= form.file_field :resource %>
+  <%= form.submit %>
+<% end %>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Filename</th>
+      <th>Created at</th>
+      <th>Updated at</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= render @assets %>
+  </tbody>
+</table>

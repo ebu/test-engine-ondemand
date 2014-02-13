@@ -21,6 +21,9 @@ gem 'jquery-rails'
 # Use bootstrap SCSS gem
 gem 'bootstrap-sass', '~> 3.1.0'
 
+# Use paperclip for file uploads
+gem "paperclip", "~> 4.0"
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
