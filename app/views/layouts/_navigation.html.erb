@@ -11,10 +11,10 @@
     </div>
     <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
       <ul class="nav navbar-nav">
-        <!-- <li>
-          <a href="../getting-started">Getting started</a>
+        <li class="<%= active_nav_item("assets") %>">
+          <%= link_to 'Assets Library', assets_path %>
         </li>
-        <li>
+        <!-- <li>
           <a href="../css">CSS</a>
         </li>
         <li class="active">
