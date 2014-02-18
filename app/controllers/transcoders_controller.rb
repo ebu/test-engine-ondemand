@@ -28,6 +28,11 @@ class TranscodersController < ApplicationController
     redirect_to transcoders_path
   end
   
+  def available
+    @transcoder = Transcoder.find(params[:id])
+    render layout: false
+  end
+  
   private
   
   def user_params

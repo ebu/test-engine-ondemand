@@ -7,7 +7,11 @@ EbuOndemand::Application.routes.draw do
   root 'dashboard#index'
   
   resources :file_assets
-  resources :transcoders
+  resources :transcoders do
+    member do
+      get 'available'
+    end
+  end
   
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
