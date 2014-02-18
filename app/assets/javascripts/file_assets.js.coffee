@@ -2,8 +2,9 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 jQuery ->
-  $('#file_asset_resource').on 'change', changeHandler
-  $('#submit').on 'click', submitHandler
+  if ($('body').attr('data-controller') == 'file_assets' && $('body').attr('data-action') == 'index')
+    $('#file_asset_resource').on 'change', changeHandler
+    $('#submit').on 'click', submitHandler
 
 changeHandler = (event) =>
   maxSize = parseInt(event.currentTarget.getAttribute('data-size-limit'), 10)
@@ -31,11 +32,15 @@ submitHandler = (event) =>
   # xhr.addEventListener("error", uploadFailed, false);
   # xhr.addEventListener("abort", uploadCanceled, false);
 
+  document.getElementById('upload_progress').style.display = 'block';
+  
   xhr.open(form.getAttribute('method'), form.getAttribute('action'));
   xhr.send(fd);
 
 uploadComplete = (event) =>
+  document.getElementById('upload_progress').style.display = 'none';
   document.getElementById('upload_progress').children[0].style.width = "0%"
+  window.location.href = window.location.href;
   
 uploadProgress = (event) =>
   pct = event.loaded * 100 / event.total

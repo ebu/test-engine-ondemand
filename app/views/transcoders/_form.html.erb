@@ -1,0 +1,15 @@
+<%= form_for @transcoder, html: {role: "form" } do |f| %>
+<div class="form-group">
+<%= f.label 'Host name: ' %>
+<%= f.text_field :host_name, :placeholder => "Host name / IP address of transcoder, e.g. 'localhost' or '192.168.1.10'", :class => "form-control", :autofocus => '' %><br/>
+</div>
+
+<div class="form-group">
+<%= f.label 'Port: ' %>
+<%= f.text_field :port, :placeholder => "Port of transcoder, e.g. '8080'", :class => "form-control" %><br/>
+</div>
+
+<%= link_to "Cancel", transcoders_path, :class => "btn btn-default" %>
+<%= f.submit :class => "btn btn-primary", :value => "Save" %>
+
+<% end %>
