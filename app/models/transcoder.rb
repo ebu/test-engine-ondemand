@@ -3,7 +3,7 @@ class Transcoder < ActiveRecord::Base
   validates :port, presence: true, numericality: true
   
   def available?
-    begin
+    @available ||= begin
       response = RestClient::Request.execute(:method => :get, :url => build_jobs_url, :timeout => 5, :open_timeout => 5)
       response.code == 200 ? true : false
     rescue Timeout::Error => e
