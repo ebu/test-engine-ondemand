@@ -2,7 +2,7 @@
   <td><%= transcoder.id %></td>
   <td><%= transcoder.host_name %></td>
   <td><%= transcoder.port %></td>
-  <td>(unknown)</td>
+  <td><%= transcoder_available_label transcoder %></td>
   <td>
     <%= link_to "Remove", transcoder_path(transcoder), method: 'delete', data: { confirm: 'This will remove your transcoder from the pool. Are you sure?' }, class: "btn btn-danger btn-sm" %>
   </td>

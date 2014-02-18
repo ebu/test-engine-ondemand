@@ -24,6 +24,9 @@ gem 'bootstrap-sass', '~> 3.1.0'
 # Use paperclip for file uploads
 gem "paperclip", "~> 3.0"
 
+# Use rest-client for transcoder communication
+gem "rest-client", "~> 1.6.7"
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
