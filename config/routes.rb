@@ -7,6 +7,7 @@ EbuOndemand::Application.routes.draw do
   root 'dashboard#index'
   
   resources :file_assets
+  resources :preset_templates
   resources :transcoders do
     member do
       get 'available'

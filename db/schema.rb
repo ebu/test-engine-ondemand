@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140218131643) do
+ActiveRecord::Schema.define(version: 20140219100838) do
 
   create_table "file_assets", force: true do |t|
     t.datetime "created_at"
@@ -20,6 +20,13 @@ ActiveRecord::Schema.define(version: 20140218131643) do
     t.string   "resource_content_type"
     t.integer  "resource_file_size"
     t.datetime "resource_updated_at"
+  end
+
+  create_table "preset_templates", force: true do |t|
+    t.text     "template_text"
+    t.integer  "preset_type",   default: 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "transcoders", force: true do |t|

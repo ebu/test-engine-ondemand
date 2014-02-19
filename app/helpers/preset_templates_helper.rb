@@ -1,0 +1,2 @@
+module PresetTemplatesHelper
+end
