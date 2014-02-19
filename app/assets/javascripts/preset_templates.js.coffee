@@ -12,7 +12,7 @@ presets = {
 }
 
 jQuery ->
-  if ($('body').attr('data-controller') == 'preset_templates' && $('body').attr('data-action') == 'new')
+  if ($('body').attr('data-controller') == 'preset_templates' && ($('body').attr('data-action') == 'new' || $('body').attr('data-action') == 'create'))
     $('#preset_template_preset_type').on 'change', changeHandler
     $('#preset_template_preset_type').change()
     
@@ -26,8 +26,9 @@ updatePrefillButtons = (preset) =>
   
   $.each available_presets, (index, value) =>
     button = document.createElement('button')
-    button.className = 'btn btn-primary btn-xs'
+    button.className = 'btn btn-info btn-xs'
     button.setAttribute('data-value', value)
+    button.setAttribute('type', 'button')
     button.innerText = index
     prefill_buttons[0].appendChild(button)
     $(button).on 'click', ->
