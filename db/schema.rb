@@ -11,14 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140219133411) do
+ActiveRecord::Schema.define(version: 20140219154931) do
 
   create_table "encoding_jobs", force: true do |t|
     t.string   "description"
     t.text     "post_processing_flags"
-    t.integer  "status",                default: 0
+    t.integer  "status",                      default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "post_processing_template_id"
   end
 
   create_table "file_assets", force: true do |t|
