@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140219100838) do
+ActiveRecord::Schema.define(version: 20140219115055) do
 
   create_table "file_assets", force: true do |t|
     t.datetime "created_at"
@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 20140219100838) do
     t.integer  "preset_type",   default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "description"
   end
 
   create_table "transcoders", force: true do |t|

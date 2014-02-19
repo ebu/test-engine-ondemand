@@ -31,6 +31,6 @@ class PresetTemplatesController < ApplicationController
   private
   
   def user_params
-    params.require(:preset_template).permit(:preset_type, :template_text)
+    params.require(:preset_template).permit(:preset_type, :template_text, :description)
   end
 end

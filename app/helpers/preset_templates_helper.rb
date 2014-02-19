@@ -6,4 +6,8 @@ module PresetTemplatesHelper
   def human_readable_preset_type(preset)
     PresetTemplate::HUMAN_READABLE_PRESET_TYPES[preset.attributes['preset_type']]
   end
+  
+  def formatted_preset_template_text(text)
+    text.gsub(/\@(.*?)\@/, '<span class="label label-info">@\1@</span>').html_safe
+  end
 end

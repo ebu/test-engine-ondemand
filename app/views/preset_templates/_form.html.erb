@@ -5,11 +5,17 @@
 </div>
 
 <div class="form-group">
-<%= f.label 'Template text: ' %>
-<%= f.text_area :template_text, :placeholder => "Template for preset.", :class => "form-control" %><br/>
+<%= f.label 'Description: ' %>
+<%= f.text_field :description, placeholder: "Description for template, e.g. 'Basic video preset'.", class: "form-control" %><br/>
 </div>
 
-<%= link_to "Cancel", preset_templates_path, :class => "btn btn-default" %>
-<%= f.submit :class => "btn btn-primary", :value => "Save" %>
+<div class="form-group">
+<%= f.label 'Template text: ' %>
+<span id="prefill_buttons"></span>
+<%= f.text_area :template_text, placeholder: "Template for preset. Write your own settings or use one of the pre-fill buttons as a starting point.", class: "form-control", rows: 5 %><br/>
+</div>
+
+<%= link_to "Cancel", preset_templates_path, class: "btn btn-default" %>
+<%= f.submit class: "btn btn-primary", value: "Save" %>
 
 <% end %>
