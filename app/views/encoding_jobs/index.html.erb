@@ -13,7 +13,7 @@
   </tbody>
 </table>
 
-<%= link_to "Add encoding", new_encoding_job_path, class: "btn btn-primary", disabled: !new_encoding_job_allowed? %>
-<% unless new_encoding_job_allowed? %>
+<%= link_to "Add encoding", new_encoding_job_path, class: "btn btn-primary", disabled: !EncodingJob.new_allowed? %>
+<% unless EncodingJob.new_allowed? %>
 <small><em>At least one file asset, one encoder preset and one post-processing preset need to exist before you can create a new encoding job...</em></small>
 <% end %>
