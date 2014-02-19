@@ -1,0 +1,8 @@
+<tr>
+  <td><%= preset_template.id %></td>
+  <td><%= human_readable_preset_type preset_template %></td>
+  <td><%= preset_template.template_text %></td>
+  <td>
+    <%= link_to "Remove", preset_template_path(preset_template), method: 'delete', data: { confirm: 'This will remove your preset template. Are you sure?' }, class: "btn btn-danger btn-sm" %>
+  </td>
+</tr>

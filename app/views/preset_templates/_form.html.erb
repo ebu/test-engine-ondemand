@@ -1,0 +1,15 @@
+<%= form_for @preset_template, html: {role: "form" } do |f| %>
+<div class="form-group">
+<%= f.label 'Preset type: ' %>
+<%= f.select :preset_type, preset_types_for_select, class: "form-control" %><br/>
+</div>
+
+<div class="form-group">
+<%= f.label 'Template text: ' %>
+<%= f.text_area :template_text, :placeholder => "Template for preset.", :class => "form-control" %><br/>
+</div>
+
+<%= link_to "Cancel", preset_templates_path, :class => "btn btn-default" %>
+<%= f.submit :class => "btn btn-primary", :value => "Save" %>
+
+<% end %>

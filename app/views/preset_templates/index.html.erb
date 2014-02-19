@@ -1,0 +1,15 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Preset Type</th>
+      <th>Template Text</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= render @preset_templates %>
+  </tbody>
+</table>
+
+<%= link_to "Add preset template", new_preset_template_path, class: "btn btn-primary" %>
