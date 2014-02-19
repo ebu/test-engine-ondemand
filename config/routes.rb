@@ -6,6 +6,7 @@ EbuOndemand::Application.routes.draw do
   # root 'welcome#index'
   root 'dashboard#index'
   
+  resources :encoding_jobs
   resources :file_assets
   resources :preset_templates
   resources :transcoders do
