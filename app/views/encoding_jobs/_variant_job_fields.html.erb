@@ -1,5 +1,5 @@
-<li class="list-group-item">
-  <button type="button" class="close" aria-hidden="true" onclick="ebu.dismiss(this)">&times;</button>
+<li class="list-group-item" data-id="new_variant_job">
+  <button type="button" class="close" aria-hidden="true">&times;</button>
 
   <div class="form-group">
   <%= f.label 'Source file: ' %>
@@ -8,7 +8,8 @@
 
   <div class="form-group">
   <%= f.label 'Encoder preset: ' %>
-  <%= f.select :encoder_preset_template, encoder_templates_for_select, class: "form-control" %>
+  <%= f.select :encoder_preset_template, encoder_templates_for_select, class: "form-control" %><br/>
+  <span class="encoder_preset_preview"></span>
   </div>
   
 </li>

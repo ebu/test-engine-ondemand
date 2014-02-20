@@ -1,10 +1,10 @@
 module EncodingJobsHelper
   def encoder_templates_for_select
-    PresetTemplate.encoder_preset.map { |p| [p.description, p.id] }
+    PresetTemplate.encoder_preset.map { |p| [p.description, p.id, {'data-preset' => p.template_text}] }
   end
 
   def post_processing_templates_for_select
-    PresetTemplate.post_processing_preset.map { |p| [p.description, p.id] }
+    PresetTemplate.post_processing_preset.map { |p| [p.description, p.id, {'data-preset' => p.template_text}] }
   end
   
   def source_files_for_select
