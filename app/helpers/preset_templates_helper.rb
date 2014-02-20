@@ -8,6 +8,6 @@ module PresetTemplatesHelper
   end
   
   def formatted_preset_template_text(text)
-    text.gsub(/\@(.*?)\@/, '<span class="label label-info">@\1@</span>').html_safe
+    text.gsub(/\@(.*?)\@/, '<span class="label label-info" data-variable="\1">@\1@</span>').html_safe
   end
 end

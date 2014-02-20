@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140219154931) do
+ActiveRecord::Schema.define(version: 20140220092501) do
 
   create_table "encoding_jobs", force: true do |t|
     t.string   "description"
@@ -42,6 +42,16 @@ ActiveRecord::Schema.define(version: 20140219154931) do
   create_table "transcoders", force: true do |t|
     t.string   "host_name"
     t.integer  "port"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "variant_jobs", force: true do |t|
+    t.integer  "encoding_job_id"
+    t.integer  "encoder_preset_template_id"
+    t.integer  "source_file_id"
+    t.string   "source_file_path"
+    t.string   "encoder_flags"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

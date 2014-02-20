@@ -1,0 +1,14 @@
+<li class="list-group-item">
+  <button type="button" class="close" aria-hidden="true" onclick="ebu.dismiss(this)">&times;</button>
+
+  <div class="form-group">
+  <%= f.label 'Source file: ' %>
+  <%= f.select :source_file, source_files_for_select, class: "form-control" %><br/>
+  </div>
+
+  <div class="form-group">
+  <%= f.label 'Encoder preset: ' %>
+  <%= f.select :encoder_preset_template, encoder_templates_for_select, class: "form-control" %>
+  </div>
+  
+</li>

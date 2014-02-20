@@ -4,9 +4,14 @@
 <%= f.text_field :description, placeholder: "Description for job, e.g. 'Test adaptive 3 variants'.", class: "form-control" %><br/>
 </div>
 
-<div class="form-group">
-<%= f.label 'Variant jobs: ' %>
-(N/A)
+<div class="panel panel-default" id="variant_jobs_list">
+  <div class="panel-heading">
+    <strong>Variant jobs</strong> <%= link_to_add_variant_job('Add encoding variant', f, @encoding_job) %>
+  </div>
+  <div class="panel-body"><em>Specify at least one variant job.</em></div>
+  
+  <ul class="list-group">
+  </ul>
 </div>
 
 <div class="form-group">
