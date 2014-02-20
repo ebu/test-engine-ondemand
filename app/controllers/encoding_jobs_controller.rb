@@ -24,6 +24,7 @@ class EncodingJobsController < ApplicationController
     params.require(:encoding_job).permit(
       :description,
       :post_processing_template_id,
+      :post_processing_flags,
       variant_jobs_attributes: [ :encoder_preset_template_id, :encoder_flags, :source_file_id ])
   end
 end

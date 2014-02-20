@@ -42,20 +42,49 @@ update_presets = (event) ->
                '<input type="text" class="form-control" data-variable="' + v + '"/></div>'
     variables_container.append(template)
 
-# Add submit hook to form
+# Setup handlers when page loads
 jQuery ->
   if ($('body').attr('data-controller') == 'encoding_jobs' && ['new', 'create'].indexOf($('body').attr('data-action')) != -1)
-    $('#new_encoding_job').on 'submit', submit_handler
-
+    $('#new_encoding_job').on 'submit', submit_handler # Handle form submit
+    select_box = $('#encoding_job_post_processing_template_id')
+    select_box.on 'change', post_processing_change_handler
+    select_box.change()
+    
+post_processing_change_handler = (event) ->
+  selected = $(this).find(':selected')
+  preview = $(this).parent().find('.post_processing_preset_preview')
+  variables_container = $(this).parent().find('.post_processing_preset_variables')
+  preview.html(ebu.format_preset(selected.attr('data-preset')))
+  variables = $.map preview.find('[data-variable]'), (item) -> $(item).attr('data-variable')
+  variables_container.html('')
+  variables.forEach (v) ->
+    template = '<div class="input-group input-group-sm"><span class="input-group-addon">' + v + '</span>' +
+               '<input type="text" class="form-control" data-variable="' + v + '"/></div>'
+    variables_container.append(template)
+  
 # Submit handler
 submit_handler = (event) ->
-  # Flatten all variable fields into hidden form field
+  # Flatten all variant jobs variable fields into hidden form field
   $.each $('#variant_jobs_list li[data-id]'), (index, item) =>
-    vars = {}
-    $.each $(item).find('.encoder_preset_variables input[data-variable]'), (i, variable) =>
-      key = $(variable).attr('data-variable')
-      value = $(variable).val()
-      vars[key] = value
-    preset = $(item).find('select[name*="encoder_preset"] :selected').attr('data-preset')
-    preset = ebu.fill_preset(preset, vars)
-    $(item).find('input[name*="encoder_flags"]').val(preset)
+    flatten_input_fields(
+      $(item).find('.encoder_preset_variables input[data-variable]'),
+      $(item).find('select[name*="encoder_preset"] :selected').attr('data-preset'),
+      $(item).find('input[name*="encoder_flags"]')
+    )
+  # Flatten post processing variable fields into hidden form field
+  flatten_input_fields(
+    $('.post_processing_preset_variables input[data-variable]'),
+    $('select[name*="post_processing_template"] :selected').attr('data-preset'),
+    $('input[name*="post_processing_flags"]')
+  )
+  
+
+flatten_input_fields = (source_fields, preset_template, target_field) ->
+  vars = {}
+  $.each source_fields, (i, variable) =>
+    key = $(variable).attr('data-variable')
+    value = $(variable).val()
+    vars[key] = value
+  preset = ebu.fill_preset(preset_template, vars)
+  target_field.val(preset)
+  

@@ -4,5 +4,9 @@ class VariantJob < ActiveRecord::Base
   belongs_to :source_file, class_name: "FileAsset"
   
   validates :encoder_flags, presence: true
-  #validates :source_file_path, presence: true
+  validates :source_file_path, presence: true
+  
+  before_validation(on: :create) do
+    self.source_file_path = (self.source_file ? self.source_file.path : nil)
+  end
 end

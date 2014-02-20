@@ -15,8 +15,11 @@
 </div>
 
 <div class="form-group">
-<%= f.label 'Post processing: ' %>
+<%= f.label 'Post processing preset: ' %>
+<%= f.hidden_field :post_processing_flags %>
 <%= f.select :post_processing_template_id, post_processing_templates_for_select, class: "form-control" %><br/>
+<span class="post_processing_preset_preview"></span>
+<div class="post_processing_preset_variables"></div>
 </div>
 
 <%= link_to "Cancel", encoding_jobs_path, class: "btn btn-default" %>
