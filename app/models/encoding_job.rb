@@ -4,7 +4,7 @@ class EncodingJob < ActiveRecord::Base
   has_many :variant_jobs
   belongs_to :post_processing_template, class_name: "PresetTemplate"
   
-  validates :post_processing_flags, presence: true
+  #validates :post_processing_flags, presence: true
 
   accepts_nested_attributes_for :variant_jobs
   

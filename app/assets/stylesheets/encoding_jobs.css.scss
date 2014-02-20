@@ -1,6 +1,11 @@
 // Place all the styles related to the Encodings controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-#variant_jobs_list .close {
-
+#variant_jobs_list .encoder_preset_variables .input-group {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  
+  .input-group-addon {
+    min-width: 80px;
+  }
 }
