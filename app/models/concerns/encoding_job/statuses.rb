@@ -59,24 +59,41 @@ module EncodingJob::Statuses
   
   # Status checking methods, used to determine preconditions for transitions
   def requires_transcoding?
+    variant_jobs.all? { |j| j.requires_transcoding? }
   end
 
-  def requires_post_processing?
-  end
-
+  # Return true if all variants finished trancoding succesfully. False otherwise.
   def did_complete_transcoding?
+    if variant_jobs.all? { |j| j.finished? }
+      variant_jobs.any? { |j| j.failed? } ? false : true
+    else
+      false
+    end
   end
   
+  # Return true if all variants finished transcoding and at least one failed. False otherwise.
   def did_fail_transcoding?
+    if variant_jobs.all? { |j| j.finished? }
+      variant_jobs.any? { |j| j.failed? } ? true : false
+    else
+      false
+    end
   end
   
+  def requires_post_processing?
+    true
+  end
+
   def did_complete_post_processing?
+    false
   end
   
   def did_fail_post_processing?
+    false
   end
   
   def did_finish_conformance_checking?
+    false
   end
   
   # Entering a state triggers these actions

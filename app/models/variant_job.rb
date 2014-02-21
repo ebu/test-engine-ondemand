@@ -11,4 +11,17 @@ class VariantJob < ActiveRecord::Base
   before_validation(on: :create) do
     self.source_file_path = (self.source_file ? self.source_file.path : nil)
   end
+  
+  def failed?
+    false
+  end
+  
+  def finished?
+    # For now VariantJobs are considered finished always
+    true
+  end
+  
+  def requires_transcoding?
+    true
+  end
 end
