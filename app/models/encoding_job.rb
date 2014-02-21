@@ -1,5 +1,5 @@
 class EncodingJob < ActiveRecord::Base
-  enum status: [ :pending, :transcoding, :post_processing, :conformance_checking, :success, :failed ]
+  include EncodingJob::Statuses
   
   has_many :variant_jobs
   belongs_to :post_processing_template, class_name: "PresetTemplate"
