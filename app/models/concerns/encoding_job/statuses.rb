@@ -26,7 +26,6 @@ module EncodingJob::Statuses
   
   # State machine definition, this describes all possible transitions
   def transition_from_pending
-    puts "from pending"
     if requires_transcoding?
       enter_transcoding
     elsif requires_post_processing?
@@ -37,7 +36,6 @@ module EncodingJob::Statuses
   end
   
   def transition_from_transcoding
-    puts "from transcoding"
     if did_complete_transcoding?
       enter_pending
     elsif did_fail_transcoding?
@@ -46,7 +44,6 @@ module EncodingJob::Statuses
   end
   
   def transition_from_post_processing
-    puts "from post processing"
     if did_complete_post_processing?
       enter_pending
     elsif did_fail_post_processing?
@@ -55,7 +52,6 @@ module EncodingJob::Statuses
   end
   
   def transition_from_conformance_checking
-    puts "from conformance checking"
     if did_finish_conformance_checking?
       enter_success
     end
@@ -85,20 +81,29 @@ module EncodingJob::Statuses
   
   # Entering a state triggers these actions
   def enter_pending
+    update_attribute(:status, :pending)
   end
 
   def enter_transcoding
+    # Send variant jobs to codem
+    update_attribute(:status, :transcoding)
   end
   
   def enter_post_processing
+    # Launch MP4Box for packaging/DASHing
+    update_attribute(:status, :post_processing)
   end
   
   def enter_conformance_checking
+    # Launch conformance checking tools
+    update_attribute(:status, :conformance_checking)
   end
   
   def enter_failed
+    update_attribute(:status, :failed)
   end
   
   def enter_success
+    update_attribute(:status, :success)
   end
 end
