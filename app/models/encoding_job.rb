@@ -1,7 +1,8 @@
 class EncodingJob < ActiveRecord::Base
   include EncodingJob::Statuses
   
-  has_many :variant_jobs
+  has_many :variant_jobs, dependent: :destroy
+  
   belongs_to :post_processing_template, class_name: "PresetTemplate"
   
   validates :post_processing_flags, presence: true

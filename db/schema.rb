@@ -11,7 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140220092501) do
+ActiveRecord::Schema.define(version: 20140221120839) do
+
+  create_table "codem_notifications", force: true do |t|
+    t.integer  "variant_job_id"
+    t.string   "state"
+    t.decimal  "notified_at",    precision: 15, scale: 3
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "encoding_jobs", force: true do |t|
     t.string   "description"
