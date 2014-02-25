@@ -1,0 +1,6 @@
+<tr>
+  <td><%= variant_job.id %></td>
+  <td><%= job_status_label variant_job %></td>
+  <td><%= variant_job.source_file_path.split(File::SEPARATOR).pop %></td>
+  <td class="small"><%= variant_job.codem_notifications.any? ? variant_job.codem_notifications.last.message : '' %></td>
+</tr>

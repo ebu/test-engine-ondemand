@@ -7,9 +7,30 @@
   </div>
 </div>
 
-<div class="panel panel-default">
+<hr/>
+
+<div class="panel panel-default <%= panel_class_for_variant_jobs @encoding_job %>">
   <div class="panel-heading">
     <h3 class="panel-title">Variant Jobs</h3>
+  </div>
+  <div class="panel-body">
+    <%= variant_jobs_summary_for @encoding_job %>
+  </div>
+  
+  <table class="table">
+    <tr>
+      <th>ID</th>
+      <th>Status</th>
+      <th>Source file</th>
+      <th>Message</th>
+    </tr>
+    <%= render partial: "variant_job", collection: @encoding_job.variant_jobs %>
+  </table>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Post processing</h3>
   </div>
   <div class="panel-body">
     <em>None</em>
@@ -18,7 +39,7 @@
 
 <div class="panel panel-default">
   <div class="panel-heading">
-    <h3 class="panel-title">Post processing</h3>
+    <h3 class="panel-title">Conformance checking</h3>
   </div>
   <div class="panel-body">
     <em>None</em>

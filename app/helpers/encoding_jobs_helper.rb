@@ -38,11 +38,31 @@ module EncodingJobsHelper
     end
   end
   
+  def variant_jobs_summary_for(job)
+    if job.variant_jobs.any? { |v| v.failed? }
+      'One or more variant jobs failed transcoding.'
+    elsif job.variant_jobs.all? { |v| v.success? }
+      'All variant jobs completed transcoding succesfully.'
+    else
+      'Waiting for jobs to finish transcoding...'
+    end
+  end
+  
   def panel_class_for(job)
     case job.status
       when 'success' then 'panel-success'
       when 'failed' then 'panel-danger'
       else 'panel-info'
+    end
+  end
+  
+  def panel_class_for_variant_jobs(job)
+    if job.variant_jobs.any? { |v| v.failed? }
+      'panel-danger'
+    elsif job.variant_jobs.all? { |v| v.success? }
+      'panel-success'
+    else
+      'panel-info'
     end
   end
   
