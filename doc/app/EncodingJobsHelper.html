@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="utf-8">
+
+<title>module EncodingJobsHelper - Rails Application Documentation</title>
+
+<link href="./fonts.css" rel="stylesheet">
+<link href="./rdoc.css" rel="stylesheet">
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+</script>
+
+<script src="./js/jquery.js"></script>
+<script src="./js/navigation.js"></script>
+<script src="./js/search_index.js"></script>
+<script src="./js/search.js"></script>
+<script src="./js/searcher.js"></script>
+<script src="./js/darkfish.js"></script>
+
+
+<body id="top" role="document" class="module">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="./index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="./table_of_contents.html#pages">Pages</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    
+    
+    
+    <!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    
+    <li ><a href="#method-i-encoder_templates_for_select">#encoder_templates_for_select</a>
+    
+    <li ><a href="#method-i-link_to_add_variant_job">#link_to_add_variant_job</a>
+    
+    <li ><a href="#method-i-post_processing_templates_for_select">#post_processing_templates_for_select</a>
+    
+    <li ><a href="#method-i-source_files_for_select">#source_files_for_select</a>
+    
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="module-EncodingJobsHelper">
+  <h1 id="module-EncodingJobsHelper" class="module">
+    module EncodingJobsHelper
+  </h1>
+
+  <section class="description">
+    
+  </section>
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-encoder_templates_for_select" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">encoder_templates_for_select</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="encoder_templates_for_select-source">
+            <pre><span class="ruby-comment"># File app/helpers/encoding_jobs_helper.rb, line 2</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">encoder_templates_for_select</span>
+  <span class="ruby-constant">PresetTemplate</span>.<span class="ruby-identifier">encoder_preset</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span> [<span class="ruby-identifier">p</span>.<span class="ruby-identifier">description</span>, <span class="ruby-identifier">p</span>.<span class="ruby-identifier">id</span>, {<span class="ruby-string">&#39;data-preset&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">p</span>.<span class="ruby-identifier">template_text</span>}] }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-link_to_add_variant_job" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">link_to_add_variant_job</span><span
+            class="method-args">(name, f, parent)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="link_to_add_variant_job-source">
+            <pre><span class="ruby-comment"># File app/helpers/encoding_jobs_helper.rb, line 14</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">link_to_add_variant_job</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">f</span>, <span class="ruby-identifier">parent</span>)
+  <span class="ruby-identifier">new_object</span> = <span class="ruby-constant">VariantJob</span>.<span class="ruby-identifier">new</span>
+  <span class="ruby-identifier">fields</span> = <span class="ruby-identifier">f</span>.<span class="ruby-identifier">fields_for</span>(<span class="ruby-value">:variant_jobs</span>, <span class="ruby-identifier">new_object</span>, <span class="ruby-value">:child_index</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;new_variant_job&quot;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">builder</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">render</span>(<span class="ruby-string">&quot;variant_job_fields&quot;</span>, <span class="ruby-value">:f</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">builder</span>)
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">link_to</span>(<span class="ruby-identifier">name</span>, <span class="ruby-string">&#39;#&#39;</span>, <span class="ruby-identifier">onclick</span><span class="ruby-operator">:</span> <span class="ruby-node">&quot;ebu.add_fields(this, \&quot;#{parent}\&quot;, \&quot;#{escape_javascript(fields)}\&quot;); return false;&quot;</span>, <span class="ruby-identifier">class</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;small&quot;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-post_processing_templates_for_select" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">post_processing_templates_for_select</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="post_processing_templates_for_select-source">
+            <pre><span class="ruby-comment"># File app/helpers/encoding_jobs_helper.rb, line 6</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">post_processing_templates_for_select</span>
+  <span class="ruby-constant">PresetTemplate</span>.<span class="ruby-identifier">post_processing_preset</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span> [<span class="ruby-identifier">p</span>.<span class="ruby-identifier">description</span>, <span class="ruby-identifier">p</span>.<span class="ruby-identifier">id</span>, {<span class="ruby-string">&#39;data-preset&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">p</span>.<span class="ruby-identifier">template_text</span>}] }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-source_files_for_select" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">source_files_for_select</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="source_files_for_select-source">
+            <pre><span class="ruby-comment"># File app/helpers/encoding_jobs_helper.rb, line 10</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">source_files_for_select</span>
+  <span class="ruby-constant">FileAsset</span>.<span class="ruby-identifier">all</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span> [<span class="ruby-identifier">f</span>.<span class="ruby-identifier">resource_file_name</span>, <span class="ruby-identifier">f</span>.<span class="ruby-identifier">id</span>] }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="http://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="http://rdoc.rubyforge.org">RDoc</a> 4.1.1.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

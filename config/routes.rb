@@ -15,6 +15,8 @@ EbuOndemand::Application.routes.draw do
     end
   end
   
+  put 'codem_notifications' => 'codem_notifications#create'
+  
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

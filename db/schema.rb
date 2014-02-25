@@ -11,14 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140221120839) do
+ActiveRecord::Schema.define(version: 20140225111754) do
 
   create_table "codem_notifications", force: true do |t|
-    t.integer  "variant_job_id"
-    t.string   "state"
-    t.decimal  "notified_at",    precision: 15, scale: 3
+    t.string   "status"
+    t.decimal  "notified_at", precision: 15, scale: 3
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "codem_id"
+    t.text     "message"
   end
 
   create_table "encoding_jobs", force: true do |t|
@@ -62,6 +63,10 @@ ActiveRecord::Schema.define(version: 20140221120839) do
     t.string   "encoder_flags"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "status",                     default: 0
+    t.string   "codem_id"
+    t.integer  "transcoder_id"
+    t.string   "destination_file_path"
   end
 
 end

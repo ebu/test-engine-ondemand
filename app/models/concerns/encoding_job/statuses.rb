@@ -40,6 +40,8 @@ module EncodingJob::Statuses
       enter_pending
     elsif did_fail_transcoding?
       enter_failed
+    else
+      variant_jobs.map { |j| j.transition }
     end
   end
   
@@ -81,11 +83,11 @@ module EncodingJob::Statuses
   end
   
   def requires_post_processing?
-    true
+    false
   end
 
   def did_complete_post_processing?
-    false
+    true
   end
   
   def did_fail_post_processing?
@@ -93,7 +95,7 @@ module EncodingJob::Statuses
   end
   
   def did_finish_conformance_checking?
-    false
+    true
   end
   
   # Entering a state triggers these actions
