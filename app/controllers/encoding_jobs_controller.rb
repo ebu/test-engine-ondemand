@@ -3,6 +3,10 @@ class EncodingJobsController < ApplicationController
     @encoding_jobs = EncodingJob.all
   end
   
+  def show
+    @encoding_job = EncodingJob.find(params[:id])
+  end
+  
   def new
     @encoding_job = EncodingJob.new
   end

@@ -1,0 +1,28 @@
+<div class="panel panel-default <%= panel_class_for @encoding_job %>">
+  <div class="panel-heading">
+    <h3 class="panel-title">Encoding Job <%= @encoding_job.id %> &mdash; <%= @encoding_job.description || '(N/A)' %></h3>
+  </div>
+  <div class="panel-body">
+    <%= human_readable_summary_for @encoding_job %>
+  </div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Variant Jobs</h3>
+  </div>
+  <div class="panel-body">
+    <em>None</em>
+  </div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Post processing</h3>
+  </div>
+  <div class="panel-body">
+    <em>None</em>
+  </div>
+</div>
+
+<%= link_to "Back to encoding jobs", encoding_jobs_path, class: "btn btn-primary" %>

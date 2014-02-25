@@ -1,8 +1,7 @@
 <tr>
   <td><%= encoding_job.id %></td>
-  <td><%= encoding_job.description %></td>
-  <td>(insert summary here)</td>
-  <td><%= encoding_job.status.titleize %></td>
+  <td><%= link_to encoding_job.description, encoding_job_path(encoding_job) %></td>
+  <td><%= job_status_label encoding_job %></td>
   <td>
     <%= link_to "Remove", encoding_job_path(encoding_job), method: 'delete', data: { confirm: 'This will remove your encoding job. Are you sure?' }, class: "btn btn-danger btn-sm" %>
   </td>
