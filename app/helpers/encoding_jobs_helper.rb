@@ -85,7 +85,7 @@ module EncodingJobsHelper
       'panel-success'
     elsif job.failed_conformance_checking?
       'panel-warning'
-    elsif job.post_processing?
+    elsif job.conformance_checking?
       'panel-info'
     else
       'panel-default'

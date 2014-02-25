@@ -83,15 +83,15 @@ module EncodingJob::Statuses
   end
   
   def requires_post_processing?
-    false
+    post_processing_job.blank?
   end
 
   def did_complete_post_processing?
-    true
+    !!post_processing_job.try(:completed?)
   end
   
   def did_fail_post_processing?
-    false
+    !!post_processing_job.try(:failed?)
   end
   
   def did_finish_conformance_checking?
@@ -99,11 +99,11 @@ module EncodingJob::Statuses
   end
   
   def did_complete_conformance_checking?
-    true
+    !!conformance_checking_job.try(:completed?)
   end
   
   def did_fail_conformance_checking?
-    false
+    !!conformance_checking_job.try(:failed?)
   end
   
   # Entering a state triggers these actions
