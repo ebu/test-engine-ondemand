@@ -61,8 +61,34 @@ module EncodingJobsHelper
       'panel-danger'
     elsif job.variant_jobs.all? { |v| v.success? }
       'panel-success'
-    else
+    elsif job.transcoding?
       'panel-info'
+    else
+      'panel-default'
+    end
+  end
+
+  def panel_class_for_post_processing(job)
+    if job.completed_post_processing?
+      'panel-success'
+    elsif job.failed_post_processing?
+      'panel-danger'
+    elsif job.post_processing?
+      'panel-info'
+    else
+      'panel-default'
+    end
+  end
+
+  def panel_class_for_conformance_checking(job)
+    if job.completed_conformance_checking?
+      'panel-success'
+    elsif job.failed_conformance_checking?
+      'panel-warning'
+    elsif job.post_processing?
+      'panel-info'
+    else
+      'panel-default'
     end
   end
   

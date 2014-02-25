@@ -28,7 +28,7 @@
   </table>
 </div>
 
-<div class="panel panel-default">
+<div class="panel panel-default <%= panel_class_for_post_processing @encoding_job %>">
   <div class="panel-heading">
     <h3 class="panel-title">Post processing</h3>
   </div>
@@ -37,7 +37,7 @@
   </div>
 </div>
 
-<div class="panel panel-default">
+<div class="panel panel-default <%= panel_class_for_conformance_checking @encoding_job %>">
   <div class="panel-heading">
     <h3 class="panel-title">Conformance checking</h3>
   </div>

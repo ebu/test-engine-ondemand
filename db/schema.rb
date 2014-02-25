@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140225111754) do
+ActiveRecord::Schema.define(version: 20140225151855) do
 
   create_table "codem_notifications", force: true do |t|
     t.string   "status"
@@ -29,6 +29,8 @@ ActiveRecord::Schema.define(version: 20140225111754) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "post_processing_template_id"
+    t.integer  "post_processing_job_id"
+    t.integer  "conformance_checking_job_id"
   end
 
   create_table "file_assets", force: true do |t|
@@ -46,6 +48,17 @@ ActiveRecord::Schema.define(version: 20140225111754) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "description"
+  end
+
+  create_table "remote_jobs", force: true do |t|
+    t.string   "remote_id"
+    t.text     "stderr"
+    t.text     "stdout"
+    t.integer  "code"
+    t.string   "command"
+    t.text     "arguments"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "transcoders", force: true do |t|

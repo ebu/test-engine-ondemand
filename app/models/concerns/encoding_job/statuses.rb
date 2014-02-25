@@ -95,7 +95,15 @@ module EncodingJob::Statuses
   end
   
   def did_finish_conformance_checking?
+    did_complete_conformance_checking? || did_fail_conformance_checking?
+  end
+  
+  def did_complete_conformance_checking?
     true
+  end
+  
+  def did_fail_conformance_checking?
+    false
   end
   
   # Entering a state triggers these actions
