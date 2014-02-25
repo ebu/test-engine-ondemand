@@ -1,0 +1,2 @@
+module HttpRunnerNotificationsHelper
+end

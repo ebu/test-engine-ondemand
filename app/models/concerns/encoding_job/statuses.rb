@@ -118,12 +118,16 @@ module EncodingJob::Statuses
   
   def enter_post_processing
     # Launch MP4Box for packaging/DASHing
-    update_attribute(:status, :post_processing)
+    if create_post_processing_job && remote_id = RemoteJob.send_job(post_processing_job)
+      update_attribute(:status, :post_processing)
+    end
   end
   
   def enter_conformance_checking
     # Launch conformance checking tools
-    update_attribute(:status, :conformance_checking)
+    if create_conformance_checking_job && remote_id = RemoteJob.send_job(conformance_checking_job)
+      update_attribute(:status, :conformance_checking)
+    end
   end
   
   def enter_failed

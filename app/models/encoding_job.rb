@@ -21,7 +21,7 @@ class EncodingJob < ActiveRecord::Base
     FileAsset.any? && PresetTemplate.encoder_preset.any? && PresetTemplate.post_processing_preset.any?
   end
   
-  # Check if post-processing completed succesfully.
+  # Check if post-processing completed successfully.
   def completed_post_processing?
     did_complete_post_processing?
   end
@@ -31,7 +31,7 @@ class EncodingJob < ActiveRecord::Base
     did_fail_post_processing?
   end
   
-  # Check if conformance checking completed succesfully.
+  # Check if conformance checking completed successfully.
   def completed_conformance_checking?
     did_complete_conformance_checking?
   end
@@ -39,5 +39,20 @@ class EncodingJob < ActiveRecord::Base
   # Check if conformance checking failed.
   def failed_conformance_checking?
     did_fail_conformance_checking?
+  end
+  
+  private
+  
+  # Attempt to create a post-processing job.
+  #
+  # Return true if successful, false otherwise.
+  def create_post_processing_job
+    self.post_processing_job = RemoteJob.initialize_for_post_processing(self)
+    self.save
+  end
+  
+  def create_conformance_checking_job
+    self.conformance_checking_job = RemoteJob.initialize_for_conformance_checking(self)
+    self.save
   end
 end

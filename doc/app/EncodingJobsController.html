@@ -79,6 +79,8 @@
     
     <li ><a href="#method-i-new">#new</a>
     
+    <li ><a href="#method-i-show">#show</a>
+    
   </ul>
 </div>
 
@@ -132,7 +134,7 @@
 
           
           <div class="method-source-code" id="create-source">
-            <pre><span class="ruby-comment"># File app/controllers/encoding_jobs_controller.rb, line 10</span>
+            <pre><span class="ruby-comment"># File app/controllers/encoding_jobs_controller.rb, line 14</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">create</span>
   <span class="ruby-ivar">@encoding_job</span> = <span class="ruby-constant">EncodingJob</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">user_params</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-ivar">@encoding_job</span>.<span class="ruby-identifier">save</span>
@@ -205,9 +207,42 @@
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File app/controllers/encoding_jobs_controller.rb, line 6</span>
+            <pre><span class="ruby-comment"># File app/controllers/encoding_jobs_controller.rb, line 10</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">new</span>
   <span class="ruby-ivar">@encoding_job</span> = <span class="ruby-constant">EncodingJob</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-show" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">show</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="show-source">
+            <pre><span class="ruby-comment"># File app/controllers/encoding_jobs_controller.rb, line 6</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
+  <span class="ruby-ivar">@encoding_job</span> = <span class="ruby-constant">EncodingJob</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
 <span class="ruby-keyword">end</span></pre>
           </div>
           

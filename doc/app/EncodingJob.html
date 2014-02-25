@@ -86,6 +86,14 @@
     
     <li ><a href="#method-c-new_allowed-3F">::new_allowed?</a>
     
+    <li ><a href="#method-i-completed_conformance_checking-3F">#completed_conformance_checking?</a>
+    
+    <li ><a href="#method-i-completed_post_processing-3F">#completed_post_processing?</a>
+    
+    <li ><a href="#method-i-failed_conformance_checking-3F">#failed_conformance_checking?</a>
+    
+    <li ><a href="#method-i-failed_post_processing-3F">#failed_post_processing?</a>
+    
   </ul>
 </div>
 
@@ -144,9 +152,149 @@
 
           
           <div class="method-source-code" id="new_allowed-3F-source">
-            <pre><span class="ruby-comment"># File app/models/encoding_job.rb, line 17</span>
+            <pre><span class="ruby-comment"># File app/models/encoding_job.rb, line 20</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new_allowed?</span>
   <span class="ruby-constant">FileAsset</span>.<span class="ruby-identifier">any?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-constant">PresetTemplate</span>.<span class="ruby-identifier">encoder_preset</span>.<span class="ruby-identifier">any?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-constant">PresetTemplate</span>.<span class="ruby-identifier">post_processing_preset</span>.<span class="ruby-identifier">any?</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-completed_conformance_checking-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">completed_conformance_checking?</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Check if conformance checking completed succesfully.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="completed_conformance_checking-3F-source">
+            <pre><span class="ruby-comment"># File app/models/encoding_job.rb, line 35</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">completed_conformance_checking?</span>
+  <span class="ruby-identifier">did_complete_conformance_checking?</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-completed_post_processing-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">completed_post_processing?</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Check if post-processing completed succesfully.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="completed_post_processing-3F-source">
+            <pre><span class="ruby-comment"># File app/models/encoding_job.rb, line 25</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">completed_post_processing?</span>
+  <span class="ruby-identifier">did_complete_post_processing?</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-failed_conformance_checking-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">failed_conformance_checking?</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Check if conformance checking failed.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="failed_conformance_checking-3F-source">
+            <pre><span class="ruby-comment"># File app/models/encoding_job.rb, line 40</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">failed_conformance_checking?</span>
+  <span class="ruby-identifier">did_fail_conformance_checking?</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-failed_post_processing-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">failed_post_processing?</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Check if post-processing failed.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="failed_post_processing-3F-source">
+            <pre><span class="ruby-comment"># File app/models/encoding_job.rb, line 30</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">failed_post_processing?</span>
+  <span class="ruby-identifier">did_fail_post_processing?</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           

@@ -84,6 +84,8 @@
 
   <ul class="link-list" role="directory">
     
+    <li ><a href="#method-i-requires_transcoding-3F">#requires_transcoding?</a>
+    
     <li ><a href="#method-i-to_codem_json">#to_codem_json</a>
     
   </ul>
@@ -120,6 +122,39 @@
        </header>
 
     
+      <div id="method-i-requires_transcoding-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">requires_transcoding?</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="requires_transcoding-3F-source">
+            <pre><span class="ruby-comment"># File app/models/variant_job.rb, line 26</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">requires_transcoding?</span>
+  <span class="ruby-identifier">codem_id</span>.<span class="ruby-identifier">blank?</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
       <div id="method-i-to_codem_json" class="method-detail ">
         
         <div class="method-heading">
@@ -143,7 +178,7 @@ href="https://github.com/madebyhiro/codem-transcode/blob/master/README.markdown"
 
           
           <div class="method-source-code" id="to_codem_json-source">
-            <pre><span class="ruby-comment"># File app/models/variant_job.rb, line 24</span>
+            <pre><span class="ruby-comment"># File app/models/variant_job.rb, line 34</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">to_codem_json</span>
   {
     <span class="ruby-string">&quot;source_file&quot;</span>      =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">source_file_path</span>,

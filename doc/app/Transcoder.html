@@ -77,8 +77,6 @@
     
     <li ><a href="#method-i-available-3F">#available?</a>
     
-    <li ><a href="#method-i-build_jobs_url">#build_jobs_url</a>
-    
     <li ><a href="#method-i-send_job">#send_job</a>
     
   </ul>
@@ -201,39 +199,6 @@
       </div>
 
     
-      <div id="method-i-build_jobs_url" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">build_jobs_url</span><span
-            class="method-args">()</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          <p>Build the base URL to connect to the transcoder.</p>
-          
-          
-
-          
-          <div class="method-source-code" id="build_jobs_url-source">
-            <pre><span class="ruby-comment"># File app/models/transcoder.rb, line 69</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">build_jobs_url</span>
-  <span class="ruby-node">&quot;http://#{host_name}:#{port}/jobs&quot;</span>
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
       <div id="method-i-send_job" class="method-detail ">
         
         <div class="method-heading">
@@ -265,35 +230,28 @@ Otherwise it will return the Codem ID that was assigned to it.</p>
           
           <div class="method-source-code" id="send_job-source">
             <pre><span class="ruby-comment"># File app/models/transcoder.rb, line 42</span>
-  <span class="ruby-keyword">def</span> <span class="ruby-identifier">send_job</span>(<span class="ruby-identifier">job</span>)
-    <span class="ruby-keyword">begin</span>
-      <span class="ruby-identifier">response</span> = <span class="ruby-constant">RestClient</span><span class="ruby-operator">::</span><span class="ruby-constant">Request</span>.<span class="ruby-identifier">execute</span>(
-        <span class="ruby-identifier">method</span><span class="ruby-operator">:</span> <span class="ruby-value">:post</span>,
-        <span class="ruby-identifier">url</span><span class="ruby-operator">:</span> <span class="ruby-identifier">build_jobs_url</span>,
-        <span class="ruby-identifier">payload</span><span class="ruby-operator">:</span> <span class="ruby-identifier">job</span>.<span class="ruby-identifier">to_codem_json</span>,
-        <span class="ruby-identifier">timeout</span><span class="ruby-operator">:</span> <span class="ruby-constant">EBU</span><span class="ruby-operator">::</span><span class="ruby-constant">TRANSCODER_TIMEOUT</span>,
-        <span class="ruby-identifier">open_timeout</span><span class="ruby-operator">:</span> <span class="ruby-constant">EBU</span><span class="ruby-operator">::</span><span class="ruby-constant">TRANSCODER_TIMEOUT</span>
-      )
-      <span class="ruby-keyword">if</span> <span class="ruby-identifier">response</span>.<span class="ruby-identifier">code</span> <span class="ruby-operator">==</span> <span class="ruby-value">202</span>
-        <span class="ruby-keyword">if</span> (<span class="ruby-identifier">obj</span> = <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">response</span>.<span class="ruby-identifier">to_str</span>))
-          <span class="ruby-identifier">obj</span>[<span class="ruby-string">&quot;job_id&quot;</span>]
-        <span class="ruby-keyword">else</span>
-          <span class="ruby-identifier">raise</span> <span class="ruby-node">&quot;Job #{job.id} was created on transcoder #{self.id}, but no job ID was returned.&quot;</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">send_job</span>(<span class="ruby-identifier">job</span>)
+  <span class="ruby-keyword">begin</span>
+    <span class="ruby-identifier">response</span> = <span class="ruby-constant">RestClient</span><span class="ruby-operator">::</span><span class="ruby-constant">Request</span>.<span class="ruby-identifier">execute</span>(
+      <span class="ruby-identifier">method</span><span class="ruby-operator">:</span> <span class="ruby-value">:post</span>,
+      <span class="ruby-identifier">url</span><span class="ruby-operator">:</span> <span class="ruby-identifier">build_jobs_url</span>,
+      <span class="ruby-identifier">payload</span><span class="ruby-operator">:</span> <span class="ruby-identifier">job</span>.<span class="ruby-identifier">to_codem_json</span>,
+      <span class="ruby-identifier">timeout</span><span class="ruby-operator">:</span> <span class="ruby-constant">EBU</span><span class="ruby-operator">::</span><span class="ruby-constant">TRANSCODER_TIMEOUT</span>,
+      <span class="ruby-identifier">open_timeout</span><span class="ruby-operator">:</span> <span class="ruby-constant">EBU</span><span class="ruby-operator">::</span><span class="ruby-constant">TRANSCODER_TIMEOUT</span>
+    )
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">response</span>.<span class="ruby-identifier">code</span> <span class="ruby-operator">==</span> <span class="ruby-value">202</span>
+      <span class="ruby-keyword">if</span> (<span class="ruby-identifier">obj</span> = <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">response</span>.<span class="ruby-identifier">to_str</span>))
+        <span class="ruby-identifier">obj</span>[<span class="ruby-string">&quot;job_id&quot;</span>]
       <span class="ruby-keyword">else</span>
-        <span class="ruby-keyword">nil</span>
+        <span class="ruby-identifier">raise</span> <span class="ruby-node">&quot;Job #{job.id} was created on transcoder #{self.id}, but no job ID was returned.&quot;</span>
       <span class="ruby-keyword">end</span>
-    <span class="ruby-keyword">rescue</span> <span class="ruby-constant">Timeout</span><span class="ruby-operator">::</span><span class="ruby-constant">Error</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">e</span>
-      <span class="ruby-keyword">nil</span>
-    <span class="ruby-keyword">rescue</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">e</span>
+    <span class="ruby-keyword">else</span>
       <span class="ruby-keyword">nil</span>
     <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">end</span>
-  
-  <span class="ruby-identifier">private</span>
-  
-  <span class="ruby-comment"># Build the base URL to connect to the transcoder.</span>
-  <span class="ruby-keyword">def</span> <span class="ruby-identifier">build_jobs_url</span>
-    <span class="ruby-node">&quot;http://#{host_name}:#{port}/jobs&quot;</span>
+  <span class="ruby-keyword">rescue</span> <span class="ruby-constant">Timeout</span><span class="ruby-operator">::</span><span class="ruby-constant">Error</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">e</span>
+    <span class="ruby-keyword">nil</span>
+  <span class="ruby-keyword">rescue</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">e</span>
+    <span class="ruby-keyword">nil</span>
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
