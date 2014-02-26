@@ -3,11 +3,11 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 presets = {
   encoder_preset: {
-    video: '-t @maxlen@ -f mp4 -vcodec libx264 -profile:v main -level:v 3.1 -s @size@ -aspect 16:9 -b:v @bitr@k -an -maxrate @maxb@k -minrate @minb@k -bufsize 9216k -keyint_min @keyint@ -g 120 -flags +cgop -sc_threshold 0 -pix_fmt yuv420p -threads 4',
-    audio: '-t @maxlen@ -f mp4 -vn -acodec faac -ar @samplerate@ -ab @bitr@k -ac @channels@'
+    video: '-t @Maximum length to transcode@ -f mp4 -vcodec libx264 -profile:v main -level:v 3.1 -s @Video size in pixels (e.g. 320x180)@ -aspect 16:9 -b:v @Target bitrate@k -an -maxrate @Max. bitrate@k -minrate @Min. bitrate@k -bufsize 9216k -keyint_min @Min. GOP length in frames@ -g @Max. GOP length in frames@ -flags +cgop -sc_threshold 0 -pix_fmt yuv420p -threads 4',
+    audio: '-t @Maximum length to transcode@ -f mp4 -vn -acodec mp2 -ar @Audio samplerate@ -ab @Target bitrate@k -ac @Number of audio channels@'
   },
   post_processing_preset: {
-    generic: '-dash @seg_dur@ -profile onDemand -rap -frag-rap -url-template -segment-name %s_ -segment-ext mp4'
+    generic: '-dash @Segment duration in ms.@ -profile onDemand -rap -frag-rap -url-template -segment-name %s_ -segment-ext mp4'
   }
 }
 

@@ -22,6 +22,16 @@ class EncodingJobsController < ApplicationController
     end
   end
   
+  def destroy
+    @encoding_job = EncodingJob.find(params[:id])
+    if @encoding_job.destroy
+      flash[:notice] = 'Encoding job removed'
+    else
+      flash[:warn] = "Unable to remove encoding job."
+    end  
+    redirect_to encoding_jobs_path
+  end
+  
   def status
     @encoding_job = EncodingJob.find(params[:id])
     render layout: false
