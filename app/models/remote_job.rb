@@ -2,8 +2,11 @@ class RemoteJob < ActiveRecord::Base
   class << self
     def initialize_for_post_processing(job)
       new({
-        command: 'echo',
-        arguments: job.post_processing_flags
+        command: 'MP4Box',
+        arguments:
+          "#{job.post_processing_flags} \
+          -out #{[EBU::FINAL_FILE_LOCATION, job.id.to_s].join(File::SEPARATOR)} \
+          #{job.variant_jobs.collect(&:destination_file_path).join(' ')}"
       })
     end
     
