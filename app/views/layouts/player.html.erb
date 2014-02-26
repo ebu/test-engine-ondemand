@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="DashPlayer">
 <head>
-  <title>EbuOndemand</title>
+  <title>EbuOndemand Player</title>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= yield :additional_styles %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
@@ -9,14 +9,11 @@
   <%= csrf_meta_tags %>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
-<body data-controller="<%= "#{params[:controller]}" %>" data-action="<%= "#{params[:action]}" %>">
+<body ng-controller="DashController" data-controller="<%= "#{params[:controller]}" %>" data-action="<%= "#{params[:action]}" %>">
   <%= render 'layouts/navigation' %>
 
-  <main role="main">
-    <div class="container">
-      <%= render 'layouts/flash' %>
-      <%= yield %>
-  </div>
-  </main>
+  <%= render 'layouts/flash' %>
+
+  <%= yield %>
 </body>
 </html>

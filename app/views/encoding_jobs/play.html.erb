@@ -1,0 +1,193 @@
+<div class="container">
+    <div class="row">
+        <div class="dash-video-player col-md-9">
+            <video controls="true"></video>
+        </div>
+        <div class="col-md-3">
+            <div class="panel">
+                <div class="panel-heading panel-top">
+                    <span class="panel-title">ABR</span>
+                    <div class="btn-group">
+                        <button
+                            type="button"
+                            class="btn btn-default"
+                            ng-class="{active:abrEnabled == false}"
+                            ng-click="setAbrEnabled(false)">
+                            <span>Off</span>
+                        </button>
+                        <button
+                            type="button"
+                            class="btn btn-default active"
+                            ng-class="{active:abrEnabled == true}"
+                            ng-click="setAbrEnabled(true)">
+                            <span>On</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="panel">
+                <div class="panel-heading panel-top">
+                    <span class="panel-title">Video</span>
+                    <div class="btn-group">
+                        <button
+                            type="button"
+                            class="btn btn-default"
+                            ng-click="abrDown('video')">
+                            <span class="glyphicon glyphicon-minus"></span>
+                        </button>
+                        <button
+                            type="button"
+                            class="btn btn-default"
+                            ng-click="abrUp('video')">
+                            <span class="glyphicon glyphicon-plus"></span>
+                        </button>
+                    </div>
+                </div>
+                <div class="panel-body panel-stats">
+                    <p class="text-warning">{{videoBitrate}} kbps</p>
+                    <p class="text-primary">Rep Index: <span class="text-success">{{videoIndex}}</span><span class="text-warning">{{videoPendingIndex}}</span>/<span class="text-success">{{videoMaxIndex}}</span></p>
+                    <p class="text-primary">Buffer Length: <span class="text-success">{{videoBufferLength}}</span></p>
+                </div>
+            </div>
+            <div class="panel">
+                <div class="panel-heading panel-top">
+                    <span class="panel-title">Audio</span>
+                    <div class="btn-group">
+                        <button
+                            type="button"
+                            class="btn btn-default"
+                            ng-click="abrDown('audio')">
+                            <span class="glyphicon glyphicon-minus"></span>
+                        </button>
+                        <button
+                            type="button"
+                            class="btn btn-default"
+                            ng-click="abrUp('audio')">
+                            <span class="glyphicon glyphicon-plus"></span>
+                        </button>
+                    </div>
+                </div>
+                <div class="panel-body panel-stats">
+                    <p class="text-warning">{{audioBitrate}} kbps</p>
+                    <p class="text-primary">Rep Index: <span class="text-success">{{audioIndex}}</span><span class="text-warning">{{audioPendingIndex}}</span>/<span class="text-success">{{audioMaxIndex}}</span></p>
+                    <p class="text-primary">Buffer Length: <span class="text-success">{{audioBufferLength}}</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="panel">
+            <div class="panel-heading panel-top">
+                <span class="panel-title">Charts</span>
+                <div class="btn-group">
+                    <button
+                        type="button"
+                        class="btn btn-default"
+                        ng-class="{active:showCharts == false}"
+                        ng-click="setCharts(false)">
+                        Hide
+                    </button>
+                    <button
+                        type="button"
+                        class="btn btn-default"
+                        ng-class="{active:showCharts == true}"
+                        ng-click="setCharts(true)">
+                        Show
+                    </button>
+                </div>
+            </div>
+            <div ng-switch on="showCharts">
+                <div class="panel-body panel-stats" ng-switch-when="true">
+                    <chart ng-model="bufferData"></chart>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- <div class="row">
+        <div class="panel">
+            <div class="panel-heading panel-top">
+                <span class="panel-title">Debug</span>
+                <div class="btn-group">
+                    <button
+                        type="button"
+                        class="btn btn-default"
+                        ng-class="{active:showDebug == false}"
+                        ng-click="setDebug(false)">
+                        Hide
+                    </button>
+                    <button
+                        type="button"
+                        class="btn btn-default"
+                        ng-class="{active:showDebug == true}"
+                        ng-click="setDebug(true)">
+                        Show
+                    </button>
+                </div>
+            </div>
+            <div ng-switch on="showDebug">
+                <div class="panel-body panel-stats" ng-switch-when="true">
+                    <ul class="nav nav-tabs">
+                        <li class="dropdown">
+                            <a href="#" id="metricsDropdown" class="dropdown-toggle" data-toggle="dropdown">Metrics <b class="caret"></b></a>
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="metricsDropdown">
+                                <li><a href="#video-metrics" tabindex="-1" data-toggle="tab">Video</a></li>
+                                <li><a href="#audio-metrics" tabindex="-1" data-toggle="tab">Audio</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#notes" data-toggle="tab">Release Notes</a></li>
+                    </ul>
+                    <div id="debugTabContent" class="tab-content">
+                        <div class="tab-pane" id="video-metrics">
+                            <button
+                                type="button"
+                                class="btn btn-default"
+                                ng-click="getVideoTreeMetrics()">
+                                Video - Update
+                            </button>
+                            <div
+                                class="tree"
+                                data-angular-treeview="true"
+                                data-tree-model="videoMetrics"
+                                data-node-label="text"
+                                data-node-children="items">
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="audio-metrics">
+                            <button
+                                type="button"
+                                class="btn btn-default"
+                                ng-click="getAudioTreeMetrics()">
+                                Audio - Update
+                            </button>
+                            <div
+                                class="tree"
+                                data-angular-treeview="true"
+                                data-tree-model="audioMetrics"
+                                data-node-label="text"
+                                data-node-children="items">
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="notes">
+                            <div ng-repeat="note in releaseNotes" class="note-box">
+                                <span><b>{{note.title}}</b></span><br/>
+                                <span ng-repeat="text in note.items">
+                                    {{text}}<br/>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+</div>
+
+<%= javascript_tag do %>
+$(window).on('load', function(e) {
+  var scope = angular.element('body').scope();
+  scope.setStream({url: '<%= stream_url_for @encoding_job %>'});
+  scope.doLoad();
+})
+<% end %>

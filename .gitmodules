@@ -1,3 +1,4 @@
 [submodule "vendor/assets/dash.js"]
 	path = vendor/assets/dash.js
 	url = https://github.com/Dash-Industry-Forum/dash.js.git
+	branch = development

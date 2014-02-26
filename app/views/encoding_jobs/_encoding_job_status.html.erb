@@ -4,6 +4,7 @@
   </div>
   <div class="panel-body">
     <%= human_readable_summary_for encoding_job %>
+    <%= play_link(encoding_job) if encoding_job.success? %>
   </div>
 </div>
 

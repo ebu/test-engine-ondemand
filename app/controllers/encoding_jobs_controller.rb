@@ -37,6 +37,11 @@ class EncodingJobsController < ApplicationController
     render layout: false
   end
   
+  def play
+    @encoding_job = EncodingJob.find(params[:id])
+    render layout: 'player'
+  end
+  
   private
   
   def user_params
