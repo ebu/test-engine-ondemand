@@ -9,6 +9,7 @@ EbuOndemand::Application.routes.draw do
   resources :encoding_jobs do
     member do
       get 'status'
+      get 'play'
     end
   end
   

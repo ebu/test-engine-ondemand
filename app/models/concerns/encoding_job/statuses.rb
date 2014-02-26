@@ -135,10 +135,12 @@ module EncodingJob::Statuses
   end
   
   def enter_failed
+    # TODO: Remove all intermediate files
     update_attribute(:status, :failed)
   end
   
   def enter_success
+    # TODO: Remove all intermediate files
     update_attribute(:status, :success)
   end
 end

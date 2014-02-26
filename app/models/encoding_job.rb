@@ -45,8 +45,10 @@ class EncodingJob < ActiveRecord::Base
   
   # Attempt to create a post-processing job.
   #
-  # Return true if successful, false otherwise.
+  # Also attempts to create the output directory for the final DASHed job.
+  # Returns true if successful, false otherwise.
   def create_post_processing_job
+    FileUtils.mkdir_p([EBU::FINAL_FILE_LOCATION, self.id.to_s].join(File::SEPARATOR))
     self.post_processing_job = RemoteJob.initialize_for_post_processing(self)
     self.save
   end

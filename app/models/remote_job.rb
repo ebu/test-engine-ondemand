@@ -5,7 +5,7 @@ class RemoteJob < ActiveRecord::Base
         command: 'MP4Box',
         arguments:
           "#{job.post_processing_flags} \
-          -out #{[EBU::FINAL_FILE_LOCATION, job.id.to_s].join(File::SEPARATOR)} \
+          -out #{[EBU::FINAL_FILE_LOCATION, job.id.to_s, 'dash'].join(File::SEPARATOR)} \
           #{job.variant_jobs.collect(&:destination_file_path).join(' ')}"
       })
     end

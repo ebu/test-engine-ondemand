@@ -9,7 +9,7 @@ module EBU
   INTERMEDIATE_FILE_LOCATION = [Rails.root, 'tmp', 'intermediate'].join(File::SEPARATOR)
   
   # Final location for DASHed files
-  FINAL_FILE_LOCATION = [Rails.root, 'tmp', 'final'].join(File::SEPARATOR)
+  FINAL_FILE_LOCATION = [Rails.root, 'public', 'dash'].join(File::SEPARATOR)
   
   # Callback URL for Codem transcoder. Depends on Rails environment and setup.
   CALLBACK_URL_FOR_CODEM = case Rails.env
