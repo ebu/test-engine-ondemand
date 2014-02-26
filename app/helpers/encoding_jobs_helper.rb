@@ -48,6 +48,30 @@ module EncodingJobsHelper
     end
   end
   
+  def post_processing_summary_for(job)
+    if job.post_processing?
+      'Waiting for post-processing to complete...'
+    elsif job.failed_post_processing?
+      'An error occurred during post-processing.'
+    elsif job.completed_post_processing?
+      'Post-processing finished successfully.'
+    else
+      'Information not yet available.'
+    end
+  end
+  
+  def conformance_checking_summary_for(job)
+    if job.conformance_checking?
+      'Waiting for conformance-checking to complete...'
+    elsif job.failed_conformance_checking?
+      'An error occurred during conformance-checking.'
+    elsif job.completed_conformance_checking?
+      'Conformance-checking finished successfully.'
+    else
+      'Information not yet available.'
+    end
+  end
+  
   def panel_class_for(job)
     case job.status
       when 'success' then 'panel-success'
