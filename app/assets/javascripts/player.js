@@ -80,4 +80,4 @@
 //= require ../../../vendor/assets/dash.js/app/js/dash/TimelineConverter
 
 //= require ../../../vendor/assets/dash.js/app/metrics
-//= require ../../../vendor/assets/dash.js/app/main
+//= require dash.js/app/main
