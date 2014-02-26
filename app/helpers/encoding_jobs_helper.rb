@@ -52,9 +52,9 @@ module EncodingJobsHelper
     if job.post_processing?
       'Waiting for post-processing to complete...'
     elsif job.failed_post_processing?
-      'An error occurred during post-processing.'
+      collapsable_group('An error occurred during post-processing.', 'post_processing_details', job.post_processing_job.stderr)
     elsif job.completed_post_processing?
-      'Post-processing finished successfully.'
+      collapsable_group('Post-processing finished successfully.', 'post_processing_details', job.post_processing_job.stderr)
     else
       'Information not yet available.'
     end
@@ -64,12 +64,18 @@ module EncodingJobsHelper
     if job.conformance_checking?
       'Waiting for conformance-checking to complete...'
     elsif job.failed_conformance_checking?
-      'An error occurred during conformance-checking.'
+      collapsable_group('An error occurred during conformance-checking.', 'conformance_checking_details', job.conformance_checking_job.stdout)
     elsif job.completed_conformance_checking?
-      'Conformance-checking finished successfully.'
+      collapsable_group('Conformance-checking finished successfully.', 'conformance_checking_details', job.conformance_checking_job.stdout)
     else
       'Information not yet available.'
     end
+  end
+  
+  def collapsable_group(text, id, data)
+    ("<div class='collapse-group'>#{text}" +
+    "<a style='float: right' class='btn btn-default' data-toggle='collapse' data-target='##{id}'>View/hide details</a>" +
+    "<pre class='collapse' id='#{id}'>" + data + "</pre></div>").html_safe
   end
   
   def panel_class_for(job)
