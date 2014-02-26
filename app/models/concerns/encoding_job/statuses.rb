@@ -14,7 +14,11 @@ module EncodingJob::Statuses
   
   module ClassMethods
     def transition
-      eligible_jobs.each { |j| j.transition }
+      j = eligible_jobs
+      if j.any?
+        puts "Examining transition states for #{j.count} encoding jobs."
+        j.each { |j| j.transition }
+      end
     end
   end
   
