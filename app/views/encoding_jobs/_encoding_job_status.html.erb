@@ -1,0 +1,47 @@
+<div class="panel panel-default <%= panel_class_for encoding_job %>" data-status="<%= encoding_job.status %>" data-status-url="<%= status_encoding_job_path encoding_job %>">
+  <div class="panel-heading">
+    <h3 class="panel-title">Encoding Job <%= encoding_job.id %> &mdash; <%= encoding_job.description || '(N/A)' %></h3>
+  </div>
+  <div class="panel-body">
+    <%= human_readable_summary_for encoding_job %>
+  </div>
+</div>
+
+<hr/>
+
+<div class="panel panel-default <%= panel_class_for_variant_jobs encoding_job %>">
+  <div class="panel-heading">
+    <h3 class="panel-title">Variant Jobs</h3>
+  </div>
+  <div class="panel-body">
+    <%= variant_jobs_summary_for encoding_job %>
+  </div>
+  
+  <table class="table">
+    <tr>
+      <th>ID</th>
+      <th>Status</th>
+      <th>Source file</th>
+      <th>Message</th>
+    </tr>
+    <%= render partial: "variant_job", collection: encoding_job.variant_jobs %>
+  </table>
+</div>
+
+<div class="panel panel-default <%= panel_class_for_post_processing encoding_job %>">
+  <div class="panel-heading">
+    <h3 class="panel-title">Post processing</h3>
+  </div>
+  <div class="panel-body">
+    <em>None</em>
+  </div>
+</div>
+
+<div class="panel panel-default <%= panel_class_for_conformance_checking encoding_job %>">
+  <div class="panel-heading">
+    <h3 class="panel-title">Conformance checking</h3>
+  </div>
+  <div class="panel-body">
+    <em>None</em>
+  </div>
+</div>

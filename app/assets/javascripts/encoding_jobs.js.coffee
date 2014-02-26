@@ -42,14 +42,6 @@ update_presets = (event) ->
                '<input type="text" class="form-control" data-variable="' + v + '"/></div>'
     variables_container.append(template)
 
-# Setup handlers when page loads
-jQuery ->
-  if ($('body').attr('data-controller') == 'encoding_jobs' && ['new', 'create'].indexOf($('body').attr('data-action')) != -1)
-    $('#new_encoding_job').on 'submit', submit_handler # Handle form submit
-    select_box = $('#encoding_job_post_processing_template_id')
-    select_box.on 'change', post_processing_change_handler
-    select_box.change()
-    
 post_processing_change_handler = (event) ->
   selected = $(this).find(':selected')
   preview = $(this).parent().find('.post_processing_preset_preview')
@@ -88,3 +80,33 @@ flatten_input_fields = (source_fields, preset_template, target_field) ->
   preset = ebu.fill_preset(preset_template, vars)
   target_field.val(preset)
   
+# Setup handlers when page loads
+jQuery ->
+  if ($('body').attr('data-controller') == 'encoding_jobs' && ['new', 'create'].indexOf($('body').attr('data-action')) != -1)
+    # Setup form processors
+    $('#new_encoding_job').on 'submit', submit_handler # Handle form submit
+    select_box = $('#encoding_job_post_processing_template_id')
+    select_box.on 'change', post_processing_change_handler
+    select_box.change()
+  else if ($('body').attr('data-controller') == 'encoding_jobs' && $('body').attr('data-action') == 'show')
+    # Setup auto job status refresh
+    setup_job_refresh()
+    
+
+# Job refresh handler
+setup_job_refresh = () ->
+  status = $('div[data-status]').data('status')
+  if (["failed", "success"].indexOf(status) == -1)
+    setTimeout refresh_status, 4000
+
+refresh_status = () ->
+  status_url = $('div[data-status]').data('status-url')
+  xhr = new XMLHttpRequest()
+  xhr.addEventListener("load", update_status, false);
+  xhr.open("get", status_url)
+  xhr.send()
+  
+update_status = (evt) ->
+  data = evt.target.response
+  $("#encoding_job_wrapper").empty().html(data)
+  setup_job_refresh()

@@ -22,6 +22,11 @@ class EncodingJobsController < ApplicationController
     end
   end
   
+  def status
+    @encoding_job = EncodingJob.find(params[:id])
+    render layout: false
+  end
+  
   private
   
   def user_params
