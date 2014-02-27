@@ -1,6 +1,7 @@
 class PresetTemplatesController < ApplicationController
   def index
-    @preset_templates = PresetTemplate.all
+    @encoder_presets = PresetTemplate.encoder_preset
+    @post_processing_presets = PresetTemplate.post_processing_preset
   end
   
   def new

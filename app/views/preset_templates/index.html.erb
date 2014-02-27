@@ -1,16 +1,15 @@
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>Description</th>
-      <th>Template Text</th>
-      <th>Preset Type</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <%= render @preset_templates %>
-  </tbody>
-</table>
+<ul class="nav nav-tabs nav-justified" id="preset_tabs">
+  <li class="active"><a href="#encoder_presets" data-toggle="tab">Encoder presets (ffmpeg)</a></li>
+  <li><a href="#post_processing_presets" data-toggle="tab">Post-processing presets (MP4Box)</a></li>
+</ul>
+
+<div class="tab-content" id="preset_tabs_content">
+  <div class="tab-pane active" id="encoder_presets">
+    <%= render partial: "preset_templates/preset_table", locals: { preset_templates: @encoder_presets } %>
+  </div>
+  <div class="tab-pane" id="post_processing_presets">
+    <%= render partial: "preset_templates/preset_table", locals: { preset_templates: @post_processing_presets } %>
+  </div>
+</div>
 
 <%= link_to "Add preset template", new_preset_template_path, class: "btn btn-primary" %>

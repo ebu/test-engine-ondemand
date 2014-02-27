@@ -15,7 +15,14 @@ jQuery ->
   if ($('body').attr('data-controller') == 'preset_templates' && ($('body').attr('data-action') == 'new' || $('body').attr('data-action') == 'create'))
     $('#preset_template_preset_type').on 'change', changeHandler
     $('#preset_template_preset_type').change()
-    
+  else if ($('body').attr('data-controller') == 'preset_templates' && $('body').attr('data-action') == 'index')
+    addTabHandler()
+
+addTabHandler = () ->
+  $('#preset_tabs a').click (e) ->
+    e.preventDefault()
+    $(this).tab('show')
+  
 changeHandler = (event) =>
   updatePrefillButtons(event.currentTarget.value)
 
