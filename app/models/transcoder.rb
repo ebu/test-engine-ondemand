@@ -64,6 +64,26 @@ class Transcoder < ActiveRecord::Base
     end
   end
   
+  def get_progress(job)
+    begin
+      response = RestClient::Request.execute(
+        method: :get,
+        url: [build_jobs_url, job.codem_id].join('/'),
+        timeout: EBU::TRANSCODER_TIMEOUT,
+        open_timeout: EBU::TRANSCODER_TIMEOUT
+      )
+      if response.code == 200 && obj = JSON.parse(response.to_str)
+        obj["progress"]
+      else
+        0.0
+      end
+    rescue Timeout::Error => e
+      0.0
+    rescue => e
+      0.0
+    end
+  end
+  
   private
   
   # Build the base URL to connect to the transcoder.

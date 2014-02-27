@@ -26,7 +26,19 @@ class VariantJob < ActiveRecord::Base
   def requires_transcoding?
     codem_id.blank?
   end
-    
+  
+  def progress
+    @progress ||= if success?
+      1.0
+    elsif (failed? || pending?)
+      0.0
+    elsif transcoder
+      transcoder.get_progress(self)
+    else
+      0.0
+    end
+  end
+  
   # Return a presentation of a job that is suited to present to
   # the codem transcoder.
   #

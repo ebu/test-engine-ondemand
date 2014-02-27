@@ -16,6 +16,8 @@ class EncodingJob < ActiveRecord::Base
     self.random_id = SecureRandom.hex(8)
   end
   
+  after_destroy :remove_output_files
+  
   # Check if it's currently allowed to create a new +EncodingJob+.
   #
   # A new +EncodingJob+ requires at least the availability of a
@@ -55,6 +57,15 @@ class EncodingJob < ActiveRecord::Base
   
   private
 
+  def remove_output_files
+    FileUtils.remove_dir output_path.join(File::SEPARATOR), force: true
+  end
+  
+  def remove_intermediate_files
+    files = variant_jobs.collect(&:destination_file_path)
+    FileUtils.rm files, force: true
+  end
+  
   def output_path
     [EBU::FINAL_FILE_LOCATION, randomized_id]
   end
