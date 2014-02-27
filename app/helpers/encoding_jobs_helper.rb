@@ -145,4 +145,9 @@ module EncodingJobsHelper
   def stream_url_for(job)
     url_for(controller: 'dashboard', action: 'index', only_path: false) + ['dash', job.id.to_s, 'dash.mpd'].join('/')
   end
+  
+  def queue_position_for(variant_job)
+    pos = VariantJob.queue_position_for(variant_job)
+    (pos.nil?) ? '' : "Queued (#{pos + 1})"
+  end
 end

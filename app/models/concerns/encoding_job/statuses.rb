@@ -9,7 +9,7 @@ module EncodingJob::Statuses
       statuses[:transcoding],
       statuses[:post_processing],
       statuses[:conformance_checking]
-    ]) }
+    ]).order("created_at ASC") }
   end
   
   module ClassMethods

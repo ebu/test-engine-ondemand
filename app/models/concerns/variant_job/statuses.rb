@@ -7,12 +7,18 @@ module VariantJob::Statuses
     scope :eligible_jobs, -> { where(status: [
       statuses[:pending],
       statuses[:transcoding]
-    ]) }
+    ]).order("created_at ASC") }
+
+    scope :queued_jobs, -> { where(status: statuses[:pending]) }
   end
   
   module ClassMethods
     def transition
       eligible_jobs.each { |j| j.transition }
+    end
+
+    def queue_position_for(j)
+      self.queued_jobs.index j
     end
   end
   

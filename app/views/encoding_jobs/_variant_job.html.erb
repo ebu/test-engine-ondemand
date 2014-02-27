@@ -1,6 +1,9 @@
 <tr>
   <td><%= variant_job.id %></td>
-  <td><%= job_status_label variant_job %></td>
+  <td>
+    <%= job_status_label variant_job %>
+    <span class="small"><%= variant_job.pending? ? queue_position_for(variant_job) : '' %></span>
+  </td>
   <td class="small">
     <b><%= variant_job.source_file_path.split(File::SEPARATOR).pop %></b><br/>
     <%= variant_job.encoder_flags %>
