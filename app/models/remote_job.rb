@@ -11,7 +11,6 @@ class RemoteJob < ActiveRecord::Base
     end
     
     def initialize_for_conformance_checking(job)
-      ant_build_file = 
       new({
         command: 'ant',
         arguments: "run -f #{EBU::CONFORMANCE_ANT_BUILD_FILE} -Dinput=#{job.output_destination}"
