@@ -12,6 +12,10 @@ class EncodingJob < ActiveRecord::Base
 
   accepts_nested_attributes_for :variant_jobs
   
+  before_create do
+    self.random_id = SecureRandom.hex(8)
+  end
+  
   # Check if it's currently allowed to create a new +EncodingJob+.
   #
   # A new +EncodingJob+ requires at least the availability of a
@@ -42,17 +46,25 @@ class EncodingJob < ActiveRecord::Base
   end
   
   def output_destination
-    [EBU::FINAL_FILE_LOCATION, self.id.to_s, 'dash.mpd'].join(File::SEPARATOR)
+    (output_path << 'dash.mpd').join(File::SEPARATOR)
+  end
+
+  def randomized_id
+    random_id.blank? ? id.to_s : "#{id}-#{random_id}"
   end
   
   private
+
+  def output_path
+    [EBU::FINAL_FILE_LOCATION, randomized_id]
+  end
   
   # Attempt to create a post-processing job.
   #
   # Also attempts to create the output directory for the final DASHed job.
   # Returns true if successful, false otherwise.
   def create_post_processing_job
-    FileUtils.mkdir_p([EBU::FINAL_FILE_LOCATION, self.id.to_s].join(File::SEPARATOR))
+    FileUtils.mkdir_p(output_path.join(File::SEPARATOR))
     self.post_processing_job = RemoteJob.initialize_for_post_processing(self)
     self.save
   end

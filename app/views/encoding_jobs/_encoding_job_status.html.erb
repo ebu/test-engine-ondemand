@@ -3,8 +3,13 @@
     <h3 class="panel-title">Encoding Job <%= encoding_job.id %> &mdash; <%= encoding_job.description || '(N/A)' %></h3>
   </div>
   <div class="panel-body">
-    <%= human_readable_summary_for encoding_job %>
-    <%= play_link(encoding_job) if encoding_job.success? %>
+    <p><%= human_readable_summary_for encoding_job %></p>
+    <% if encoding_job.success? %>
+    <div>
+      <%= play_link(encoding_job) %>
+      <%= raw_mpd_link(encoding_job) %>
+    </div>
+    <% end %>
   </div>
 </div>
 

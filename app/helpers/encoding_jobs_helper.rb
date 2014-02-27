@@ -139,11 +139,15 @@ module EncodingJobsHelper
   end
   
   def play_link(job)
-    link_to 'Open in Dash.js player', play_encoding_job_path(job), class: 'btn btn-primary'
+    link_to('Open in Dash.js player', play_encoding_job_path(job), class: 'btn btn-primary')
+  end
+
+  def raw_mpd_link(job)
+    "Raw public MPD link: ".html_safe + link_to(stream_url_for(job), stream_url_for(job))
   end
   
   def stream_url_for(job)
-    url_for(controller: 'dashboard', action: 'index', only_path: false) + ['dash', job.id.to_s, 'dash.mpd'].join('/')
+    url_for(controller: 'dashboard', action: 'index', only_path: false) + ['dash', job.randomized_id, 'dash.mpd'].join('/')
   end
   
   def queue_position_for(variant_job)

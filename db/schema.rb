@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140225151855) do
+ActiveRecord::Schema.define(version: 20140227104705) do
 
   create_table "codem_notifications", force: true do |t|
     t.string   "status"
@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 20140225151855) do
     t.integer  "post_processing_template_id"
     t.integer  "post_processing_job_id"
     t.integer  "conformance_checking_job_id"
+    t.string   "random_id"
   end
 
   create_table "file_assets", force: true do |t|
