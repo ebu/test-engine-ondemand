@@ -41,6 +41,10 @@ class EncodingJob < ActiveRecord::Base
     did_fail_conformance_checking?
   end
   
+  def output_destination
+    [EBU::FINAL_FILE_LOCATION, self.id.to_s, 'dash.mpd'].join(File::SEPARATOR)
+  end
+  
   private
   
   # Attempt to create a post-processing job.

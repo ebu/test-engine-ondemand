@@ -5,15 +5,16 @@ class RemoteJob < ActiveRecord::Base
         command: 'MP4Box',
         arguments:
           "#{job.post_processing_flags} \
-          -out #{[EBU::FINAL_FILE_LOCATION, job.id.to_s, 'dash'].join(File::SEPARATOR)} \
+          -out #{job.output_destination} \
           #{job.variant_jobs.collect(&:destination_file_path).join(' ')}"
       })
     end
     
     def initialize_for_conformance_checking(job)
+      ant_build_file = 
       new({
-        command: 'echo',
-        arguments: 'foo'
+        command: 'ant',
+        arguments: "run -f #{EBU::CONFORMANCE_ANT_BUILD_FILE} -Dinput=#{job.output_destination}"
       })
     end
     
@@ -54,6 +55,10 @@ class RemoteJob < ActiveRecord::Base
   
   def failed?
     !code.nil? && code != 0
+  end
+  
+  def stdout_contains_exceptions?
+    stdout =~ /Exception/
   end
   
   def to_runner_json

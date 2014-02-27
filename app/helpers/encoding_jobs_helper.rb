@@ -66,7 +66,11 @@ module EncodingJobsHelper
     elsif job.failed_conformance_checking?
       collapsable_group('An error occurred during conformance-checking.', 'conformance_checking_details', job.conformance_checking_job.stdout)
     elsif job.completed_conformance_checking?
-      collapsable_group('Conformance-checking finished successfully.', 'conformance_checking_details', job.conformance_checking_job.stdout)
+      if job.conformance_checking_job.stdout_contains_exceptions?
+        collapsable_group('Conformance-checking finished, but may contain errors. Please check details.', 'conformance_checking_details', job.conformance_checking_job.stdout)
+      else
+        collapsable_group('Conformance-checking finished successfully.', 'conformance_checking_details', job.conformance_checking_job.stdout)
+      end
     else
       'Information not yet available.'
     end
@@ -112,9 +116,9 @@ module EncodingJobsHelper
 
   def panel_class_for_conformance_checking(job)
     if job.completed_conformance_checking?
-      'panel-success'
+      job.conformance_checking_job.stdout_contains_exceptions? ? 'panel-warning' : 'panel-success'
     elsif job.failed_conformance_checking?
-      'panel-warning'
+      'panel-danger'
     elsif job.conformance_checking?
       'panel-info'
     else
