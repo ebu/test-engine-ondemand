@@ -38,3 +38,6 @@ Rails.application.configure do
   # Development uses a different timezone
   config.time_zone = 'Amsterdam'
 end
+
+# Don't buffer stdout for foreman
+$stdout.sync = true
