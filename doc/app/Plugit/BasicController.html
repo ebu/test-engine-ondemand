@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8">
 
-<title>module EncodingJob::Statuses - Rails Application Documentation</title>
+<title>class Plugit::BasicController - Rails Application Documentation</title>
 
 <link href="../fonts.css" rel="stylesheet">
 <link href="../rdoc.css" rel="stylesheet">
@@ -21,7 +21,7 @@
 <script src="../js/darkfish.js"></script>
 
 
-<body id="top" role="document" class="module">
+<body id="top" role="document" class="class">
 <nav role="navigation">
   <div id="project-navigation">
     <div id="home-section" role="region" title="Quick navigation" class="nav-section">
@@ -57,27 +57,25 @@
 
   <div id="class-metadata">
     
-    
-    
-    <div id="extends-section" class="nav-section">
-  <h3>Extended With Modules</h3>
+    <div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
 
-  <ul class="link-list">
-    
   
-    <li><span class="extend">ActiveSupport::Concern</span>
+  <p class="link"><a href="../ApplicationController.html">ApplicationController</a>
   
-  
-  </ul>
 </div>
 
+    
+    
     <!-- Method Quickref -->
 <div id="method-list-section" class="nav-section">
   <h3>Methods</h3>
 
   <ul class="link-list" role="directory">
     
-    <li ><a href="#method-i-transition">#transition</a>
+    <li ><a href="#method-i-ping">#ping</a>
+    
+    <li ><a href="#method-i-version">#version</a>
     
   </ul>
 </div>
@@ -85,13 +83,18 @@
   </div>
 </nav>
 
-<main role="main" aria-labelledby="module-EncodingJob::Statuses">
-  <h1 id="module-EncodingJob::Statuses" class="module">
-    module EncodingJob::Statuses
+<main role="main" aria-labelledby="class-Plugit::BasicController">
+  <h1 id="class-Plugit::BasicController" class="class">
+    class Plugit::BasicController
   </h1>
 
   <section class="description">
     
+<p>This controller provides basic PlugIt methods.</p>
+
+<p>The requirements for these actions are describe here: <a
+href="https://github.com/ebu/PlugIt#basic-methods">github.com/ebu/PlugIt#basic-methods</a></p>
+
   </section>
 
   
@@ -113,10 +116,10 @@
        </header>
 
     
-      <div id="method-i-transition" class="method-detail ">
+      <div id="method-i-ping" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">transition</span><span
+          <span class="method-name">ping</span><span
             class="method-args">()</span>
           
           <span class="method-click-advice">click to toggle source</span>
@@ -131,10 +134,44 @@
           
 
           
-          <div class="method-source-code" id="transition-source">
-            <pre><span class="ruby-comment"># File app/models/concerns/encoding_job/statuses.rb, line 25</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">transition</span>
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">send</span>(<span class="ruby-node">&quot;transition_from_#{status}&quot;</span>)
+          <div class="method-source-code" id="ping-source">
+            <pre><span class="ruby-comment"># File app/controllers/plugit/basic_controller.rb, line 6</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">ping</span>
+  <span class="ruby-identifier">data</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:data</span>] <span class="ruby-operator">||</span> <span class="ruby-string">&#39;&#39;</span>
+  <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> { <span class="ruby-identifier">data</span><span class="ruby-operator">:</span> <span class="ruby-identifier">data</span> }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-version" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">version</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="version-source">
+            <pre><span class="ruby-comment"># File app/controllers/plugit/basic_controller.rb, line 11</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">version</span>
+  <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> { <span class="ruby-identifier">result</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;Ok&#39;</span>, <span class="ruby-identifier">version</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;1&#39;</span>, <span class="ruby-identifier">protocol</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;EBUio-PlugIt&#39;</span> }
 <span class="ruby-keyword">end</span></pre>
           </div>
           

@@ -94,6 +94,10 @@
     
     <li ><a href="#method-i-failed_post_processing-3F">#failed_post_processing?</a>
     
+    <li ><a href="#method-i-output_destination">#output_destination</a>
+    
+    <li ><a href="#method-i-randomized_id">#randomized_id</a>
+    
   </ul>
 </div>
 
@@ -152,7 +156,7 @@
 
           
           <div class="method-source-code" id="new_allowed-3F-source">
-            <pre><span class="ruby-comment"># File app/models/encoding_job.rb, line 20</span>
+            <pre><span class="ruby-comment"># File app/models/encoding_job.rb, line 26</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new_allowed?</span>
   <span class="ruby-constant">FileAsset</span>.<span class="ruby-identifier">any?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-constant">PresetTemplate</span>.<span class="ruby-identifier">encoder_preset</span>.<span class="ruby-identifier">any?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-constant">PresetTemplate</span>.<span class="ruby-identifier">post_processing_preset</span>.<span class="ruby-identifier">any?</span>
 <span class="ruby-keyword">end</span></pre>
@@ -187,13 +191,13 @@
 
         <div class="method-description">
           
-          <p>Check if conformance checking completed succesfully.</p>
+          <p>Check if conformance checking completed successfully.</p>
           
           
 
           
           <div class="method-source-code" id="completed_conformance_checking-3F-source">
-            <pre><span class="ruby-comment"># File app/models/encoding_job.rb, line 35</span>
+            <pre><span class="ruby-comment"># File app/models/encoding_job.rb, line 41</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">completed_conformance_checking?</span>
   <span class="ruby-identifier">did_complete_conformance_checking?</span>
 <span class="ruby-keyword">end</span></pre>
@@ -220,13 +224,13 @@
 
         <div class="method-description">
           
-          <p>Check if post-processing completed succesfully.</p>
+          <p>Check if post-processing completed successfully.</p>
           
           
 
           
           <div class="method-source-code" id="completed_post_processing-3F-source">
-            <pre><span class="ruby-comment"># File app/models/encoding_job.rb, line 25</span>
+            <pre><span class="ruby-comment"># File app/models/encoding_job.rb, line 31</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">completed_post_processing?</span>
   <span class="ruby-identifier">did_complete_post_processing?</span>
 <span class="ruby-keyword">end</span></pre>
@@ -259,7 +263,7 @@
 
           
           <div class="method-source-code" id="failed_conformance_checking-3F-source">
-            <pre><span class="ruby-comment"># File app/models/encoding_job.rb, line 40</span>
+            <pre><span class="ruby-comment"># File app/models/encoding_job.rb, line 46</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">failed_conformance_checking?</span>
   <span class="ruby-identifier">did_fail_conformance_checking?</span>
 <span class="ruby-keyword">end</span></pre>
@@ -292,9 +296,75 @@
 
           
           <div class="method-source-code" id="failed_post_processing-3F-source">
-            <pre><span class="ruby-comment"># File app/models/encoding_job.rb, line 30</span>
+            <pre><span class="ruby-comment"># File app/models/encoding_job.rb, line 36</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">failed_post_processing?</span>
   <span class="ruby-identifier">did_fail_post_processing?</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-output_destination" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">output_destination</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="output_destination-source">
+            <pre><span class="ruby-comment"># File app/models/encoding_job.rb, line 50</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">output_destination</span>
+  (<span class="ruby-identifier">output_path</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&#39;dash.mpd&#39;</span>).<span class="ruby-identifier">join</span>(<span class="ruby-constant">File</span><span class="ruby-operator">::</span><span class="ruby-constant">SEPARATOR</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-randomized_id" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">randomized_id</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="randomized_id-source">
+            <pre><span class="ruby-comment"># File app/models/encoding_job.rb, line 54</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">randomized_id</span>
+  <span class="ruby-identifier">random_id</span>.<span class="ruby-identifier">blank?</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">id</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">:</span> <span class="ruby-node">&quot;#{id}-#{random_id}&quot;</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           

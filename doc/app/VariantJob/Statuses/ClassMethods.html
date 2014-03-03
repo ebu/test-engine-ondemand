@@ -66,6 +66,8 @@
 
   <ul class="link-list" role="directory">
     
+    <li ><a href="#method-i-queue_position_for">#queue_position_for</a>
+    
     <li ><a href="#method-i-transition">#transition</a>
     
   </ul>
@@ -102,6 +104,39 @@
        </header>
 
     
+      <div id="method-i-queue_position_for" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">queue_position_for</span><span
+            class="method-args">(j)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="queue_position_for-source">
+            <pre><span class="ruby-comment"># File app/models/concerns/variant_job/statuses.rb, line 20</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">queue_position_for</span>(<span class="ruby-identifier">j</span>)
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">queued_jobs</span>.<span class="ruby-identifier">index</span> <span class="ruby-identifier">j</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
       <div id="method-i-transition" class="method-detail ">
         
         <div class="method-heading">
@@ -121,7 +156,7 @@
 
           
           <div class="method-source-code" id="transition-source">
-            <pre><span class="ruby-comment"># File app/models/concerns/variant_job/statuses.rb, line 14</span>
+            <pre><span class="ruby-comment"># File app/models/concerns/variant_job/statuses.rb, line 16</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">transition</span>
   <span class="ruby-identifier">eligible_jobs</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">j</span><span class="ruby-operator">|</span> <span class="ruby-identifier">j</span>.<span class="ruby-identifier">transition</span> }
 <span class="ruby-keyword">end</span></pre>

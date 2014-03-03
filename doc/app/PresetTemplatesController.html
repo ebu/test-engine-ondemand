@@ -134,7 +134,7 @@
 
           
           <div class="method-source-code" id="create-source">
-            <pre><span class="ruby-comment"># File app/controllers/preset_templates_controller.rb, line 10</span>
+            <pre><span class="ruby-comment"># File app/controllers/preset_templates_controller.rb, line 11</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">create</span>
   <span class="ruby-ivar">@preset_template</span> = <span class="ruby-constant">PresetTemplate</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">user_params</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-ivar">@preset_template</span>.<span class="ruby-identifier">save</span>
@@ -174,7 +174,7 @@
 
           
           <div class="method-source-code" id="destroy-source">
-            <pre><span class="ruby-comment"># File app/controllers/preset_templates_controller.rb, line 21</span>
+            <pre><span class="ruby-comment"># File app/controllers/preset_templates_controller.rb, line 22</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">destroy</span>
   <span class="ruby-ivar">@preset_template</span> = <span class="ruby-constant">PresetTemplate</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
   <span class="ruby-keyword">if</span> <span class="ruby-ivar">@preset_template</span>.<span class="ruby-identifier">destroy</span>
@@ -215,7 +215,8 @@
           <div class="method-source-code" id="index-source">
             <pre><span class="ruby-comment"># File app/controllers/preset_templates_controller.rb, line 2</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
-  <span class="ruby-ivar">@preset_templates</span> = <span class="ruby-constant">PresetTemplate</span>.<span class="ruby-identifier">all</span>
+  <span class="ruby-ivar">@encoder_presets</span> = <span class="ruby-constant">PresetTemplate</span>.<span class="ruby-identifier">encoder_preset</span>
+  <span class="ruby-ivar">@post_processing_presets</span> = <span class="ruby-constant">PresetTemplate</span>.<span class="ruby-identifier">post_processing_preset</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -246,7 +247,7 @@
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File app/controllers/preset_templates_controller.rb, line 6</span>
+            <pre><span class="ruby-comment"># File app/controllers/preset_templates_controller.rb, line 7</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">new</span>
   <span class="ruby-ivar">@preset_template</span> = <span class="ruby-constant">PresetTemplate</span>.<span class="ruby-identifier">new</span>
 <span class="ruby-keyword">end</span></pre>

@@ -134,7 +134,7 @@
 
           
           <div class="method-source-code" id="finished-3F-source">
-            <pre><span class="ruby-comment"># File app/models/concerns/variant_job/statuses.rb, line 23</span>
+            <pre><span class="ruby-comment"># File app/models/concerns/variant_job/statuses.rb, line 29</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">finished?</span>
   <span class="ruby-identifier">success?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">failed?</span>
 <span class="ruby-keyword">end</span></pre>
@@ -167,7 +167,7 @@
 
           
           <div class="method-source-code" id="transition-source">
-            <pre><span class="ruby-comment"># File app/models/concerns/variant_job/statuses.rb, line 19</span>
+            <pre><span class="ruby-comment"># File app/models/concerns/variant_job/statuses.rb, line 25</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">transition</span>
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">send</span>(<span class="ruby-node">&quot;transition_from_#{status}&quot;</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">finished?</span>
 <span class="ruby-keyword">end</span></pre>

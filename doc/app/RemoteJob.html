@@ -77,6 +77,18 @@
     
     <li ><a href="#method-i-failed-3F">#failed?</a>
     
+    <li ><a href="#method-i-finished-3F">#finished?</a>
+    
+    <li ><a href="#method-i-initialize_for_conformance_checking">#initialize_for_conformance_checking</a>
+    
+    <li ><a href="#method-i-initialize_for_post_processing">#initialize_for_post_processing</a>
+    
+    <li ><a href="#method-i-send_job">#send_job</a>
+    
+    <li ><a href="#method-i-stdout_contains_exceptions-3F">#stdout_contains_exceptions?</a>
+    
+    <li ><a href="#method-i-to_runner_json">#to_runner_json</a>
+    
   </ul>
 </div>
 
@@ -130,7 +142,7 @@
 
           
           <div class="method-source-code" id="completed-3F-source">
-            <pre><span class="ruby-comment"># File app/models/remote_job.rb, line 2</span>
+            <pre><span class="ruby-comment"># File app/models/remote_job.rb, line 51</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">completed?</span>
   <span class="ruby-identifier">code</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
 <span class="ruby-keyword">end</span></pre>
@@ -163,9 +175,242 @@
 
           
           <div class="method-source-code" id="failed-3F-source">
-            <pre><span class="ruby-comment"># File app/models/remote_job.rb, line 6</span>
+            <pre><span class="ruby-comment"># File app/models/remote_job.rb, line 55</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">failed?</span>
   <span class="ruby-operator">!</span><span class="ruby-identifier">code</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">code</span> <span class="ruby-operator">!=</span> <span class="ruby-value">0</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-finished-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">finished?</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="finished-3F-source">
+            <pre><span class="ruby-comment"># File app/models/remote_job.rb, line 47</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">finished?</span>
+  <span class="ruby-operator">!</span><span class="ruby-identifier">code</span>.<span class="ruby-identifier">nil?</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-initialize_for_conformance_checking" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">initialize_for_conformance_checking</span><span
+            class="method-args">(job)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="initialize_for_conformance_checking-source">
+            <pre><span class="ruby-comment"># File app/models/remote_job.rb, line 13</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize_for_conformance_checking</span>(<span class="ruby-identifier">job</span>)
+  <span class="ruby-identifier">new</span>({
+    <span class="ruby-identifier">command</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;ant&#39;</span>,
+    <span class="ruby-identifier">arguments</span><span class="ruby-operator">:</span> <span class="ruby-node">&quot;run -f #{EBU::CONFORMANCE_ANT_BUILD_FILE} -Dinput=#{job.output_destination}&quot;</span>
+  })
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-initialize_for_post_processing" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">initialize_for_post_processing</span><span
+            class="method-args">(job)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="initialize_for_post_processing-source">
+            <pre><span class="ruby-comment"># File app/models/remote_job.rb, line 3</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize_for_post_processing</span>(<span class="ruby-identifier">job</span>)
+  <span class="ruby-identifier">new</span>({
+    <span class="ruby-identifier">command</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;MP4Box&#39;</span>,
+    <span class="ruby-identifier">arguments</span><span class="ruby-operator">:</span>
+      <span class="ruby-node">&quot;#{job.post_processing_flags} \
+      -out #{job.output_destination} \
+      #{job.variant_jobs.collect(&amp;:destination_file_path).join(&#39; &#39;)}&quot;</span>
+  })
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-send_job" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">send_job</span><span
+            class="method-args">(job)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="send_job-source">
+            <pre><span class="ruby-comment"># File app/models/remote_job.rb, line 20</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">send_job</span>(<span class="ruby-identifier">job</span>)
+  <span class="ruby-keyword">begin</span>
+    <span class="ruby-identifier">response</span> = <span class="ruby-constant">RestClient</span><span class="ruby-operator">::</span><span class="ruby-constant">Request</span>.<span class="ruby-identifier">execute</span>(
+      <span class="ruby-identifier">method</span><span class="ruby-operator">:</span> <span class="ruby-value">:post</span>,
+      <span class="ruby-identifier">url</span><span class="ruby-operator">:</span> <span class="ruby-constant">EBU</span><span class="ruby-operator">::</span><span class="ruby-constant">HTTP_RUNNER_HOST</span>,
+      <span class="ruby-identifier">payload</span><span class="ruby-operator">:</span> <span class="ruby-identifier">job</span>.<span class="ruby-identifier">to_runner_json</span>,
+      <span class="ruby-identifier">timeout</span><span class="ruby-operator">:</span> <span class="ruby-constant">EBU</span><span class="ruby-operator">::</span><span class="ruby-constant">TRANSCODER_TIMEOUT</span>,
+      <span class="ruby-identifier">open_timeout</span><span class="ruby-operator">:</span> <span class="ruby-constant">EBU</span><span class="ruby-operator">::</span><span class="ruby-constant">TRANSCODER_TIMEOUT</span>
+    )
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">response</span>.<span class="ruby-identifier">code</span> <span class="ruby-operator">==</span> <span class="ruby-value">202</span>
+      <span class="ruby-keyword">if</span> (<span class="ruby-identifier">obj</span> = <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">response</span>.<span class="ruby-identifier">to_str</span>))
+        <span class="ruby-identifier">job</span>.<span class="ruby-identifier">update_attribute</span>(<span class="ruby-value">:remote_id</span>, <span class="ruby-identifier">obj</span>[<span class="ruby-string">&quot;id&quot;</span>])
+        <span class="ruby-identifier">obj</span>[<span class="ruby-string">&quot;id&quot;</span>]
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-identifier">raise</span> <span class="ruby-node">&quot;Job #{job.id} was created, but no job ID was returned.&quot;</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-keyword">nil</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">rescue</span> <span class="ruby-constant">Timeout</span><span class="ruby-operator">::</span><span class="ruby-constant">Error</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">e</span>
+    <span class="ruby-keyword">nil</span>
+  <span class="ruby-comment"># rescue =&gt; e</span>
+  <span class="ruby-comment">#   nil</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-stdout_contains_exceptions-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">stdout_contains_exceptions?</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="stdout_contains_exceptions-3F-source">
+            <pre><span class="ruby-comment"># File app/models/remote_job.rb, line 59</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">stdout_contains_exceptions?</span>
+  <span class="ruby-identifier">stdout</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/Exception/</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-to_runner_json" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">to_runner_json</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="to_runner_json-source">
+            <pre><span class="ruby-comment"># File app/models/remote_job.rb, line 63</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">to_runner_json</span>
+  {
+    <span class="ruby-string">&quot;command&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">command</span>,
+    <span class="ruby-string">&quot;args&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">arguments</span>,
+    <span class="ruby-string">&quot;callback&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">EBU</span><span class="ruby-operator">::</span><span class="ruby-constant">CALLBACK_URL_FOR_HTTP_RUNNER</span>
+  }.<span class="ruby-identifier">to_json</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           

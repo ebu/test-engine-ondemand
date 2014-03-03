@@ -84,6 +84,8 @@
 
   <ul class="link-list" role="directory">
     
+    <li ><a href="#method-i-progress">#progress</a>
+    
     <li ><a href="#method-i-requires_transcoding-3F">#requires_transcoding?</a>
     
     <li ><a href="#method-i-to_codem_json">#to_codem_json</a>
@@ -120,6 +122,47 @@
        <header>
          <h3>Public Instance Methods</h3>
        </header>
+
+    
+      <div id="method-i-progress" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">progress</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="progress-source">
+            <pre><span class="ruby-comment"># File app/models/variant_job.rb, line 30</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">progress</span>
+  <span class="ruby-ivar">@progress</span> <span class="ruby-operator">||=</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">success?</span>
+    <span class="ruby-value">1.0</span>
+  <span class="ruby-keyword">elsif</span> (<span class="ruby-identifier">failed?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">pending?</span>)
+    <span class="ruby-value">0.0</span>
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">transcoder</span>
+    <span class="ruby-identifier">transcoder</span>.<span class="ruby-identifier">get_progress</span>(<span class="ruby-keyword">self</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-value">0.0</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
 
     
       <div id="method-i-requires_transcoding-3F" class="method-detail ">
@@ -178,7 +221,7 @@ href="https://github.com/madebyhiro/codem-transcode/blob/master/README.markdown"
 
           
           <div class="method-source-code" id="to_codem_json-source">
-            <pre><span class="ruby-comment"># File app/models/variant_job.rb, line 34</span>
+            <pre><span class="ruby-comment"># File app/models/variant_job.rb, line 46</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">to_codem_json</span>
   {
     <span class="ruby-string">&quot;source_file&quot;</span>      =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">source_file_path</span>,

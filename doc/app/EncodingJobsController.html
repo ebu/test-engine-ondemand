@@ -75,11 +75,17 @@
     
     <li ><a href="#method-i-create">#create</a>
     
+    <li ><a href="#method-i-destroy">#destroy</a>
+    
     <li ><a href="#method-i-index">#index</a>
     
     <li ><a href="#method-i-new">#new</a>
     
+    <li ><a href="#method-i-play">#play</a>
+    
     <li ><a href="#method-i-show">#show</a>
+    
+    <li ><a href="#method-i-status">#status</a>
     
   </ul>
 </div>
@@ -144,6 +150,45 @@
     <span class="ruby-identifier">flash</span>[<span class="ruby-value">:warn</span>] = <span class="ruby-node">&quot;Unable to save encoding job. #{@encoding_job.errors.messages}&quot;</span>
     <span class="ruby-identifier">render</span> <span class="ruby-value">:new</span>
   <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-destroy" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">destroy</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="destroy-source">
+            <pre><span class="ruby-comment"># File app/controllers/encoding_jobs_controller.rb, line 25</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">destroy</span>
+  <span class="ruby-ivar">@encoding_job</span> = <span class="ruby-constant">EncodingJob</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@encoding_job</span>.<span class="ruby-identifier">destroy</span>
+    <span class="ruby-identifier">flash</span>[<span class="ruby-value">:notice</span>] = <span class="ruby-string">&#39;Encoding job removed&#39;</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">flash</span>[<span class="ruby-value">:warn</span>] = <span class="ruby-string">&quot;Unable to remove encoding job.&quot;</span>
+  <span class="ruby-keyword">end</span>  
+  <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">encoding_jobs_path</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -221,6 +266,40 @@
       </div>
 
     
+      <div id="method-i-play" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">play</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="play-source">
+            <pre><span class="ruby-comment"># File app/controllers/encoding_jobs_controller.rb, line 40</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">play</span>
+  <span class="ruby-ivar">@encoding_job</span> = <span class="ruby-constant">EncodingJob</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
+  <span class="ruby-identifier">render</span> <span class="ruby-identifier">layout</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;player&#39;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
       <div id="method-i-show" class="method-detail ">
         
         <div class="method-heading">
@@ -243,6 +322,40 @@
             <pre><span class="ruby-comment"># File app/controllers/encoding_jobs_controller.rb, line 6</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
   <span class="ruby-ivar">@encoding_job</span> = <span class="ruby-constant">EncodingJob</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-status" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">status</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="status-source">
+            <pre><span class="ruby-comment"># File app/controllers/encoding_jobs_controller.rb, line 35</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">status</span>
+  <span class="ruby-ivar">@encoding_job</span> = <span class="ruby-constant">EncodingJob</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
+  <span class="ruby-identifier">render</span> <span class="ruby-identifier">layout</span><span class="ruby-operator">:</span> <span class="ruby-keyword">false</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           

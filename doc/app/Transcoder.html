@@ -77,6 +77,8 @@
     
     <li ><a href="#method-i-available-3F">#available?</a>
     
+    <li ><a href="#method-i-get_progress">#get_progress</a>
+    
     <li ><a href="#method-i-send_job">#send_job</a>
     
   </ul>
@@ -187,6 +189,55 @@
     <span class="ruby-keyword">false</span>
   <span class="ruby-keyword">rescue</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">e</span>
     <span class="ruby-keyword">false</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-get_progress" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">get_progress</span><span
+            class="method-args">(job)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="get_progress-source">
+            <pre><span class="ruby-comment"># File app/models/transcoder.rb, line 67</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">get_progress</span>(<span class="ruby-identifier">job</span>)
+  <span class="ruby-keyword">begin</span>
+    <span class="ruby-identifier">response</span> = <span class="ruby-constant">RestClient</span><span class="ruby-operator">::</span><span class="ruby-constant">Request</span>.<span class="ruby-identifier">execute</span>(
+      <span class="ruby-identifier">method</span><span class="ruby-operator">:</span> <span class="ruby-value">:get</span>,
+      <span class="ruby-identifier">url</span><span class="ruby-operator">:</span> [<span class="ruby-identifier">build_jobs_url</span>, <span class="ruby-identifier">job</span>.<span class="ruby-identifier">codem_id</span>].<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;/&#39;</span>),
+      <span class="ruby-identifier">timeout</span><span class="ruby-operator">:</span> <span class="ruby-constant">EBU</span><span class="ruby-operator">::</span><span class="ruby-constant">TRANSCODER_TIMEOUT</span>,
+      <span class="ruby-identifier">open_timeout</span><span class="ruby-operator">:</span> <span class="ruby-constant">EBU</span><span class="ruby-operator">::</span><span class="ruby-constant">TRANSCODER_TIMEOUT</span>
+    )
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">response</span>.<span class="ruby-identifier">code</span> <span class="ruby-operator">==</span> <span class="ruby-value">200</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">obj</span> = <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">response</span>.<span class="ruby-identifier">to_str</span>)
+      <span class="ruby-identifier">obj</span>[<span class="ruby-string">&quot;progress&quot;</span>]
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-value">0.0</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">rescue</span> <span class="ruby-constant">Timeout</span><span class="ruby-operator">::</span><span class="ruby-constant">Error</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">e</span>
+    <span class="ruby-value">0.0</span>
+  <span class="ruby-keyword">rescue</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">e</span>
+    <span class="ruby-value">0.0</span>
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
