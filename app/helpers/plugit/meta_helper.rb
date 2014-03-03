@@ -1,0 +1,2 @@
+module Plugit::MetaHelper
+end

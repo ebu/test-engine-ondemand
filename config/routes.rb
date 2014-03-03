@@ -1,4 +1,8 @@
 EbuOndemand::Application.routes.draw do
+  namespace :plugit do
+  get 'meta/index'
+  end
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -19,6 +23,12 @@ EbuOndemand::Application.routes.draw do
     member do
       get 'available'
     end
+  end
+    
+  namespace :plugit do
+    get '/meta', to: "meta#index"
+    get '/action', to: "action#index"
+    get '/template', to: "template#index"
   end
   
   put  'codem_notifications'       => 'codem_notifications#create'

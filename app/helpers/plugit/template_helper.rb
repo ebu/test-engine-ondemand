@@ -1,0 +1,2 @@
+module Plugit::TemplateHelper
+end
