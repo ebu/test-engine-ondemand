@@ -1,0 +1,2 @@
+module Plugit::BasicHelper
+end

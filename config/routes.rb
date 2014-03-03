@@ -26,6 +26,11 @@ EbuOndemand::Application.routes.draw do
   end
     
   namespace :plugit do
+    # Basic application endpoints
+    get '/ping', to: "basic#ping"
+    get '/version', to: "basic#version"
+    
+    # Root action
     get '/meta', to: "meta#index"
     get '/action', to: "action#index"
     get '/template', to: "template#index"
