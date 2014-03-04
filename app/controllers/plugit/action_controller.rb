@@ -3,4 +3,7 @@ class Plugit::ActionController < ApplicationController
     render json: {}
   end
   
+  def play
+    render json: {}
+  end
 end

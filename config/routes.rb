@@ -34,6 +34,11 @@ EbuOndemand::Application.routes.draw do
     get '/meta', to: "meta#index"
     get '/action', to: "action#index"
     get '/template', to: "template#index"
+    
+    # Play action
+    get '/meta/play/:id',     to: "meta#play"
+    get '/action/play/:id',   to: "action#play"
+    get '/template/play/:id', to: "template#play"    
   end
   
   put  'codem_notifications'       => 'codem_notifications#create'

@@ -3,6 +3,9 @@ class Plugit::MetaController < ApplicationController
   
   def index
   end
+
+  def play
+  end
   
   private
   
