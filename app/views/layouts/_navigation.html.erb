@@ -1,4 +1,4 @@
-<header class="navbar navbar-inverse navbar-static-top" role="banner">
+<header class="navbar navbar-inverse" role="banner">
   <div class="container">
     <div class="navbar-header">
       <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
@@ -7,7 +7,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <%= link_to 'Dashboard', root_path, class: "navbar-brand" %>
+      <%= link_to 'Dashboard', "{{ebuio_baseUrl}}", class: "navbar-brand" %>
     </div>
     <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
       <ul class="nav navbar-nav">
@@ -23,15 +23,6 @@
         <li class="<%= active_nav_item("encoding_jobs") %>">
           <%= link_to 'Encoding Jobs', encoding_jobs_path %>
         </li>
-        <!-- <li class="active">
-          <a href="../components">Components</a>
-        </li>
-        <li>
-          <a href="../javascript">JavaScript</a>
-        </li>
-        <li>
-          <a href="../customize">Customize</a>
-        </li> -->
       </ul>
     </nav>
   </div>

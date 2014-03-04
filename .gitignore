@@ -21,3 +21,6 @@
 
 # Ignore all DASH output files
 /public/dash
+
+# Ignore all compiled Python files
+*.pyc

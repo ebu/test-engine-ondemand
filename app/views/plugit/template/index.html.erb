@@ -1,10 +1,20 @@
 {% extends "plugIt/base.html" %}
+{% load i18n %}
+
+{% block title %}
+Dashboard
+{% endblock %}
 
 {% block content %}
 <%= render 'layouts/navigation' %>
 
-<h1>Welcome to the plugit</h1>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Welcome to the plugit</h3>
+  </div>
 
-<p>non?</p>
-
+  <div class="panel-body">
+    <p>non?</p>
+  </div>
+</div>
 {% endblock %}
