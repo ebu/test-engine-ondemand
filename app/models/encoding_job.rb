@@ -16,6 +16,8 @@ class EncodingJob < ActiveRecord::Base
     self.random_id = SecureRandom.hex(8)
   end
   
+  scope :recently_encoded, -> { success.limit(10).order("created_at DESC") }
+  
   after_destroy :remove_output_files
   
   # Check if it's currently allowed to create a new +EncodingJob+.
