@@ -1,0 +1,38 @@
+{% extends "plugIt/base.html" %}
+{% load i18n %}
+
+{% block title %}
+	{% trans "API" %}
+{% endblock %}
+
+{% block pretitle %}{% endblock %}
+
+{% block content %}
+	<h1>{% trans "API" %}</h1>
+
+	{% blocktrans %}
+		The API allow a PlugIt server to access different informations, about user or current organization.
+	{% endblocktrans %}
+
+	<h3>/user/&lt;id&gt;</h3>
+	<small><i>PlugItAPI.get_user(pk)</i></small><br />
+
+	Return information about an user.
+
+
+	<h3>/orga/&lt;id&gt;</h3>
+	<small><i>PlugItAPI.get_orga(pk)</i></small><br />
+
+	Return information about an organization.
+
+	<h3>/members/</h3>
+	<small><i>PlugItAPI.get_project_members()</i></small><br />
+
+	Return the list of members in the project.
+
+	<h3>/mail/</h3>
+	<small><i>PlugItAPI.send_mail(sender, subject, recipients, message, response_id=None)</i></small><br />
+
+	Send a mail with given parameters. If response_id is set, the sender email will be set by the system and recipents replies will be send back to the PlugIt server.
+
+{% endblock %}
