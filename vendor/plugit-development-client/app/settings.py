@@ -35,7 +35,7 @@ ALLOWED_HOSTS = []
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # although not all choices may be available on all operating systems.
 # In a Windows environment this must be set to your system time zone.
-TIME_ZONE = 'Europe/Zurich'
+TIME_ZONE = 'Europe/Amsterdam'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
@@ -166,8 +166,10 @@ PIAPI_STANDALONE = True
 PIAPI_STANDALONE_URI = 'http://127.0.0.1:3000/plugit'
 PIAPI_BASEURI = '/plugIt/'
 PIAPI_USERDATA = ['username', 'id', 'pk', 'first_name', 'last_name', 'email', 'ebuio_member', 'ebuio_admin', 'ebuio_orga_member', 'ebuio_orga_admin']
-PIAPI_ORGAMODE = False # Don't active this with PIAPI_REALUSERS !
+PIAPI_ORGAMODE = False  # Don't active this with PIAPI_REALUSERS !
 PIAPI_REALUSERS = False  # Don't active this with PIAPI_ORGAMODE !
+
+PIAPI_PROXYMODE = True
 
 CACHES = {
     'default': {
@@ -190,3 +192,5 @@ EBUIO_MAIL_SECRET_KEY = 'CHANGE_ME'
 INCOMING_MAIL_USER = ''
 INCOMING_MAIL_PASSWORD = ''
 INCOMING_MAIL_HOST = ''
+
+DISCUSSION_ID = 'I-D'
