@@ -31,4 +31,9 @@ module EBU
   
   CONFORMANCE_ANT_BUILD_FILE = [Rails.root, 'vendor', 'conformance', 'MPDValidator', 'build.xml'].join(File::SEPARATOR)
   #ALLOWED_CONTENT_TYPES = /\Aimage|\Avideo|\Atext/
+  
+  PLUGIT_ROOT = case Rails.env
+  when 'development' then 'plugIt'
+  else 'foo'
+  end
 end
