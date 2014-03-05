@@ -1,4 +1,6 @@
-class FileAssetsController < ApplicationController
+class FileAssetsController < PlugitController
+  before_filter :require_login
+  
   def index
     @file_assets = FileAsset.order("created_at DESC")
   end

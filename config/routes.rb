@@ -1,44 +1,31 @@
 EbuOndemand::Application.routes.draw do
-  namespace :plugit do
-  get 'meta/index'
-  end
-
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
-  root 'dashboard#index'
-  
-  resources :encoding_jobs do
-    member do
-      get 'status'
-      get 'play'
-    end
-  end
-  
-  resources :file_assets
-  resources :preset_templates
-  resources :transcoders do
-    member do
-      get 'available'
-    end
-  end
-    
-  namespace :plugit do
-    # Basic application endpoints
+
+  # Basic application endpoints
+  scope 'plugit-rails' do
     get '/ping', to: "basic#ping"
     get '/version', to: "basic#version"
-    
-    # Root action
-    get '/meta', to: "meta#index"
-    get '/action', to: "action#index"
-    get '/template', to: "template#index"
-    
-    # Play action
-    get '/meta/play/:id',     to: "meta#play"
-    get '/action/play/:id',   to: "action#play"
-    get '/template/play/:id', to: "template#play"    
+
+    root 'dashboard#index'
+
+    resources :encoding_jobs do
+      member do
+        get 'status'
+        get 'play'
+      end
+    end
+
+    resources :file_assets
+    resources :preset_templates
+    resources :transcoders do
+      member do
+        get 'available'
+      end
+    end
   end
   
   put  'codem_notifications'       => 'codem_notifications#create'

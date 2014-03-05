@@ -5,12 +5,12 @@
             <title>{% block title %}{% endblock %} :: PlugIt -Standalone mode</title>
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-            <link href="/media/css/bootstrap.min.css" rel="stylesheet" media="screen">
+            <!-- <link href="/media/css/bootstrap.min.css" rel="stylesheet" media="screen">
             <link href="/media/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
             <script src="/media/js/jquery-1.10.1.min.js"></script>
-            <script src="/media/js/bootstrap.min.js"></script>
+            <script src="/media/js/bootstrap.min.js"></script> -->
 
-            <link href="/media/css/plugIt-standalone.css" rel="stylesheet" media="screen">
+            <!-- <link href="/media/css/plugIt-standalone.css" rel="stylesheet" media="screen"> -->
             
 
         </head>
@@ -42,12 +42,20 @@
 
                 <div class="masthead">
                     
-                    <div class="navbar">
-                      <div class="navbar-inner">
+                    <div class="navbar navbar-default">
                         <div class="container">
-                          <ul class="nav">
+                          <div class="navbar-header">
+                            <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse-plugit">
+                              <span class="sr-only">Toggle navigation</span>
+                              <span class="icon-bar"></span>
+                              <span class="icon-bar"></span>
+                              <span class="icon-bar"></span>
+                            </button>
+                            <a class="navbar-brand" href="{{ebuio_baseUrl}}">PlugIt - Standalone mode</a>
+                          </div>
+                          <nav class="collapse navbar-collapse bs-navbar-collapse-plugit" role="navigation">
+                          <ul class="nav navbar-nav">
 
-                            <a class="brand" href="{{ebuio_baseUrl}}">PlugIt - Standalone mode</a>
 
                             {% if ebuio_realUsers %}
 
@@ -97,14 +105,8 @@
                                 </li>
                             {% endif %}
                           </ul>
-
-                          <ul class="nav pull-right">
-                            <li><a href="http://ebu.io" class="text-info">About Ebu.io</a></li>
-                            <!-- TODO this link is broken -->
-                            <li><a href="http://ebu.io/plugit" class="text-info">About PlugIt</a></li>
-                          </ul>
+                          </nav>
                         </div>
-                      </div>
                     </div><!-- /.navbar -->
                 </div>
 

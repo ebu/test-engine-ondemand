@@ -22,5 +22,8 @@
 # Ignore all DASH output files
 /public/dash
 
+# Ignore all precompiled assets
+/public/plugit-rails
+
 # Ignore all compiled Python files
 *.pyc

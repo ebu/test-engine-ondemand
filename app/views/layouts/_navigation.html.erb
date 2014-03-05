@@ -7,21 +7,21 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <%= link_to 'Dashboard', "{{ebuio_baseUrl}}", class: "navbar-brand" %>
+      <%= link_to 'Dashboard', @plugit_base_uri, class: "navbar-brand" %>
     </div>
     <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
       <ul class="nav navbar-nav">
         <li class="<%= active_nav_item("file_assets") %>">
-          <%= link_to 'Assets Library', file_assets_path %>
+          <%= link_to 'Assets Library', @plugit_base_uri + 'file_assets' %>
         </li>
         <li class="<%= active_nav_item("transcoders") %>">
-          <%= link_to 'Transcoders', transcoders_path %>
+          <%= link_to 'Transcoders', @plugit_base_uri + 'transcoders' %>
         </li>
         <li class="<%= active_nav_item("preset_templates") %>">
-          <%= link_to 'Preset Templates', preset_templates_path %>
+          <%= link_to 'Preset Templates', @plugit_base_uri + 'preset_templates' %>
         </li>
         <li class="<%= active_nav_item("encoding_jobs") %>">
-          <%= link_to 'Encoding Jobs', encoding_jobs_path %>
+          <%= link_to 'Encoding Jobs', @plugit_base_uri + 'encoding_jobs' %>
         </li>
       </ul>
     </nav>

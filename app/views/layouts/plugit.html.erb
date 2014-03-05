@@ -1,0 +1,11 @@
+<div id="plugit_wrapper" data-controller="<%= "#{params[:controller]}" %>" data-action="<%= "#{params[:action]}" %>">
+  <%= stylesheet_link_tag    "#{@plugit_base_uri}media/application", media: "all" %>
+  <%= javascript_include_tag "#{@plugit_base_uri}media/application" %>
+
+  <%= render 'layouts/navigation' %>
+
+  <main role="main">
+    <%= render 'layouts/flash' %>
+    <%= yield %>
+  </main>
+</div>

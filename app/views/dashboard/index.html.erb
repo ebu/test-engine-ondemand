@@ -1,3 +1,24 @@
-<!-- <h1>Hello world</h1>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Recently encoded videos</h3>
+  </div>
 
-<p>Dashboard#index</p> -->
+  <div class="panel-body">
+    <p>These are the most recently encoded videos by all users. They are available for on-line playback and
+    linking to the generated MPD.</p>
+  </div>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Description</th>
+        <th>Created</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= render partial: 'encoding_job', collection: @encoding_jobs %>
+    </tbody>
+  </table>
+</div>
