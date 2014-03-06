@@ -4,5 +4,5 @@
   <td><%= number_to_human_size file_asset.resource_file_size %></td>
   <td><%= file_asset.resource_content_type %></td>
   <td class="hidden-xs"><%= l file_asset.created_at, :format => :long %></td>
-  <td><%= link_to "Remove", file_asset_path(file_asset), method: 'delete', data: { confirm: 'This will remove your source file. Are you sure?' }, class: "btn btn-danger btn-sm" %></td>
+  <td><%= link_to "Remove", url_for_plugit(file_asset_path(file_asset)), method: 'delete', data: { confirm: 'This will remove your source file. Are you sure?' }, class: "btn btn-danger btn-sm" %></td>
 </tr>

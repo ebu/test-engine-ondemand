@@ -3,6 +3,13 @@
 # Most of these functions revolve around getting a valid URL to a resource
 # and then modifying it to obtain a URL that the PlugIt framework deems valid.
 module PlugitHelper
+  def url_for_plugit(orig)
+    orig.gsub(
+      %r[/#{Rails.application.config.ebu_plugit_local_root}],
+      %Q[/#{Rails.application.config.ebu_plugit_root}]
+    )
+  end
+  
   def plugit_link_to_mpd(job)
     link_to('Raw MPD', plugit_stream_url_for(job), class: 'btn btn-default btn-sm')
   end
