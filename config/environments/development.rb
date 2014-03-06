@@ -34,7 +34,12 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
-  config.assets.prefix = '/plugit-rails/media'
+  
+  # Set the PlugIt roots (local and remote) only once in the application configuration
+  config.ebu_plugit_local_root = 'plugit-rails'
+  config.ebu_plugit_root = 'plugIt'
+  
+  config.assets.prefix = "/#{config.ebu_plugit_local_root}/media"
   
   # Development uses a different timezone
   config.time_zone = 'Amsterdam'

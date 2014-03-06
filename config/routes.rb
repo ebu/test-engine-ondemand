@@ -6,7 +6,7 @@ EbuOndemand::Application.routes.draw do
   # root 'welcome#index'
 
   # Basic application endpoints
-  scope 'plugit-rails' do
+  scope Rails.application.config.ebu_plugit_local_root do
     get '/ping', to: "basic#ping"
     get '/version', to: "basic#version"
 
