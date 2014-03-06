@@ -1,4 +1,5 @@
-<%= form_for @transcoder, html: {role: "form" } do |f| %>
+<%= form_for @transcoder, url: url_for_plugit(transcoders_path), html: {role: "form" } do |f| %>
+<input type="hidden" name="csrfmiddlewaretoken" value="{~__PLUGIT_CSRF_TOKEN__~}"/>
 <div class="form-group">
 <%= f.label 'Host name: ' %>
 <%= f.text_field :host_name, :placeholder => "Host name / IP address of transcoder, e.g. 'localhost' or '192.168.1.10'", :class => "form-control", :autofocus => '' %><br/>

@@ -2,7 +2,7 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 jQuery ->
-  if ($('body').attr('data-controller') == 'transcoders' && $('body').attr('data-action') == 'index')
+  if ($('#plugit_wrapper').data('controller') == 'transcoders' && $('#plugit_wrapper').data('action') == 'index')
     refreshTranscoderStatus()
 
 refreshTranscoderStatus = () =>
@@ -17,3 +17,5 @@ pingTranscoder = (transcoder) =>
     type: 'GET',
     success: (data, textStatus, jqXHR) =>
       $(transcoder).html(data)
+    error: (data, textStatus, jqXHR) =>
+      $(transcoder).html("<span class='label label-default'>Unknown</span>")

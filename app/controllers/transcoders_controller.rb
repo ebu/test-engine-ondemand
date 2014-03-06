@@ -31,6 +31,7 @@ class TranscodersController < PlugitController
   end
   
   def available
+    response.headers["EbuIo-PlugIt-NoTemplate"] = ''
     @transcoder = Transcoder.find(params[:id])
     render layout: false
   end
