@@ -7,5 +7,9 @@
   <main role="main">
     <%= render 'layouts/flash' %>
     <%= yield %>
+    
+    <% if Rails.env.development? %>
+    <pre><%= @plugit_env.inspect %></pre>
+    <% end %>
   </main>
 </div>
