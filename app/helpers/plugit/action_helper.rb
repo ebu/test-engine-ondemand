@@ -1,2 +1,0 @@
-module Plugit::ActionHelper
-end

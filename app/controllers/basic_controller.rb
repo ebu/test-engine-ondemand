@@ -2,7 +2,9 @@
 #
 # The requirements for these actions are describe here:
 # https://github.com/ebu/PlugIt#basic-methods
-class Plugit::BasicController < ApplicationController
+class BasicController < PlugitController
+  layout false
+  
   def ping
     data = params[:data] || ''
     render json: { data: data }
