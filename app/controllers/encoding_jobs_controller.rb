@@ -35,6 +35,7 @@ class EncodingJobsController < PlugitController
   end
   
   def status
+    response.headers["EbuIo-PlugIt-NoTemplate"] = ''
     @encoding_job = EncodingJob.find(params[:id])
     render layout: false
   end

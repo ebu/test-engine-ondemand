@@ -1,4 +1,5 @@
-<%= form_for @encoding_job, html: {role: "form" } do |f| %>
+<%= form_for @encoding_job, url: url_for_plugit(encoding_jobs_path), html: {role: "form" } do |f| %>
+<input type="hidden" name="csrfmiddlewaretoken" value="{~__PLUGIT_CSRF_TOKEN__~}"/>
 <div class="form-group">
 <%= f.label 'Description: ' %>
 <%= f.text_field :description, placeholder: "Description for job, e.g. 'Test adaptive 3 variants'.", class: "form-control" %><br/>
@@ -22,7 +23,7 @@
 <div class="post_processing_preset_variables"></div>
 </div>
 
-<%= link_to "Cancel", encoding_jobs_path, class: "btn btn-default" %>
+<%= plugit_link_to "Cancel", encoding_jobs_path, class: "btn btn-default" %>
 <%= f.submit class: "btn btn-primary", value: "Save" %>
 
 <% end %>

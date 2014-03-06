@@ -1,4 +1,4 @@
-<div class="panel panel-default <%= panel_class_for encoding_job %>" data-status="<%= encoding_job.status %>" data-status-url="<%= status_encoding_job_path encoding_job %>">
+<div class="panel panel-default <%= panel_class_for encoding_job %>" data-status="<%= encoding_job.status %>" data-status-url="<%= url_for_plugit(status_encoding_job_path(encoding_job)) %>">
   <div class="panel-heading">
     <h3 class="panel-title">Encoding Job <%= encoding_job.id %> &mdash; <%= encoding_job.description || '(N/A)' %></h3>
   </div>
@@ -6,8 +6,8 @@
     <p><%= human_readable_summary_for encoding_job %></p>
     <% if encoding_job.success? %>
     <div>
-      <%= play_link(encoding_job) %>
-      <%= raw_mpd_link(encoding_job) %>
+      <%= plugit_link_to_play(encoding_job) %>
+      <%= plugit_raw_mpd_link(encoding_job) %>
     </div>
     <% end %>
   </div>

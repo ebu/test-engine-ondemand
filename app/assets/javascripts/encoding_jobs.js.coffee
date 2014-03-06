@@ -82,13 +82,13 @@ flatten_input_fields = (source_fields, preset_template, target_field) ->
   
 # Setup handlers when page loads
 jQuery ->
-  if ($('body').attr('data-controller') == 'encoding_jobs' && ['new', 'create'].indexOf($('body').attr('data-action')) != -1)
+  if ($('#plugit_wrapper').data('controller') == 'encoding_jobs' && ['new', 'create'].indexOf($('#plugit_wrapper').data('action')) != -1)
     # Setup form processors
     $('#new_encoding_job').on 'submit', submit_handler # Handle form submit
     select_box = $('#encoding_job_post_processing_template_id')
     select_box.on 'change', post_processing_change_handler
     select_box.change()
-  else if ($('body').attr('data-controller') == 'encoding_jobs' && $('body').attr('data-action') == 'show')
+  else if ($('#plugit_wrapper').data('controller') == 'encoding_jobs' && $('#plugit_wrapper').data('action') == 'show')
     # Setup auto job status refresh
     setup_job_refresh()
     

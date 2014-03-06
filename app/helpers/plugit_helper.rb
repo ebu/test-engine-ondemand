@@ -22,6 +22,11 @@ module PlugitHelper
     "media/" + ['dash', job.randomized_id, 'dash.mpd'].join('/')
   end
 
+  def plugit_raw_mpd_link(job)
+    url = url_for_plugit("#{root_path}/#{plugit_stream_url_for(job)}")
+    "Raw public MPD link: ".html_safe + plugit_link_to(url, url)
+  end  
+
   def plugit_link_to(name = nil, options = nil, html_options = nil, &block)
     link_to(name, options, html_options, &block).gsub(
       %r[href="/#{Rails.application.config.ebu_plugit_local_root}],
