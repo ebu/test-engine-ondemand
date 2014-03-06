@@ -1,4 +1,5 @@
-<%= form_for @preset_template, html: {role: "form" } do |f| %>
+<%= form_for @preset_template, url: url_for_plugit(preset_templates_path), html: {role: "form" } do |f| %>
+<input type="hidden" name="csrfmiddlewaretoken" value="{~__PLUGIT_CSRF_TOKEN__~}"/>
 <div class="form-group">
 <%= f.label 'Preset type: ' %>
 <%= f.select :preset_type, preset_types_for_select, class: "form-control" %><br/>
