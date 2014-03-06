@@ -8,7 +8,7 @@
     <%= render 'layouts/flash' %>
     <%= yield %>
     
-    <% if Rails.env.development? %>
+    <% if Rails.env.development? || Rails.env.development_remote? %>
     <pre><%= @plugit_env.inspect %></pre>
     <% end %>
   </main>

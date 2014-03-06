@@ -26,6 +26,10 @@ EbuOndemand::Application.routes.draw do
         get 'available'
       end
     end
+    
+    # Dynamic route to send files from public/media. Better done using a Apache
+    # rewrite rule in production! This is only included here as a fallback.
+    get '/media/*other', to: "media#serve", format: false
   end
   
   put  'codem_notifications'       => 'codem_notifications#create'
