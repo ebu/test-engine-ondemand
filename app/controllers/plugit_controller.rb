@@ -1,7 +1,7 @@
 class PlugitController < ApplicationController
   before_filter :assign_ebu_variables
   before_filter :assign_base_uri
-  before_filter :set_asset_prefix
+  #before_filter :set_asset_prefix
   
   layout 'plugit'
   
@@ -20,9 +20,9 @@ class PlugitController < ApplicationController
   
   private
   
-  def set_asset_prefix
-    Rails.application.config.assets.prefix = "#{assign_base_uri}media"
-  end
+  # def set_asset_prefix
+  #   Rails.application.config.assets.prefix = "#{assign_base_uri}media"
+  # end
   
   def assign_base_uri
     @plugit_base_uri ||= @plugit_env["HTTP_X_PLUGIT_BASE_URL"] || ''

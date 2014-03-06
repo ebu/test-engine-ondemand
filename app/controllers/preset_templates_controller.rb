@@ -1,4 +1,6 @@
-class PresetTemplatesController < ApplicationController
+class PresetTemplatesController < PlugitController
+  before_filter :require_login
+  
   def index
     @encoder_presets = PresetTemplate.encoder_preset
     @post_processing_presets = PresetTemplate.post_processing_preset
