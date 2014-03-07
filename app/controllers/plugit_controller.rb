@@ -6,7 +6,8 @@ class PlugitController < ApplicationController
   # proxy mode behind PlugIt.
   skip_before_action :verify_authenticity_token 
   
-  layout 'plugit'
+  layout('plugit') if Rails.env.development?
+  layout('application') unless Rails.env.development?
   
   protected
   

@@ -6,17 +6,22 @@
   <%= yield :additional_styles %>
   <%= javascript_include_tag "#{request.headers["HTTP_X_PLUGIT_BASE_URL"]}media/application", "data-turbolinks-track" => true %>
   <%= yield :additional_scripts %>
-  <%= csrf_meta_tags %>
+  <%#= csrf_meta_tags %>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body data-controller="<%= "#{params[:controller]}" %>" data-action="<%= "#{params[:action]}" %>">
+  <div class="container">
   <%= render 'layouts/navigation' %>
 
+  <div id="plugit_wrapper" data-controller="<%= "#{params[:controller]}" %>" data-action="<%= "#{params[:action]}" %>">
   <main role="main">
-    <div class="container">
       <%= render 'layouts/flash' %>
       <%= yield %>
-  </div>
   </main>
+  </div>
+</div>
+
+<div id="csrf_proxy" data-csrf-param="csrfmiddlewaretoken" data-csrf-token="{~__PLUGIT_CSRF_TOKEN__~}">
+  
 </body>
 </html>
