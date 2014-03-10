@@ -2,8 +2,8 @@ class PresetTemplatesController < PlugitController
   before_filter :require_login
   
   def index
-    @encoder_presets = PresetTemplate.encoder_preset
-    @post_processing_presets = PresetTemplate.post_processing_preset
+    @encoder_presets = PresetTemplate.where(user_id: logged_in_user.ebu_id).encoder_preset
+    @post_processing_presets = PresetTemplate.where(user_id: logged_in_user.ebu_id).post_processing_preset
   end
   
   def new
@@ -24,7 +24,7 @@ class PresetTemplatesController < PlugitController
   
   def destroy
     @preset_template = PresetTemplate.find(params[:id])
-    if @preset_template.destroy
+    if @preset_template.user_id == logged_in_user.ebu_id && @preset_template.destroy
       flash[:notice] = "Preset template removed."
     else
       flash[:alert] = "Unable to remove preset template."

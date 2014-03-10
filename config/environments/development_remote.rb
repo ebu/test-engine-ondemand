@@ -28,7 +28,7 @@ Rails.application.configure do
   config.assets.debug = false
 
   config.logger = ActiveSupport::TaggedLogging.new(Logger.new(STDOUT))
-  config.log_level = :info
+  config.log_level = :debug
 
   # Adds additional error checking when serving assets at runtime.
   # Checks for improperly declared sprockets dependencies.

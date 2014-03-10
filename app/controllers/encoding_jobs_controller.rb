@@ -2,7 +2,7 @@ class EncodingJobsController < PlugitController
   before_filter :require_login
   
   def index
-    @encoding_jobs = EncodingJob.all
+    @encoding_jobs = EncodingJob.where(user_id: logged_in_user.ebu_id)
   end
   
   def show
@@ -27,7 +27,7 @@ class EncodingJobsController < PlugitController
   
   def destroy
     @encoding_job = EncodingJob.find(params[:id])
-    if @encoding_job.destroy
+    if @encoding_job.user_id == logged_in_user.ebu_id && @encoding_job.destroy
       flash[:notice] = 'Encoding job removed'
     else
       flash[:warn] = "Unable to remove encoding job."

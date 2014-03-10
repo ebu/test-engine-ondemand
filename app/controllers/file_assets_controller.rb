@@ -2,7 +2,7 @@ class FileAssetsController < PlugitController
   before_filter :require_login
   
   def index
-    @file_assets = FileAsset.order("created_at DESC")
+    @file_assets = FileAsset.where(user_id: logged_in_user.ebu_id).order("created_at DESC")
   end
   
   def create
@@ -14,7 +14,7 @@ class FileAssetsController < PlugitController
   
   def destroy
     @file_asset = FileAsset.find(params[:id])
-    if @file_asset.destroy
+    if @file_asset.user_id == logged_in_user.ebu_id && @file_asset.destroy
       flash[:notice] = "File removed."
     else
       flash[:alert] = "Unable to remove file."

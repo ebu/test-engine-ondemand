@@ -16,6 +16,11 @@ class PlugitController < ApplicationController
   
   protected
   
+  def logged_in_user
+    users = User.where(ebu_id: logged_in_user_id).limit(1)
+    users.any? ? users.first : nil
+  end
+  
   def logged_in_user_id
     @plugit_env["HTTP_X_PLUGIT_USER_ID"].to_i
   end

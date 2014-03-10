@@ -2,6 +2,7 @@
   <td><%= encoding_job.id %></td>
   <td><%= encoding_job.description %></td>
   <td><%= time_ago_in_words encoding_job.created_at %> ago</td>
+  <td><%= formatted_owner(encoding_job.user) %></td>
   <td>
     <%= plugit_link_to_play(encoding_job) %>
     <%= plugit_link_to_mpd(encoding_job) %>
