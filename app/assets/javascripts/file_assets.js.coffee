@@ -36,6 +36,14 @@ submitHandler = (event) =>
   
   xhr.open(form.getAttribute('method'), form.getAttribute('action'));
   xhr.send(fd);
+  
+  submitButton = $('#submit')
+  inputElm = $('#file_asset_resource')
+  inputBtn = $('.fileinput-button')
+  
+  submitButton.attr("disabled", "disabled")
+  inputElm.attr("disabled", "disabled")
+  inputBtn.attr("disabled", "disabled")
 
 uploadComplete = (event) =>
   document.getElementById('upload_progress').style.display = 'none';
