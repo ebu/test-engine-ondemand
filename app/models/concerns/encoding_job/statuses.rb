@@ -26,6 +26,10 @@ module EncodingJob::Statuses
     self.send("transition_from_#{status}")
   end
   
+  def initial?
+    (pending? && !did_finish_transcoding? && !did_finish_post_processing? && !did_finish_conformance_checking?)
+  end
+  
   private
   
   # State machine definition, this describes all possible transitions
@@ -86,6 +90,10 @@ module EncodingJob::Statuses
     end
   end
   
+  def did_finish_transcoding?
+    variant_jobs.all? { |j| j.finished? }
+  end
+  
   def requires_post_processing?
     post_processing_job.blank?
   end
@@ -96,6 +104,10 @@ module EncodingJob::Statuses
   
   def did_fail_post_processing?
     !!post_processing_job.try(:failed?)
+  end
+  
+  def did_finish_post_processing?
+    did_complete_post_processing? || did_fail_post_processing?
   end
   
   def did_finish_conformance_checking?

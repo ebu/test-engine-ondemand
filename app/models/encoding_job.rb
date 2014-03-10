@@ -19,6 +19,7 @@ class EncodingJob < ActiveRecord::Base
   
   scope :recently_encoded, -> { success.limit(10).order("created_at DESC") }
   
+  before_destroy :verify_destroy
   after_destroy :remove_output_files
   
   # Check if it's currently allowed to create a new +EncodingJob+.
@@ -58,8 +59,21 @@ class EncodingJob < ActiveRecord::Base
     random_id.blank? ? id.to_s : "#{id}-#{random_id}"
   end
   
+  def destroy_allowed?
+    success? || failed? || initial?
+  end
+  
   private
 
+  def verify_destroy
+    if destroy_allowed?
+      true
+    else
+      self.errors.add(:base, "Cannot delete encoding job while it is being processed.")
+      false
+    end
+  end
+  
   def remove_output_files
     FileUtils.remove_dir output_path.join(File::SEPARATOR), force: true
   end

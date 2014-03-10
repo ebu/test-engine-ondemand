@@ -21,6 +21,13 @@ class PlugitController < ApplicationController
       render template: "plugit/error"
     end
   end
+
+  def require_admin
+    unless is_admin?
+      @plugit_message = "You need to be an administrator to view this page."
+      render template: "plugit/error"
+    end
+  end
   
   def logged_in?
     !@plugit_env["HTTP_X_PLUGIT_USER_USERNAME"].blank? && !@plugit_env["HTTP_X_PLUGIT_USER_ID"].blank?
