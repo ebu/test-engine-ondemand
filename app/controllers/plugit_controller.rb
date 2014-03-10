@@ -1,7 +1,8 @@
 class PlugitController < ApplicationController
   before_filter :assign_ebu_variables
   before_filter :assign_base_uri
-
+  before_filter :update_user
+  
   # Disable *all* authenticity_token checking, because we are in reverse
   # proxy mode behind PlugIt.
   skip_before_action :verify_authenticity_token 
@@ -14,6 +15,10 @@ class PlugitController < ApplicationController
   end
   
   protected
+  
+  def logged_in_user_id
+    @plugit_env["HTTP_X_PLUGIT_USER_ID"].to_i
+  end
   
   def require_login
     unless logged_in?
@@ -52,5 +57,15 @@ class PlugitController < ApplicationController
     else
       value
     end
+  end
+  
+  def update_user
+    u = User.find_or_initialize_by(ebu_id: @plugit_env["HTTP_X_PLUGIT_USER_ID"].to_i)
+    u.first_name        = @plugit_env["HTTP_X_PLUGIT_USER_FIRST_NAME"]
+    u.last_name         = @plugit_env["HTTP_X_PLUGIT_USER_LAST_NAME"]
+    u.username          = @plugit_env["HTTP_X_PLUGIT_USER_USERNAME"]
+    u.organisation_name = @plugit_env["HTTP_X_PLUGIT_ORGA_NAME"]
+    u.organisation_id   = @plugit_env["HTTP_X_PLUGIT_ORGA_PK"].to_i
+    u.save
   end
 end

@@ -12,6 +12,7 @@ class PresetTemplatesController < PlugitController
   
   def create
     @preset_template = PresetTemplate.new(user_params)
+    @preset_template.user_id = logged_in_user_id
     if @preset_template.save
       flash[:notice] = "Preset template created."
       redirect_to preset_templates_path
@@ -34,6 +35,6 @@ class PresetTemplatesController < PlugitController
   private
   
   def user_params
-    params.require(:preset_template).permit(:preset_type, :template_text, :description)
+    params.require(:preset_template).permit(:preset_type, :template_text, :description, :user_id)
   end
 end

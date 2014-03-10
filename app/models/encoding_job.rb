@@ -8,8 +8,11 @@ class EncodingJob < ActiveRecord::Base
   
   belongs_to :post_processing_template, class_name: "PresetTemplate"
   
+  belongs_to :user, primary_key: 'ebu_id', foreign_key: 'user_id'
+  
   validates :post_processing_flags, presence: true
   validates :description, presence: true
+  validates :user_id, presence: true
   
   accepts_nested_attributes_for :variant_jobs
   

@@ -6,7 +6,9 @@ class FileAssetsController < PlugitController
   end
   
   def create
-    @file_asset = FileAsset.create!(user_params)
+    @file_asset = FileAsset.new(user_params)
+    @file_asset.user_id = logged_in_user_id
+    @file_asset.save!
     render :ok, nothing: true
   end
   
@@ -23,6 +25,6 @@ class FileAssetsController < PlugitController
   private
   
   def user_params
-    params.require(:file_asset).permit(:resource)
+    params.require(:file_asset).permit(:resource, :user_id)
   end
 end

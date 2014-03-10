@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140227104705) do
+ActiveRecord::Schema.define(version: 20140310132032) do
 
   create_table "codem_notifications", force: true do |t|
     t.string   "status"
@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(version: 20140227104705) do
     t.integer  "post_processing_job_id"
     t.integer  "conformance_checking_job_id"
     t.string   "random_id"
+    t.integer  "user_id"
   end
 
   create_table "file_assets", force: true do |t|
@@ -41,6 +42,7 @@ ActiveRecord::Schema.define(version: 20140227104705) do
     t.string   "resource_content_type"
     t.integer  "resource_file_size"
     t.datetime "resource_updated_at"
+    t.integer  "user_id"
   end
 
   create_table "preset_templates", force: true do |t|
@@ -49,6 +51,7 @@ ActiveRecord::Schema.define(version: 20140227104705) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "description"
+    t.integer  "user_id"
   end
 
   create_table "remote_jobs", force: true do |t|
@@ -65,6 +68,17 @@ ActiveRecord::Schema.define(version: 20140227104705) do
   create_table "transcoders", force: true do |t|
     t.string   "host_name"
     t.integer  "port"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "users", force: true do |t|
+    t.integer  "ebu_id"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "organisation_name"
+    t.integer  "organisation_id"
+    t.string   "username"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
