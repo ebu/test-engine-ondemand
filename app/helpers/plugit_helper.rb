@@ -23,7 +23,7 @@ module PlugitHelper
   end
 
   def plugit_raw_mpd_link(job)
-    url = url_for_plugit("#{root_path}/#{plugit_stream_url_for(job)}")
+    url = mpd_url(job)
     "Raw public MPD link: ".html_safe + plugit_link_to(url, url)
   end  
 
@@ -32,5 +32,9 @@ module PlugitHelper
       %r[href="/#{Rails.application.config.ebu_plugit_local_root}],
       %Q[href="/#{Rails.application.config.ebu_plugit_root}]
     ).html_safe
+  end
+  
+  def mpd_url(job)
+    url_for_plugit("#{root_path}/#{plugit_stream_url_for(job)}")
   end
 end

@@ -1,10 +1,9 @@
-<div class="container">
     <div class="row">
         <div class="dash-video-player col-md-9">
             <video controls="true"></video>
         </div>
         <div class="col-md-3">
-            <div class="panel">
+            <div class="panel panel-default">
                 <div class="panel-heading panel-top">
                     <span class="panel-title">ABR</span>
                     <div class="btn-group">
@@ -25,7 +24,7 @@
                     </div>
                 </div>
             </div>
-            <div class="panel">
+            <div class="panel panel-default">
                 <div class="panel-heading panel-top">
                     <span class="panel-title">Video</span>
                     <div class="btn-group">
@@ -49,7 +48,7 @@
                     <p class="text-primary">Buffer Length: <span class="text-success">{{videoBufferLength}}</span></p>
                 </div>
             </div>
-            <div class="panel">
+            <div class="panel panel-default">
                 <div class="panel-heading panel-top">
                     <span class="panel-title">Audio</span>
                     <div class="btn-group">
@@ -77,7 +76,28 @@
     </div>
 
     <div class="row">
-        <div class="panel">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Encoding Job settings</h3>
+        </div>
+        <div class="panel-body">
+          <b>Variant Jobs:</b><br>
+          <ul>
+            <% @encoding_job.variant_jobs.each do |v| %>
+            <li><%= v.encoder_flags %></li>
+            <% end %>
+          </ul>
+          
+          <b>MP4Box DASH settings:</b><br>
+          <ul>
+            <li><%= @encoding_job.post_processing_flags %></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+        <div class="panel panel-default">
             <div class="panel-heading panel-top">
                 <span class="panel-title">Charts</span>
                 <div class="btn-group">
@@ -104,12 +124,11 @@
             </div>
         </div>
     </div>
-  </div>
 
 <%= javascript_tag do %>
 $(window).on('load', function(e) {
   var scope = angular.element('body').scope();
-  scope.setStream({url: '<%= stream_url_for @encoding_job %>'});
+  scope.setStream({url: '<%= mpd_url @encoding_job %>'});
   scope.doLoad();
 })
 <% end %>
