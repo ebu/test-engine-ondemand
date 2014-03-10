@@ -37,4 +37,9 @@ module PlugitHelper
   def mpd_url(job)
     url_for_plugit("#{root_path}/#{plugit_stream_url_for(job)}")
   end
+  
+  # Authorisation methods
+  def auth_is_admin?
+    controller.is_admin?
+  end
 end

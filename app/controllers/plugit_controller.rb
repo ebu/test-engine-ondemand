@@ -9,6 +9,10 @@ class PlugitController < ApplicationController
   layout('plugit') if Rails.env.development?
   layout('application') unless Rails.env.development?
   
+  def is_admin?
+    logged_in? && @plugit_env["HTTP_X_PLUGIT_USER_EBUIO_ADMIN"] && @plugit_env["HTTP_X_PLUGIT_USER_EBUIO_ADMIN"] == true
+  end
+  
   protected
   
   def require_login

@@ -9,7 +9,8 @@ class EncodingJob < ActiveRecord::Base
   belongs_to :post_processing_template, class_name: "PresetTemplate"
   
   validates :post_processing_flags, presence: true
-
+  validates :description, presence: true
+  
   accepts_nested_attributes_for :variant_jobs
   
   before_create do

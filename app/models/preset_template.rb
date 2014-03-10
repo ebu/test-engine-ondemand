@@ -8,4 +8,5 @@ class PresetTemplate < ActiveRecord::Base
   
   validates :preset_type, presence: true
   validates :template_text, presence: true
+  validates :description, presence: true
 end
