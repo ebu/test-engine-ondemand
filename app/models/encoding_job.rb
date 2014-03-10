@@ -13,6 +13,7 @@ class EncodingJob < ActiveRecord::Base
   validates :post_processing_flags, presence: true
   validates :description, presence: true
   validates :user_id, presence: true
+  validates :is_reference, presence: true
   
   accepts_nested_attributes_for :variant_jobs
   

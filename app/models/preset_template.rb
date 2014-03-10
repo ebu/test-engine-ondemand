@@ -12,4 +12,5 @@ class PresetTemplate < ActiveRecord::Base
   validates :template_text, presence: true
   validates :description, presence: true
   validates :user_id, presence: true
+  validates :is_reference, presence: true
 end

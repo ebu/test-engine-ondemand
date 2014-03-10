@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140310132032) do
+ActiveRecord::Schema.define(version: 20140310144620) do
 
   create_table "codem_notifications", force: true do |t|
     t.string   "status"
@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(version: 20140310132032) do
     t.integer  "conformance_checking_job_id"
     t.string   "random_id"
     t.integer  "user_id"
+    t.boolean  "is_reference",                default: false, null: false
   end
 
   create_table "file_assets", force: true do |t|
@@ -43,6 +44,7 @@ ActiveRecord::Schema.define(version: 20140310132032) do
     t.integer  "resource_file_size"
     t.datetime "resource_updated_at"
     t.integer  "user_id"
+    t.boolean  "is_reference",          default: false, null: false
   end
 
   create_table "preset_templates", force: true do |t|
@@ -52,6 +54,7 @@ ActiveRecord::Schema.define(version: 20140310132032) do
     t.datetime "updated_at"
     t.string   "description"
     t.integer  "user_id"
+    t.boolean  "is_reference",  default: false, null: false
   end
 
   create_table "remote_jobs", force: true do |t|
