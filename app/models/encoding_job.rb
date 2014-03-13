@@ -1,5 +1,7 @@
 class EncodingJob < ActiveRecord::Base
   include EncodingJob::Statuses
+  include Referencable
+  include Expirable
   
   has_many :variant_jobs, dependent: :destroy
   
@@ -13,7 +15,6 @@ class EncodingJob < ActiveRecord::Base
   validates :post_processing_flags, presence: true
   validates :description, presence: true
   validates :user_id, presence: true
-  validates :is_reference, presence: true
   
   accepts_nested_attributes_for :variant_jobs
   
@@ -22,7 +23,7 @@ class EncodingJob < ActiveRecord::Base
   end
   
   scope :recently_encoded, -> { success.limit(10).order("created_at DESC") }
-  scope :reference, -> { success.where(is_reference: true).order("created_at DESC") }
+  scope :reference_for_dashboard, -> { success.referenced.order("created_at DESC") }
   
   before_destroy :verify_destroy
   after_destroy :remove_output_files

@@ -1,4 +1,7 @@
 class FileAsset < ActiveRecord::Base
+  include Referencable
+  include Expirable
+  
   has_attached_file :resource
   
   delegate :path, to: :resource
@@ -13,5 +16,4 @@ class FileAsset < ActiveRecord::Base
     #content_type: { content_type: EBU::ALLOWED_CONTENT_TYPES }
   
   validates :user_id, presence: true
-  validates :is_reference, presence: true
 end
