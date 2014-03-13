@@ -22,6 +22,7 @@ class EncodingJob < ActiveRecord::Base
   end
   
   scope :recently_encoded, -> { success.limit(10).order("created_at DESC") }
+  scope :reference, -> { success.where(is_reference: true).order("created_at DESC") }
   
   before_destroy :verify_destroy
   after_destroy :remove_output_files

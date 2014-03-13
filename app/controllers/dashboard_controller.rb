@@ -3,5 +3,6 @@ class DashboardController < PlugitController
   
   def index
     @encoding_jobs = EncodingJob.recently_encoded
+    @reference_encoding_jobs = EncodingJob.reference
   end
 end

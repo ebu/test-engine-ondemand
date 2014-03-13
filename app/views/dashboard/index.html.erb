@@ -1,5 +1,36 @@
 <div class="panel panel-default">
   <div class="panel-heading">
+    <h3 class="panel-title">Reference encodings</h3>
+  </div>
+
+  <div class="panel-body">
+    <p><em>
+      <% if @reference_encoding_jobs.any? %>
+        These are the reference encodings as selected by the EBU administrator.
+      <% else %>
+        There are no reference encodings yet.
+      <% end %>
+    </em></p>
+  </div>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Description</th>
+        <th>Created</th>
+        <th>Owner</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= render partial: 'reference_encoding_job', collection: @reference_encoding_jobs %>
+    </tbody>
+  </table>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
     <h3 class="panel-title">Recently encoded videos</h3>
   </div>
 
