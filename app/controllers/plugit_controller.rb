@@ -69,8 +69,8 @@ class PlugitController < ApplicationController
     u.first_name        = @plugit_env["HTTP_X_PLUGIT_USER_FIRST_NAME"]
     u.last_name         = @plugit_env["HTTP_X_PLUGIT_USER_LAST_NAME"]
     u.username          = @plugit_env["HTTP_X_PLUGIT_USER_USERNAME"]
-    u.organisation_name = @plugit_env["HTTP_X_PLUGIT_ORGA_NAME"]
-    u.organisation_id   = @plugit_env["HTTP_X_PLUGIT_ORGA_PK"].to_i
+    u.organization_name = @plugit_env["HTTP_X_PLUGIT_ORGA_NAME"]
+    u.organization_id   = @plugit_env["HTTP_X_PLUGIT_ORGA_PK"].to_i
     u.save
   end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140310144620) do
+ActiveRecord::Schema.define(version: 20140313101251) do
 
   create_table "codem_notifications", force: true do |t|
     t.string   "status"
@@ -47,6 +47,14 @@ ActiveRecord::Schema.define(version: 20140310144620) do
     t.boolean  "is_reference",          default: false, null: false
   end
 
+  create_table "organizations", force: true do |t|
+    t.string   "name",                       null: false
+    t.integer  "ebu_id",                     null: false
+    t.boolean  "can_write",  default: false, null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "preset_templates", force: true do |t|
     t.text     "template_text"
     t.integer  "preset_type",   default: 0
@@ -79,8 +87,8 @@ ActiveRecord::Schema.define(version: 20140310144620) do
     t.integer  "ebu_id"
     t.string   "first_name"
     t.string   "last_name"
-    t.string   "organisation_name"
-    t.integer  "organisation_id"
+    t.string   "organization_name"
+    t.integer  "organization_id"
     t.string   "username"
     t.datetime "created_at"
     t.datetime "updated_at"

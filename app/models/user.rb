@@ -5,4 +5,6 @@ class User < ActiveRecord::Base
   
   validates :username, presence: true
   validates :ebu_id, presence: true
+  
+  belongs_to :organization, primary_key: 'ebu_id', foreign_key: 'organization_id'
 end

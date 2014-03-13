@@ -10,7 +10,7 @@ module ApplicationHelper
       [user.first_name, user.last_name].join(' ')
     end
     
-    text += " (#{user.organisation_name})"
+    text += " (#{user.organization_name})"
     text
   end
 end
