@@ -1,5 +1,6 @@
 class OrganizationsController < PlugitController
   before_filter :require_admin
+  before_filter :update_organizations, only: [ :index ]
   
   def index
     @organizations = Organization.all
@@ -12,5 +13,11 @@ class OrganizationsController < PlugitController
     end
     flash[:notice] = "Updated organizations."
     redirect_to organizations_path
+  end
+  
+  private
+  
+  def update_organizations
+    # NOOP
   end
 end
