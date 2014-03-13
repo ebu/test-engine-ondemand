@@ -3,7 +3,7 @@ module Referencable
   
   included do
     # scopes, class thingies
-    validates :is_reference, presence: true
+    validates :is_reference, inclusion: [true, false]
 
     scope :referenced, -> { where(is_reference: true) }
     scope :not_referenced, -> { where(is_reference: false) }
