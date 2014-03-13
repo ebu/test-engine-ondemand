@@ -1,0 +1,7 @@
+<tr>
+  <td><%= referenced_file_asset.id %></td>
+  <td><%= referenced_file_asset.resource_file_name %></td>
+  <td><%= number_to_human_size referenced_file_asset.resource_file_size %></td>
+  <td class="hidden-xs"><%= l referenced_file_asset.created_at, :format => :long %></td>
+  <td><%= formatted_owner(referenced_file_asset.user) %></td>
+</tr>

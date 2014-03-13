@@ -4,6 +4,7 @@ class FileAssetsController < PlugitController
   
   def index
     @file_assets = FileAsset.where(user_id: logged_in_user.ebu_id).order("created_at DESC")
+    @referenced_file_assets = FileAsset.referenced
   end
   
   def create

@@ -1,3 +1,34 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Reference source file assets</h3>
+  </div>
+
+  <div class="panel-body">
+    <p><em>
+      <% if @referenced_file_assets.any? %>
+        These are the reference source file assets as selected by the EBU administrator.
+      <% else %>
+        There are no reference source file assets yet.
+      <% end %>
+    </em></p>
+  </div>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Filename</th>
+        <th>Size</th>
+        <th>Created</th>
+        <th>Owner</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= render partial: 'referenced_file_asset', collection: @referenced_file_assets %>
+    </tbody>
+  </table>
+</div>
+
 <% if auth_can_write? %>
 <div class="panel panel-default">
   <div class="panel-heading">
@@ -22,13 +53,13 @@
   </div>
 </div>
 <% end %>
+
 <table class="table table-striped">
   <thead>
     <tr>
       <th>ID</th>
       <th>Filename</th>
       <th>Size</th>
-      <th>Type</th>
       <th class="hidden-xs">Created</th>
       <th>Actions</th>
     </tr>

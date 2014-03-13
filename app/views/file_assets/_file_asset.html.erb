@@ -2,7 +2,6 @@
   <td><%= file_asset.id %></td>
   <td><%= file_asset.resource_file_name %></td>
   <td><%= number_to_human_size file_asset.resource_file_size %></td>
-  <td><%= file_asset.resource_content_type %></td>
   <td class="hidden-xs"><%= l file_asset.created_at, :format => :long %></td>
   <td>
     <% if auth_can_write? %>
