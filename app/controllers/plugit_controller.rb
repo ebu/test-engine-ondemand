@@ -17,12 +17,6 @@ class PlugitController < ApplicationController
   def has_write_access?
     logged_in? && logged_in_user.organization.can_write?
   end
-  
-  protected
-  
-  def logged_in_user_id
-    @plugit_env["HTTP_X_PLUGIT_USER_ID"].to_i
-  end
 
   def logged_in_user
     if @logged_in_user
@@ -32,7 +26,13 @@ class PlugitController < ApplicationController
       @logged_in_user = (users.any? ? users.first : nil)
     end
   end
+    
+  protected
   
+  def logged_in_user_id
+    @plugit_env["HTTP_X_PLUGIT_USER_ID"].to_i
+  end
+
   def require_login
     unless logged_in?
       @plugit_message = "You need to log in to view this page."

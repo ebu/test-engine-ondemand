@@ -10,6 +10,13 @@ module Owned
   
   module ClassMethods
     # class methods
+    def owned(user)
+      where(user_id: user.ebu_id)
+    end
+    
+    def owned_or_referenced(user)
+      where(["user_id = ? OR is_reference = ?", user.ebu_id, true])
+    end
   end
 
   # instance methods

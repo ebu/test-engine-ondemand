@@ -13,8 +13,8 @@
 </table>
 
 <% if auth_can_write? %>
-<%= plugit_link_to "Add encoding job", new_encoding_job_path, class: "btn btn-primary", disabled: !EncodingJob.new_allowed? %>
-<% unless EncodingJob.new_allowed? %>
+<%= plugit_link_to "Add encoding job", new_encoding_job_path, class: "btn btn-primary", disabled: !encoding_job_new_allowed? %>
+<% unless encoding_job_new_allowed? %>
 <small><em>At least one file asset, one encoder preset and one post-processing preset need to exist before you can create a new encoding job...</em></small>
 <% end %>
 <% end %>
