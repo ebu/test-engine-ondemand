@@ -1,3 +1,35 @@
+<div class="panel panel-success">
+  <div class="panel-heading">
+    <h3 class="panel-title">Reference preset templates</h3>
+  </div>
+
+  <div class="panel-body">
+    <p><em>
+      <% if @referenced_preset_templates.any? %>
+        These are the reference preset templates as selected by the EBU administrator. You
+        can use these for discussion or your own encodings.
+      <% else %>
+        There are no reference preset templates yet.
+      <% end %>
+    </em></p>
+  </div>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Description</th>
+        <th>Type</th>
+        <th>Created</th>
+        <th>Owner</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= render partial: 'referenced_preset_template', collection: @referenced_preset_templates %>
+    </tbody>
+  </table>
+</div>
+
 <ul class="nav nav-tabs nav-justified" id="preset_tabs">
   <li class="active"><a href="#encoder_presets" data-toggle="tab">Encoder presets (ffmpeg)</a></li>
   <li><a href="#post_processing_presets" data-toggle="tab">Post-processing presets (MP4Box)</a></li>

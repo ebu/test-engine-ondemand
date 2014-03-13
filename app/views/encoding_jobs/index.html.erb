@@ -1,16 +1,28 @@
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>Description</th>
-      <th>Status</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <%= render @encoding_jobs %>
-  </tbody>
-</table>
+<%= render partial: "encoding_jobs/referenced" %>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Your encodings</h3>
+  </div>
+
+  <div class="panel-body">
+    <p><em>These are your encoding jobs.</em></p>
+  </div>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Description</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= render @encoding_jobs %>
+    </tbody>
+  </table>
+</div>
 
 <% if auth_can_write? %>
 <%= plugit_link_to "Add encoding job", new_encoding_job_path, class: "btn btn-primary", disabled: !encoding_job_new_allowed? %>

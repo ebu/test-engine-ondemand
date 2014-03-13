@@ -3,7 +3,8 @@ class EncodingJobsController < PlugitController
   before_filter :require_write_access, only: [ :new, :create, :destroy ]
   
   def index
-    @encoding_jobs = EncodingJob.where(user_id: logged_in_user.ebu_id)
+    @encoding_jobs = EncodingJob.owned(logged_in_user)
+    @referenced_encoding_jobs = EncodingJob.referenced_for_dashboard
   end
   
   def show
