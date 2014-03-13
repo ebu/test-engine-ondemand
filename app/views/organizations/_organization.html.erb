@@ -1,0 +1,7 @@
+<%#= hidden_field_tag "organization_ids[]", organization.id %>
+<tr>
+  <td><%= organization.id %></td>
+  <td><%= organization.name %></td>
+  <td><%= organization.ebu_id %></td>
+  <td><%= check_box_tag "organization_ids[]", organization.id, organization.can_write? %></td>
+</tr>

@@ -3,6 +3,8 @@
   <td><%= plugit_link_to encoding_job.description, encoding_job_path(encoding_job) %></td>
   <td><%= job_status_label encoding_job %></td>
   <td>
+    <% if auth_can_write? %>
     <%= plugit_link_to "Remove", encoding_job_path(encoding_job), method: 'delete', disabled: !encoding_job.destroy_allowed?, data: { confirm: 'This will remove your encoding job. Are you sure?' }, class: "btn btn-danger btn-sm" %>
+    <% end %>
   </td>
 </tr>

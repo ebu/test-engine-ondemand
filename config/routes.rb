@@ -21,6 +21,12 @@ EbuOndemand::Application.routes.draw do
 
     resources :file_assets
     resources :preset_templates
+    resources :organizations do
+      collection do
+        put 'update_multiple'
+      end
+    end
+    
     resources :transcoders do
       member do
         get 'available'

@@ -1,3 +1,4 @@
+<% if auth_can_write? %>
 <div class="panel panel-default">
   <div class="panel-heading">
     <h3 class="panel-title">Upload new file (max. <%= number_to_human_size EBU::UPLOAD_MAX_SIZE %>)</h3>
@@ -20,7 +21,7 @@
     <% end %>
   </div>
 </div>
-
+<% end %>
 <table class="table table-striped">
   <thead>
     <tr>

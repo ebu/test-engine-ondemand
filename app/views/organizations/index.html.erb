@@ -1,0 +1,18 @@
+<%= form_for :organization, url: url_for_plugit(update_multiple_organizations_path), method: 'PUT' do |f| %>
+<input type="hidden" name="csrfmiddlewaretoken" value="{~__PLUGIT_CSRF_TOKEN__~}"/>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>EBU ID</th>
+      <th>Allow read/write access</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= render partial: 'organization', collection: @organizations, locals: { f: f } %>
+  </tbody>
+</table>
+
+<%= f.submit value: 'Save changes', class: 'btn btn-primary' %>
+<% end %>
