@@ -13,16 +13,24 @@ class PlugitController < ApplicationController
   def is_admin?
     logged_in? && @plugit_env["HTTP_X_PLUGIT_USER_EBUIO_ADMIN"] && @plugit_env["HTTP_X_PLUGIT_USER_EBUIO_ADMIN"] == true
   end
+
+  def has_write_access?
+    logged_in? && logged_in_user.organization.can_write?
+  end
   
   protected
   
-  def logged_in_user
-    users = User.where(ebu_id: logged_in_user_id).limit(1)
-    users.any? ? users.first : nil
-  end
-  
   def logged_in_user_id
     @plugit_env["HTTP_X_PLUGIT_USER_ID"].to_i
+  end
+
+  def logged_in_user
+    if @logged_in_user
+      @logged_in_user
+    else
+      users = User.where(ebu_id: logged_in_user_id).limit(1)
+      @logged_in_user = (users.any? ? users.first : nil)
+    end
   end
   
   def require_login
@@ -30,6 +38,10 @@ class PlugitController < ApplicationController
       @plugit_message = "You need to log in to view this page."
       render template: "plugit/error"
     end
+  end
+
+  def require_write_access
+    
   end
 
   def require_admin

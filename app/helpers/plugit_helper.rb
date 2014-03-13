@@ -42,4 +42,8 @@ module PlugitHelper
   def auth_is_admin?
     controller.is_admin?
   end
+  
+  def auth_can_write?
+    controller.has_write_access?
+  end
 end

@@ -1,5 +1,6 @@
 class FileAssetsController < PlugitController
-  before_filter :require_login
+  before_filter :require_login, only: [ :index ]
+  before_filter :require_write_access, only: [ :create, :destroy ]
   
   def index
     @file_assets = FileAsset.where(user_id: logged_in_user.ebu_id).order("created_at DESC")

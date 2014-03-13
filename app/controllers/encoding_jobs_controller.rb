@@ -1,5 +1,6 @@
 class EncodingJobsController < PlugitController
-  before_filter :require_login
+  before_filter :require_login, only: [ :index, :show, :status, :play ]
+  before_filter :require_write_access, only: [ :new, :create, :destroy ]
   
   def index
     @encoding_jobs = EncodingJob.where(user_id: logged_in_user.ebu_id)
