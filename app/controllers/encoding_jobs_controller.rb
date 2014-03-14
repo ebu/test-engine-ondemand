@@ -1,6 +1,6 @@
 class EncodingJobsController < PlugitController
   before_filter :require_login, only: [ :index, :show, :status, :play ]
-  before_filter :require_write_access, only: [ :new, :create, :destroy ]
+  before_filter :require_write_access, only: [ :new, :create, :destroy, :reference_presets, :unreference_prests ]
   
   def index
     @encoding_jobs = EncodingJob.owned(logged_in_user)
@@ -48,7 +48,26 @@ class EncodingJobsController < PlugitController
     render layout: 'player'
   end
   
+  def reference_presets
+    @encoding_job = EncodingJob.find(params[:id])
+    set_reference(@encoding_job, true)
+    redirect_to play_encoding_job_path(@encoding_job)
+  end
+  
+  def unreference_presets
+    @encoding_job = EncodingJob.find(params[:id])
+    set_reference(@encoding_job, false)
+    redirect_to play_encoding_job_path(@encoding_job)
+  end
+  
   private
+  
+  def set_reference(job, value)
+    job.post_processing_template.update_attribute(:is_reference, value) if job.post_processing_template
+    job.variant_jobs.each do |v|
+      v.encoder_preset_template.update_attribute(:is_reference, value) if v.encoder_preset_template
+    end
+  end
   
   def user_params
     params.require(:encoding_job).permit(

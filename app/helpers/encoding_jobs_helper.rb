@@ -161,4 +161,12 @@ module EncodingJobsHelper
     pos = VariantJob.queue_position_for(variant_job)
     (pos.nil?) ? '' : "Queued (#{pos + 1})"
   end
+  
+  def availability_label_for_template(template)
+    if template.blank?
+      content_tag :span, 'not available', class: "label label-danger", title: "This template is no longer available to make a reference. It might have been deleted."
+    else
+      content_tag :span, 'available', class: "label label-success", title: "This template is still available to make a reference."
+    end
+  end
 end

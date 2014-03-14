@@ -25,6 +25,16 @@ class EncodingJob < ActiveRecord::Base
   
   before_destroy :verify_destroy
   after_destroy :remove_output_files
+
+  # Check if presets are still available
+  def presets_available?
+    !post_processing_template.blank? && variant_jobs.all? { |v| !v.encoder_preset_template.blank? }
+  end
+  
+  # Check if presets are referenced
+  def presets_referenced?
+    post_processing_template.try(:is_reference?) && variant_jobs.all? { |v| v.encoder_preset_template.try(:is_reference?) }
+  end
   
   # Check if post-processing completed successfully.
   def completed_post_processing?

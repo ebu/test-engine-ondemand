@@ -16,6 +16,8 @@ EbuOndemand::Application.routes.draw do
       member do
         get 'status'
         get 'play'
+        put 'reference_presets'
+        put 'unreference_presets'
       end
     end
 

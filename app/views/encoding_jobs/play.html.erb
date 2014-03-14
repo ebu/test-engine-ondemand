@@ -84,14 +84,34 @@
           <b>Variant Jobs:</b><br>
           <ul>
             <% @encoding_job.variant_jobs.each do |v| %>
-            <li><%= v.encoder_flags %></li>
+            <li>
+              <%= availability_label_for_template(v.encoder_preset_template) if auth_is_admin? %>
+              <%= v.encoder_flags %>
+            </li>
             <% end %>
           </ul>
           
           <b>MP4Box DASH settings:</b><br>
           <ul>
-            <li><%= @encoding_job.post_processing_flags %></li>
+            <li>
+              <%= availability_label_for_template(@encoding_job.post_processing_template) if auth_is_admin? %>
+              <%= @encoding_job.post_processing_flags %>
+            </li>
           </ul>
+          
+          <% if auth_is_admin? %>
+            <% if @encoding_job.presets_available? %>
+              <% if @encoding_job.presets_referenced? %>
+                <%= plugit_link_to 'Remove preset templates as reference', unreference_presets_encoding_job_path(@encoding_job), method: 'PUT', class: 'btn btn-danger', data: { confirm: "This will remove the presets as a reference and prevent others from reusing them. Are you sure?" } %>
+                <em>These preset templates are currently a reference.</em>
+              <% else %>
+                <%= plugit_link_to 'Make preset templates a reference', reference_presets_encoding_job_path(@encoding_job), method: 'PUT', class: 'btn btn-success' %>
+                <em>These preset templates are currently not a reference.</em>
+              <% end %>
+            <% else %>
+              <em>Not all preset templates are still available. They can't me made a reference.</em>
+            <% end %>
+          <% end %>
         </div>
       </div>
     </div>
