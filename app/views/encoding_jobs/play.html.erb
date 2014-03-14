@@ -75,6 +75,28 @@
         </div>
     </div>
 
+    <% if auth_is_admin? %>
+    <div class="row">
+      <div class="panel panel-default">
+          <div class="panel-heading panel-top">
+              <h3 class="panel-title">Reference</h3>
+          </div>
+          <div class="panel-body">
+            <% if @encoding_job.is_reference? %>
+              <%= plugit_link_to 'Remove encoding as a reference', unreference_encoding_job_path(@encoding_job), method: 'PUT', class: 'btn btn-danger', data: { confirm: "This will remove the encoding as a reference. This means it may be expired and deleted."} %>
+              <em>This encoding is currently a reference. It won't be removed
+                  by the normal clean-up tasks.</em>
+            <% else %>
+                  <%= plugit_link_to 'Make encoding a reference', reference_encoding_job_path(@encoding_job), method: 'PUT', class: 'btn btn-success' %>
+                  <em>This encoding is currently not a reference. It will be removed
+                  in <%= distance_of_time_in_words(Time.now, @encoding_job.created_at + EBU::MAX_AGE) %>
+                  if it is not made a reference.</em>
+            <% end %>
+          </div>
+      </div>
+    </div>
+    <% end %>
+
     <div class="row">
       <div class="panel panel-default">
         <div class="panel-heading">

@@ -18,6 +18,8 @@ EbuOndemand::Application.routes.draw do
         get 'play'
         put 'reference_presets'
         put 'unreference_presets'
+        put 'reference'
+        put 'unreference'
       end
     end
 
