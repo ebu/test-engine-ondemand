@@ -26,5 +26,11 @@ namespace :ebu do
       Organization.create(name: 'SVT',           ebu_id: 17)
     end
   end
+  
+  desc "Purge expired file assets and encoding jobs"
+  task :purge => :environment do
+    EncodingJob.purge!
+    FileAsset.purge!
+  end
 end
 

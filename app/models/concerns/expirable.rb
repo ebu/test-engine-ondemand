@@ -8,6 +8,13 @@ module Expirable
   
   module ClassMethods
     # class methods
+    def to_purge
+      expired.not_referenced
+    end
+    
+    def purge!
+      to_purge.destroy_all
+    end
   end
 
   # instance methods
