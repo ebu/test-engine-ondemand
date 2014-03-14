@@ -20,6 +20,8 @@ EbuOndemand::Application.routes.draw do
         put 'unreference_presets'
         put 'reference'
         put 'unreference'
+        put 'reference_source_files'
+        put 'unreference_source_files'
       end
     end
 

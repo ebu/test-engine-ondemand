@@ -1,6 +1,9 @@
 class EncodingJobsController < PlugitController
   before_filter :require_login, only: [ :index, :show, :status, :play ]
-  before_filter :require_write_access, only: [ :new, :create, :destroy, :reference_presets, :unreference_prests ]
+  before_filter :require_write_access, only: [ :new, :create, :destroy,
+                                               :reference_presets, :unreference_prests,
+                                               :reference, :unreference,
+                                               :reference_source_files, :unreference_source_files ]
   
   def index
     @encoding_jobs = EncodingJob.owned(logged_in_user)
@@ -22,7 +25,7 @@ class EncodingJobsController < PlugitController
       flash[:notice] = 'Created new encoding job'
       redirect_to encoding_jobs_path
     else
-      flash[:warn] = "Unable to save encoding job. #{@encoding_job.errors.messages}"
+      flash[:warn] = "Unable to save encoding job. Make sure to fill in all the fields. #{@encoding_job.errors.messages}"
       render :new
     end
   end
@@ -72,12 +75,30 @@ class EncodingJobsController < PlugitController
     redirect_to play_encoding_job_path(@encoding_job)
   end
   
+  def reference_source_files
+    @encoding_job = EncodingJob.find(params[:id])
+    set_reference_source_file(@encoding_job, true)
+    redirect_to play_encoding_job_path(@encoding_job)
+  end
+  
+  def unreference_source_files
+    @encoding_job = EncodingJob.find(params[:id])
+    set_reference_source_file(@encoding_job, false)
+    redirect_to play_encoding_job_path(@encoding_job)
+  end
+  
   private
   
   def set_reference_presets(job, value)
     job.post_processing_template.update_attribute(:is_reference, value) if job.post_processing_template
     job.variant_jobs.each do |v|
       v.encoder_preset_template.update_attribute(:is_reference, value) if v.encoder_preset_template
+    end
+  end
+
+  def set_reference_source_file(job, value)
+    job.variant_jobs.each do |v|
+      v.source_file.update_attribute(:is_reference, value) if v.source_file
     end
   end
   

@@ -36,6 +36,14 @@ class EncodingJob < ActiveRecord::Base
     post_processing_template.try(:is_reference?) && variant_jobs.all? { |v| v.encoder_preset_template.try(:is_reference?) }
   end
   
+  def source_files_available?
+    variant_jobs.all? { |v| !v.source_file.blank? }
+  end
+
+  def source_files_referenced?
+    variant_jobs.all? { |v| v.source_file.try(:is_reference?) }
+  end
+  
   # Check if post-processing completed successfully.
   def completed_post_processing?
     did_complete_post_processing?
