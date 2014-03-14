@@ -15,7 +15,7 @@ module PlugitHelper
   end
   
   def plugit_link_to_play(job)
-    plugit_link_to('Open in Dash.js player', url_for_plugit(play_encoding_job_path(job)), class: 'btn btn-primary btn-sm')
+    plugit_link_to('Play now', url_for_plugit(play_encoding_job_path(job)), class: 'btn btn-primary btn-sm')
   end
   
   def plugit_stream_url_for(job)
