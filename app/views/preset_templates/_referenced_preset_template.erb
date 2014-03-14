@@ -1,7 +1,9 @@
 <tr>
   <td><%= referenced_preset_template.id %></td>
   <td><%= referenced_preset_template.description %></td>
-  <td><%= human_readable_preset_type referenced_preset_template %></td>
-  <td class="hidden-xs"><%= l referenced_preset_template.created_at, :format => :long %></td>
+  <td>
+    <b class="small"><%= human_readable_preset_type referenced_preset_template %></b><br>
+    <%= formatted_preset_template_text referenced_preset_template.template_text %>
+  </td>
   <td><%= formatted_owner(referenced_preset_template.user) %></td>
 </tr>

@@ -26,7 +26,7 @@ class PresetTemplatesController < PlugitController
   
   def destroy
     @preset_template = PresetTemplate.find(params[:id])
-    if @preset_template.user_id == logged_in_user.ebu_id && @preset_template.destroy
+    if @preset_template.owned_by?(logged_in_user) && !@preset_template.is_reference? && @preset_template.destroy
       flash[:notice] = "Preset template removed."
     else
       flash[:alert] = "Unable to remove preset template."

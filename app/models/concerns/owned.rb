@@ -20,4 +20,7 @@ module Owned
   end
 
   # instance methods
+  def owned_by?(user)
+    self.user_id == user.ebu_id
+  end
 end

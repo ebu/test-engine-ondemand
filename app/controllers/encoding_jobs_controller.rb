@@ -29,7 +29,7 @@ class EncodingJobsController < PlugitController
   
   def destroy
     @encoding_job = EncodingJob.find(params[:id])
-    if @encoding_job.user_id == logged_in_user.ebu_id && @encoding_job.destroy
+    if @encoding_job.owned_by?(logged_in_user) && !@encoding_job.is_reference? && @encoding_job.destroy
       flash[:notice] = 'Encoding job removed'
     else
       flash[:warn] = "Unable to remove encoding job."

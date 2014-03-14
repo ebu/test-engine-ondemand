@@ -3,7 +3,7 @@ class FileAssetsController < PlugitController
   before_filter :require_write_access, only: [ :create, :destroy ]
   
   def index
-    @file_assets = FileAsset.where(user_id: logged_in_user.ebu_id).order("created_at DESC")
+    @file_assets = FileAsset.owned(logged_in_user).order("created_at DESC")
     @referenced_file_assets = FileAsset.referenced
   end
   
@@ -16,7 +16,7 @@ class FileAssetsController < PlugitController
   
   def destroy
     @file_asset = FileAsset.find(params[:id])
-    if @file_asset.user_id == logged_in_user.ebu_id && @file_asset.destroy
+    if @file_asset.owned_by?(logged_in_user) && !@file_asset.is_reference? && @file_asset.destroy
       flash[:notice] = "File removed."
     else
       flash[:alert] = "Unable to remove file."

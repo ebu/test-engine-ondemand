@@ -6,7 +6,8 @@
   <div class="panel-body">
     <p><em>
       <% if @referenced_encoding_jobs.any? %>
-        These are the reference encodings as selected by the EBU administrator.
+        These are the reference encodings as selected by the EBU administrator. If you are the owner
+        of the encoding job, you can't delete it while it is marked as a reference.
       <% else %>
         There are no reference encodings yet.
       <% end %>

@@ -4,7 +4,7 @@
   <td><%= formatted_preset_template_text preset_template.template_text %></td>
   <td>
     <% if auth_can_write? %>
-    <%= plugit_link_to "Remove", preset_template_path(preset_template), method: 'delete', data: { confirm: 'This will remove your preset template. Are you sure?' }, class: "btn btn-danger btn-sm" %>
+    <%= plugit_link_to "Remove", preset_template_path(preset_template), method: 'delete', data: { confirm: 'This will remove your preset template. Are you sure?' }, class: "btn btn-danger btn-sm", disabled: preset_template.is_reference? %>
     <% end %>
   </td>
 </tr>
