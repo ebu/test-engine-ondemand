@@ -2,7 +2,7 @@
 <input type="hidden" name="csrfmiddlewaretoken" value="{~__PLUGIT_CSRF_TOKEN__~}"/>
 <div class="form-group">
 <%= f.label 'Description: ' %>
-<%= f.text_field :description, placeholder: "Description for job, e.g. 'Test adaptive 3 variants'.", class: "form-control" %><br/>
+<%= f.text_field :description, placeholder: "Description for job, e.g. 'Test adaptive 3 variants'.", class: "form-control", data: { required: true } %><br/>
 </div>
 
 <div class="panel panel-default" id="variant_jobs_list">

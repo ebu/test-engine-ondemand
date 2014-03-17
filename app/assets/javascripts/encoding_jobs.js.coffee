@@ -39,7 +39,7 @@ update_presets = (event) ->
   variables_container.html('')
   variables.forEach (v) ->
     template = '<div class="input-group input-group-sm"><span class="input-group-addon">' + v + '</span>' +
-               '<input type="text" class="form-control" data-variable="' + v + '"/></div>'
+               '<input type="text" class="form-control" data-variable="' + v + '" data-required="true"/></div>'
     variables_container.append(template)
 
 post_processing_change_handler = (event) ->
@@ -51,11 +51,16 @@ post_processing_change_handler = (event) ->
   variables_container.html('')
   variables.forEach (v) ->
     template = '<div class="input-group input-group-sm"><span class="input-group-addon">' + v + '</span>' +
-               '<input type="text" class="form-control" data-variable="' + v + '"/></div>'
+               '<input type="text" class="form-control" data-variable="' + v + '" data-required="true"/></div>'
     variables_container.append(template)
   
 # Submit handler
 submit_handler = (event) ->
+  # Don't allow submit if there are no variant jobs
+  if ($('#variant_jobs_list ul li').length == 0)
+    alert('Please specify at least one variant job before submitting an encoding job.')
+    return false
+    
   # Flatten all variant jobs variable fields into hidden form field
   $.each $('#variant_jobs_list li[data-id]'), (index, item) =>
     flatten_input_fields(
