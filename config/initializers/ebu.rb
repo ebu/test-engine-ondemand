@@ -1,6 +1,6 @@
 module EBU
   # Limit upload size for individual file uploads.
-  UPLOAD_MAX_SIZE = 256.megabytes
+  UPLOAD_MAX_SIZE = 400.megabytes
   
   # Expire items after 30 days
   MAX_AGE = 30.days
