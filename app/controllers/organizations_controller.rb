@@ -19,6 +19,6 @@ class OrganizationsController < PlugitController
   private
   
   def update_organizations
-    # NOOP
+    Organization.refresh
   end
 end
