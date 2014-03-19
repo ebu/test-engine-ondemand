@@ -1,6 +1,6 @@
 require 'capistrano/ext/multistage'
 
-set :application, "madebyhiro.com"
+set :application, "ebu-ondemand"
 set :stages, %w(production)
 set :default_stage, "production"
 
