@@ -1,14 +1,19 @@
 # config valid only for Capistrano 3.1
 lock '3.1.0'
 
-set :application, 'ebu-ondemand'
+SSHKit.config.command_map[:rake] = "bundle exec rake"
 
-set :scm, :git
-set :repository,  "https://github.com/madebyhiro/ebu-ondemand.git"
+set :application, 'ebu-ondemand'
+set :stages, ["production"]
+
+set :repo_url,  "https://github.com/madebyhiro/ebu-ondemand.git"
+set :branch, "master"
 
 set :deploy_via, :copy
 set :copy_strategy, :export
 set :use_sudo, false
+
+set :deploy_to, "/var/www/ebu-ondemand/rails"
 
 # Default branch is :master
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
@@ -38,7 +43,7 @@ set :use_sudo, false
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
 
 # Default value for keep_releases is 5
-# set :keep_releases, 5
+set :keep_releases, 5
 
 namespace :deploy do
 

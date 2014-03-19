@@ -20,6 +20,11 @@ development_remote:
 #   pool: 5
 #   timeout: 5000
 # 
+production:
+  adapter: mysql
+  database: ebu_ondemand
+  username: ebu_ondemand
+  password: <%= begin IO.read("/etc/.db") rescue "" end %>
 # production:
 #   adapter: sqlite3
 #   database: db/production.sqlite3
