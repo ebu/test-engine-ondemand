@@ -1,6 +1,6 @@
 require 'active_support/concern'
 
-module EncodingJob::Statuses
+module EncodingJobStatuses
   extend ActiveSupport::Concern
   
   included do

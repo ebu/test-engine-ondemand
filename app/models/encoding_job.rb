@@ -1,5 +1,5 @@
 class EncodingJob < ActiveRecord::Base
-  include EncodingJob::Statuses
+  include EncodingJobStatuses
   include Referencable
   include Expirable
   include Owned

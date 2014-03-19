@@ -1,6 +1,6 @@
 require 'active_support/concern'
 
-module VariantJob::Statuses
+module VariantJobStatuses
   extend ActiveSupport::Concern
   
   included do

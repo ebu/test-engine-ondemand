@@ -1,5 +1,5 @@
 class VariantJob < ActiveRecord::Base
-  include VariantJob::Statuses
+  include VariantJobStatuses
 
   belongs_to :encoding_job
   belongs_to :encoder_preset_template, class_name: "PresetTemplate"
