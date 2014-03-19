@@ -36,10 +36,9 @@ group :development do
   # Use foreman in development mode
   gem 'foreman'
   
-  gem 'capistrano', '~> 3.1.0'
-  gem 'capistrano-rvm'
-  gem 'capistrano-rails',   '~> 1.1', require: false
-  gem 'capistrano-bundler', '~> 1.1', require: false  
+  gem "capistrano", '~> 2.15.5'
+  gem "capistrano-ext"
+  gem 'capistrano_colors'
 end
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
