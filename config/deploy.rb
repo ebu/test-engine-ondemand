@@ -16,7 +16,7 @@ set :use_sudo, false
 set :default_environment,   {
   'PATH'      => "/usr/local/rvm/gems/ruby-2.0.0-p451/bin:/usr/local/rvm/gems/ruby-2.0.0-p451@global/bin:/usr/local/rvm/rubies/ruby-2.0.0-p451/bin:$PATH",
   'GEM_PATH'  => "/usr/local/rvm/gems/ruby-2.0.0-p451:/usr/local/rvm/gems/ruby-2.0.0-p451@global",
-  'GEM_HOME'  => "/usr/local/rvm/gems/ruby-2.0.0-p451"
+  'GEM_HOME'  => "/usr/local/rvm/gems/ruby-2.0.0-p451",
   'LC_TYPE'   => "en_US.utf8"
 }
 
