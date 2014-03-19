@@ -1,3 +1,5 @@
+require 'active_support/concern'
+
 module VariantJob::Statuses
   extend ActiveSupport::Concern
   
