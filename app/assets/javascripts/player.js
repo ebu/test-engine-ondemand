@@ -1,4 +1,4 @@
-//= require ../../../vendor/assets/dash.js/app/lib/angular/angular.min
+//= require ../../vendor/assets/dash.js/app/lib/angular/angular.min
 //= require ../../../vendor/assets/dash.js/app/lib/angular/angular-resource.min
 
 //= require ../../../vendor/assets/dash.js/app/lib/q
