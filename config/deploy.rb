@@ -8,7 +8,6 @@ set :stages, ["production"]
 
 set :repo_url,  "https://github.com/madebyhiro/ebu-ondemand.git"
 set :branch, "master"
-set :git_strategy, SubmoduleStrategy
 
 set :deploy_via, :copy
 set :copy_strategy, :export
