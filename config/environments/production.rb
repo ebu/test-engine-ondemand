@@ -67,7 +67,7 @@ Rails.application.configure do
 
   # Set the PlugIt roots (local and remote) only once in the application configuration
   config.ebu_plugit_local_root = 'plugit-rails'
-  config.ebu_plugit_root = 'plugit/11'
+  config.ebu_plugit_root = 'plugit/14'
   
   config.assets.prefix = "/#{config.ebu_plugit_local_root}/media"
 

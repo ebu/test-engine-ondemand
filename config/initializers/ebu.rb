@@ -47,5 +47,8 @@ module EBU
   CONFORMANCE_ANT_BUILD_FILE = [Rails.root, 'vendor', 'conformance', 'MPDValidator', 'build.xml'].join(File::SEPARATOR)
   #ALLOWED_CONTENT_TYPES = /\Aimage|\Avideo|\Atext/
   
-  API_URL = "http://ebu.io/plugit/#{Rails.application.secrets.plugit}/13"
+  API_URL = case Rails.env
+    when production then "http://ebu.io/plugit/#{Rails.application.secrets.plugit}/14"
+    else "http://ebu.io/plugit/#{Rails.application.secrets.plugit}/13"
+  end
 end
