@@ -9,8 +9,5 @@ class FileAsset < ActiveRecord::Base
   
   has_many :variant_jobs, foreign_key: 'source_file_id', dependent: :nullify
   
-  validates_attachment :resource,
-    presence: true,
-    size: { in: 0..EBU::UPLOAD_MAX_SIZE }
-    #content_type: { content_type: EBU::ALLOWED_CONTENT_TYPES }
+  validates :resource, attachment_size: { in: 0..EBU::UPLOAD_MAX_SIZE }, unless: :is_reference?
 end
