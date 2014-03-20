@@ -3,7 +3,7 @@ class FileAsset < ActiveRecord::Base
   include Expirable
   include Owned
   
-  has_attached_file :resource
+  has_attached_file :resource, path: EBU::UPLOAD_PATH
   
   delegate :path, to: :resource
   

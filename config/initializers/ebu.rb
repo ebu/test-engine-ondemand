@@ -1,7 +1,10 @@
 module EBU
   # Limit upload size for individual file uploads.
   UPLOAD_MAX_SIZE = 400.megabytes
-  
+  UPLOAD_PATH = case Rails.env
+  when "production" then "/data_ebs/uploads/:class/:attachment/:id_partition/:style/:filename"
+  else ":rails_root/public/system/:class/:attachment/:id_partition/:style/:filename"
+  end
   # Expire items after 30 days
   MAX_AGE = 30.days
   
@@ -24,7 +27,7 @@ module EBU
   CALLBACK_URL_FOR_CODEM = case Rails.env
     when 'development' then 'http://localhost:3000/codem_notifications'
     when 'development_remote' then 'http://localhost:3000/codem_notifications'
-    when 'production' then 'http://localhost:3000/codem_notifications'
+    when 'production' then 'http://ebu-ondemand.madebyhiro.com/codem_notifications'
     else raise "Codem callback URL not yet configured."
   end
   
@@ -32,7 +35,7 @@ module EBU
   CALLBACK_URL_FOR_HTTP_RUNNER = case Rails.env
     when 'development' then 'http://localhost:3000/http_runner_notifications'
     when 'development_remote' then 'http://localhost:3000/http_runner_notifications'
-    when 'production' then 'http://localhost:3000/http_runner_notifications'
+    when 'production' then 'http://ebu-ondemand.madebyhiro.com/http_runner_notifications'
     else raise "http-runner callback URL not yet configured."
   end
   
