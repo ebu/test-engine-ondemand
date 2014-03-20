@@ -48,7 +48,7 @@ module EBU
   #ALLOWED_CONTENT_TYPES = /\Aimage|\Avideo|\Atext/
   
   API_URL = case Rails.env
-    when production then "http://ebu.io/plugit/#{Rails.application.secrets.plugit}/14"
+    when "production" then "http://ebu.io/plugit/#{Rails.application.secrets.plugit}/14"
     else "http://ebu.io/plugit/#{Rails.application.secrets.plugit}/13"
   end
 end
