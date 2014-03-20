@@ -10,7 +10,7 @@
 <%= f.text_field :port, :placeholder => "Port of transcoder, e.g. '8080'", :class => "form-control", data: { required: true } %><br/>
 </div>
 
-<%= link_to "Cancel", transcoders_path, :class => "btn btn-default" %>
+<%= plugit_link_to "Cancel", transcoders_path, :class => "btn btn-default" %>
 <%= f.submit :class => "btn btn-primary", :value => "Save" %>
 
 <% end %>

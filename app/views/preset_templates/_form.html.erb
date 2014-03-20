@@ -16,7 +16,7 @@
 <%= f.text_area :template_text, placeholder: "Template for preset. Write your own settings or use one of the pre-fill buttons as a starting point.", class: "form-control", rows: 5, data: { required: true } %><br/>
 </div>
 
-<%= link_to "Cancel", preset_templates_path, class: "btn btn-default" %>
+<%= plugit_link_to "Cancel", preset_templates_path, class: "btn btn-default" %>
 <%= f.submit class: "btn btn-primary", value: "Save" %>
 
 <% end %>
