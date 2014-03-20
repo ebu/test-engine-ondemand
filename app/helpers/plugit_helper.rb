@@ -34,6 +34,20 @@ module PlugitHelper
     ).html_safe
   end
   
+  def plugit_stylesheet_link_tag(*sources)
+    stylesheet_link_tag(*sources).gsub(
+      %r[href="/#{Rails.application.config.ebu_plugit_local_root}],
+      %Q[href="/#{Rails.application.config.ebu_plugit_root}]
+    ).html_safe
+  end
+  
+  def plugit_javascript_include_tag(*sources)
+    javascript_include_tag(*sources).gsub(
+      %r[src="/#{Rails.application.config.ebu_plugit_local_root}],
+      %Q[src="/#{Rails.application.config.ebu_plugit_root}]
+    ).html_safe
+  end
+  
   def mpd_url(job)
     url_for_plugit("#{root_path}/#{plugit_stream_url_for(job)}")
   end
