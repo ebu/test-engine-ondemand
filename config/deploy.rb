@@ -49,6 +49,9 @@ namespace :deploy do
     
     # Manually do this because Capistrano support is broken for Rails 4
     run "cd #{release_path}; RAILS_ENV=#{rails_env} bundle exec rake assets:precompile"
+
+    # Create symlink for apache
+    run "cd #{release_path}/public/plugit-rails/media; ln -s /data_ebs/media/dash"
     
     # Set permissions
     run "chmod -R g+w #{release_path}"
