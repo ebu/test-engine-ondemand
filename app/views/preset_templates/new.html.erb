@@ -1,3 +1,26 @@
+<div class="alert alert-info">
+  <h4>Tips for creating preset templates</h4>
+  <p>
+    Preset templates are basically building blocks that contain variable and fixed parameters to send to
+    ffmpeg and MP4Box. For smooth operation here are a couple of tips you can use for building flexible
+    templates.
+  </p>
+  <hr>
+  <ul>
+    <li>If you need sample presets, use the pre-fill buttons below as a starting point.</li>
+    <li>
+      Everything you put between @-signs will be considered a variable to be filled in when
+      creating a new encoding job. For example: <code>-s @Size of video (e.g. 320x180)@</code>
+      results in a preset template that looks like:
+      "<%= formatted_preset_template_text("-s @Size of video (e.g. 320x180)@") %>".
+    </li>
+    <li>MP4Box requires the use of an MP4-container for input files, for now always specify <code>-f mp4</code> for ffmpeg presets.</li>
+    <li>Don't explicitly define any input or output files. The encoder will automatically fill in these settings.</li>
+    <li>We recommend you do not claim an unreasonable amount of threads to be used by the encoder (using the <code>-threads</code> option), keep it at 4 or less.</li>
+    <li>There is no need to put quotes around individual parameters, as that may interfere with correct functioning.</li>
+  </ul>
+</div>
+
 <div class="panel panel-default">
   <div class="panel-heading">
     <h3 class="panel-title">Add new preset template</h3>
