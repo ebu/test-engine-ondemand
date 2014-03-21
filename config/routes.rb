@@ -1,4 +1,5 @@
 EbuOndemand::Application.routes.draw do
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -46,6 +47,9 @@ EbuOndemand::Application.routes.draw do
   
   put  'codem_notifications'       => 'codem_notifications#create'
   post 'http_runner_notifications' => 'http_runner_notifications#create'
+  
+  get 'cron/job_state'
+  get 'cron/purge'
   
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
