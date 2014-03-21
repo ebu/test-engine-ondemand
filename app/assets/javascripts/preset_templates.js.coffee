@@ -4,7 +4,7 @@
 presets = {
   encoder_preset: {
     video: '-f mp4 -vcodec libx264 -profile:v baseline -level:v 3.1 -s @Video size in pixels (e.g. 320x180)@ -b:v @Target bitrate@k -an -maxrate @Max. bitrate@k -minrate @Min. bitrate@k -keyint_min @Min. GOP length in frames@ -g @Max. GOP length in frames@ -threads 4',
-    audio: '-f mp4 -vn -acodec libfaac -ar @Audio samplerate@ -ab @Target bitrate@k -ac @Number of audio channels@ -metadata:s:0 language=@Language of audio track@'
+    audio: '-f mp4 -vn -acodec aac -strict -2 -ar @Audio samplerate@ -ab @Target bitrate@k -ac @Number of audio channels@ -metadata:s:0 language=@Language of audio track@'
   },
   post_processing_preset: {
     generic: '-dash @Segment duration in ms.@ -profile onDemand -rap -frag-rap -url-template -segment-name %s_ -segment-ext mp4'
