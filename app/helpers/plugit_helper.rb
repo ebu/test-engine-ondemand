@@ -11,7 +11,8 @@ module PlugitHelper
   end
   
   def plugit_link_to_mpd(job)
-    plugit_link_to('Raw MPD', plugit_stream_url_for(job), class: 'btn btn-default btn-sm')
+    url = [root_url, plugit_stream_url_for(job)].join('/')
+    link_to('Raw MPD', url, class: 'btn btn-default btn-sm')
   end
   
   def plugit_link_to_play(job)
@@ -23,10 +24,11 @@ module PlugitHelper
   end
 
   def plugit_raw_mpd_link(job)
-    url = mpd_url(job)
-    "Raw public MPD link: ".html_safe + plugit_link_to(url, url)
-  end  
-
+    #url = mpd_url(job)
+    url = [root_url, plugit_stream_url_for(job)].join('/')
+    "Raw public MPD link: ".html_safe + link_to(url, url)
+  end
+  
   def plugit_link_to(name = nil, options = nil, html_options = nil, &block)
     link_to(name, options, html_options, &block).gsub(
       %r[href="/#{Rails.application.config.ebu_plugit_local_root}],
@@ -49,7 +51,8 @@ module PlugitHelper
   end
   
   def mpd_url(job)
-    url_for_plugit("#{root_path}/#{plugit_stream_url_for(job)}")
+    [root_url, plugit_stream_url_for(job)].join('/')
+    #url_for_plugit("#{root_path}/#{plugit_stream_url_for(job)}")
   end
   
   # Authorisation methods
