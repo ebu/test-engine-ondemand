@@ -53,6 +53,9 @@ namespace :deploy do
     # Create symlink for apache
     run "cd #{release_path}/public/plugit-rails/media; ln -s /data_ebs/media/dash"
     
+    # Copy bootstrap fonts
+    run "cd #{release_path}/vendor/assets/fonts/bootstrap; cp * ../../../../public/plugit-rails/media/bootstrap"
+    
     # Set permissions
     run "chmod -R g+w #{release_path}"
     run "cd #{release_path}; chmod 0666 log/#{rails_env}.log"
