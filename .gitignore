@@ -27,3 +27,6 @@
 
 # Ignore all compiled Python files
 *.pyc
+
+# Ignore all compiled Java code
+*.class 
