@@ -56,6 +56,9 @@ namespace :deploy do
     # Copy bootstrap fonts
     run "cd #{release_path}/vendor/assets/fonts/bootstrap; cp * ../../../../public/plugit-rails/media/bootstrap"
     
+    # Compile MPDValidator
+    run "cd #{release_path}/vendor/conformance/MPDValidator; ant"
+    
     # Set permissions
     run "chmod -R g+w #{release_path}"
     run "cd #{release_path}; chmod 0666 log/#{rails_env}.log"
