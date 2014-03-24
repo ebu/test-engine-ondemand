@@ -129,13 +129,16 @@ href="https://github.com/ebu/PlugIt#basic-methods">github.com/ebu/PlugIt#basic-m
 
         <div class="method-description">
           
-          
+          <p>Respond to a PlugIt ping request.</p>
+
+<p>Sends back an empty HTTP 200 response, or the &#39;data&#39; parameter that
+was provided by PlugIt.</p>
           
           
 
           
           <div class="method-source-code" id="ping-source">
-            <pre><span class="ruby-comment"># File app/controllers/basic_controller.rb, line 8</span>
+            <pre><span class="ruby-comment"># File app/controllers/basic_controller.rb, line 11</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">ping</span>
   <span class="ruby-identifier">data</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:data</span>] <span class="ruby-operator">||</span> <span class="ruby-string">&#39;&#39;</span>
   <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> { <span class="ruby-identifier">data</span><span class="ruby-operator">:</span> <span class="ruby-identifier">data</span> }
@@ -163,13 +166,13 @@ href="https://github.com/ebu/PlugIt#basic-methods">github.com/ebu/PlugIt#basic-m
 
         <div class="method-description">
           
-          
+          <p>Respond with the PlugIt version number.</p>
           
           
 
           
           <div class="method-source-code" id="version-source">
-            <pre><span class="ruby-comment"># File app/controllers/basic_controller.rb, line 13</span>
+            <pre><span class="ruby-comment"># File app/controllers/basic_controller.rb, line 17</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">version</span>
   <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> { <span class="ruby-identifier">result</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;Ok&#39;</span>, <span class="ruby-identifier">version</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;1&#39;</span>, <span class="ruby-identifier">protocol</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;EBUio-PlugIt&#39;</span> }
 <span class="ruby-keyword">end</span></pre>

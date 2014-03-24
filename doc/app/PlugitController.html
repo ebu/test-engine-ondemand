@@ -254,7 +254,7 @@
 
           
           <div class="method-source-code" id="logged_in-3F-source">
-            <pre><span class="ruby-comment"># File app/controllers/plugit_controller.rb, line 54</span>
+            <pre><span class="ruby-comment"># File app/controllers/plugit_controller.rb, line 57</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">logged_in?</span>
   <span class="ruby-operator">!</span><span class="ruby-ivar">@plugit_env</span>[<span class="ruby-string">&quot;HTTP_X_PLUGIT_USER_USERNAME&quot;</span>].<span class="ruby-identifier">blank?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-ivar">@plugit_env</span>[<span class="ruby-string">&quot;HTTP_X_PLUGIT_USER_ID&quot;</span>].<span class="ruby-identifier">blank?</span>
 <span class="ruby-keyword">end</span></pre>
@@ -320,7 +320,7 @@
 
           
           <div class="method-source-code" id="require_admin-source">
-            <pre><span class="ruby-comment"># File app/controllers/plugit_controller.rb, line 47</span>
+            <pre><span class="ruby-comment"># File app/controllers/plugit_controller.rb, line 50</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">require_admin</span>
   <span class="ruby-keyword">unless</span> <span class="ruby-identifier">is_admin?</span>
     <span class="ruby-ivar">@plugit_message</span> = <span class="ruby-string">&quot;You need to be an administrator to view this page.&quot;</span>
@@ -394,7 +394,10 @@
           <div class="method-source-code" id="require_write_access-source">
             <pre><span class="ruby-comment"># File app/controllers/plugit_controller.rb, line 43</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">require_write_access</span>
-  
+  <span class="ruby-keyword">unless</span> <span class="ruby-identifier">logged_in_user</span>.<span class="ruby-identifier">try</span>(<span class="ruby-value">:can_write?</span>)
+    <span class="ruby-ivar">@plugit_message</span> = <span class="ruby-string">&quot;Your organization requires read/write access to do this. Please contact EBU for assistance.&quot;</span>
+    <span class="ruby-identifier">render</span> <span class="ruby-identifier">template</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;plugit/error&quot;</span>
+  <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           

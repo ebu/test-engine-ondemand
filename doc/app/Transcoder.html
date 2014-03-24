@@ -181,8 +181,8 @@
     <span class="ruby-identifier">response</span> = <span class="ruby-constant">RestClient</span><span class="ruby-operator">::</span><span class="ruby-constant">Request</span>.<span class="ruby-identifier">execute</span>(
       <span class="ruby-identifier">method</span><span class="ruby-operator">:</span> <span class="ruby-value">:get</span>,
       <span class="ruby-identifier">url</span><span class="ruby-operator">:</span> <span class="ruby-identifier">build_jobs_url</span>,
-      <span class="ruby-identifier">timeout</span><span class="ruby-operator">:</span> <span class="ruby-constant">EBU</span><span class="ruby-operator">::</span><span class="ruby-constant">TRANSCODER_TIMEOUT</span>,
-      <span class="ruby-identifier">open_timeout</span><span class="ruby-operator">:</span> <span class="ruby-constant">EBU</span><span class="ruby-operator">::</span><span class="ruby-constant">TRANSCODER_TIMEOUT</span>
+      <span class="ruby-identifier">timeout</span><span class="ruby-operator">:</span> <span class="ruby-constant">EBU</span><span class="ruby-operator">::</span><span class="ruby-constant">NETWORK_TIMEOUT</span>,
+      <span class="ruby-identifier">open_timeout</span><span class="ruby-operator">:</span> <span class="ruby-constant">EBU</span><span class="ruby-operator">::</span><span class="ruby-constant">NETWORK_TIMEOUT</span>
     )
     <span class="ruby-identifier">response</span>.<span class="ruby-identifier">code</span> <span class="ruby-operator">==</span> <span class="ruby-value">200</span> <span class="ruby-operator">?</span> <span class="ruby-keyword">true</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">false</span>
   <span class="ruby-keyword">rescue</span> <span class="ruby-constant">Timeout</span><span class="ruby-operator">::</span><span class="ruby-constant">Error</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">e</span>
@@ -226,8 +226,8 @@
     <span class="ruby-identifier">response</span> = <span class="ruby-constant">RestClient</span><span class="ruby-operator">::</span><span class="ruby-constant">Request</span>.<span class="ruby-identifier">execute</span>(
       <span class="ruby-identifier">method</span><span class="ruby-operator">:</span> <span class="ruby-value">:get</span>,
       <span class="ruby-identifier">url</span><span class="ruby-operator">:</span> [<span class="ruby-identifier">build_jobs_url</span>, <span class="ruby-identifier">job</span>.<span class="ruby-identifier">codem_id</span>].<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;/&#39;</span>),
-      <span class="ruby-identifier">timeout</span><span class="ruby-operator">:</span> <span class="ruby-constant">EBU</span><span class="ruby-operator">::</span><span class="ruby-constant">TRANSCODER_TIMEOUT</span>,
-      <span class="ruby-identifier">open_timeout</span><span class="ruby-operator">:</span> <span class="ruby-constant">EBU</span><span class="ruby-operator">::</span><span class="ruby-constant">TRANSCODER_TIMEOUT</span>
+      <span class="ruby-identifier">timeout</span><span class="ruby-operator">:</span> <span class="ruby-constant">EBU</span><span class="ruby-operator">::</span><span class="ruby-constant">NETWORK_TIMEOUT</span>,
+      <span class="ruby-identifier">open_timeout</span><span class="ruby-operator">:</span> <span class="ruby-constant">EBU</span><span class="ruby-operator">::</span><span class="ruby-constant">NETWORK_TIMEOUT</span>
     )
     <span class="ruby-keyword">if</span> <span class="ruby-identifier">response</span>.<span class="ruby-identifier">code</span> <span class="ruby-operator">==</span> <span class="ruby-value">200</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">obj</span> = <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">response</span>.<span class="ruby-identifier">to_str</span>)
       <span class="ruby-identifier">obj</span>[<span class="ruby-string">&quot;progress&quot;</span>]
@@ -287,8 +287,8 @@ Otherwise it will return the Codem ID that was assigned to it.</p>
       <span class="ruby-identifier">method</span><span class="ruby-operator">:</span> <span class="ruby-value">:post</span>,
       <span class="ruby-identifier">url</span><span class="ruby-operator">:</span> <span class="ruby-identifier">build_jobs_url</span>,
       <span class="ruby-identifier">payload</span><span class="ruby-operator">:</span> <span class="ruby-identifier">job</span>.<span class="ruby-identifier">to_codem_json</span>,
-      <span class="ruby-identifier">timeout</span><span class="ruby-operator">:</span> <span class="ruby-constant">EBU</span><span class="ruby-operator">::</span><span class="ruby-constant">TRANSCODER_TIMEOUT</span>,
-      <span class="ruby-identifier">open_timeout</span><span class="ruby-operator">:</span> <span class="ruby-constant">EBU</span><span class="ruby-operator">::</span><span class="ruby-constant">TRANSCODER_TIMEOUT</span>
+      <span class="ruby-identifier">timeout</span><span class="ruby-operator">:</span> <span class="ruby-constant">EBU</span><span class="ruby-operator">::</span><span class="ruby-constant">NETWORK_TIMEOUT</span>,
+      <span class="ruby-identifier">open_timeout</span><span class="ruby-operator">:</span> <span class="ruby-constant">EBU</span><span class="ruby-operator">::</span><span class="ruby-constant">NETWORK_TIMEOUT</span>
     )
     <span class="ruby-keyword">if</span> <span class="ruby-identifier">response</span>.<span class="ruby-identifier">code</span> <span class="ruby-operator">==</span> <span class="ruby-value">202</span>
       <span class="ruby-keyword">if</span> (<span class="ruby-identifier">obj</span> = <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">response</span>.<span class="ruby-identifier">to_str</span>))

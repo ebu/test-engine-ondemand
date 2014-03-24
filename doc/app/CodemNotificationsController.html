@@ -88,6 +88,8 @@
 
   <section class="description">
     
+<p>Controller receiving any notifications from the Codem transcoder.</p>
+
   </section>
 
   
@@ -122,13 +124,13 @@
 
         <div class="method-description">
           
-          
+          <p>Create and save a new Codem notification.</p>
           
           
 
           
           <div class="method-source-code" id="create-source">
-            <pre><span class="ruby-comment"># File app/controllers/codem_notifications_controller.rb, line 4</span>
+            <pre><span class="ruby-comment"># File app/controllers/codem_notifications_controller.rb, line 7</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">create</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">codem_notification</span> = <span class="ruby-constant">CodemNotification</span>.<span class="ruby-identifier">initialize_from_request</span>(<span class="ruby-identifier">request</span>)
     <span class="ruby-identifier">codem_notification</span>.<span class="ruby-identifier">save</span>

@@ -41,7 +41,10 @@ class PlugitController < ApplicationController
   end
 
   def require_write_access
-    
+    unless logged_in_user.try(:can_write?)
+      @plugit_message = "Your organization requires read/write access to do this. Please contact EBU for assistance."
+      render template: "plugit/error"
+    end
   end
 
   def require_admin

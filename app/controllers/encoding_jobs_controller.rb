@@ -1,23 +1,33 @@
+# Encoding Jobs controller. Handles all actions related to encoding jobs.
 class EncodingJobsController < PlugitController
+  # Only a login is required for the read-only actions index, show, status and play.
   before_filter :require_login, only: [ :index, :show, :status, :play ]
-  before_filter :require_write_access, only: [ :new, :create, :destroy,
-                                               :reference_presets, :unreference_prests,
-                                               :reference, :unreference,
-                                               :reference_source_files, :unreference_source_files ]
+  # Write access is required for creating, destroying jobs.
+  before_filter :require_write_access, only: [ :new, :create, :destroy ]
+  # Require admin access for referencing/unreferencing.
+  before_filter :require_admin, only: [ :reference_presets, :unreference_presets, :reference, :unreference,
+                                        :reference_source_files, :unreference_source_files ]
+                                        
+  # Assign the job for specific actions
+  before_filter :assign_job, only: [ :show, :destroy, :status, :play, :reference_presets, :unreference_presets,
+                                     :reference, :unreference, :reference_source_files, :unreference_source_files ]
   
+  # Index action shows own jobs and reference jobs.
   def index
     @encoding_jobs = EncodingJob.owned(logged_in_user)
     @referenced_encoding_jobs = EncodingJob.referenced_for_dashboard
   end
   
+  # Show a specific job.
   def show
-    @encoding_job = EncodingJob.find(params[:id])
   end
   
+  # Show the "new encoding job" form.
   def new
     @encoding_job = EncodingJob.new
   end
   
+  # Create a new encoding job.
   def create
     @encoding_job = EncodingJob.new(user_params)
     @encoding_job.user_id = logged_in_user_id
@@ -30,8 +40,8 @@ class EncodingJobsController < PlugitController
     end
   end
   
+  # Destroy the specified encoding job.
   def destroy
-    @encoding_job = EncodingJob.find(params[:id])
     if @encoding_job.owned_by?(logged_in_user) && !@encoding_job.is_reference? && @encoding_job.destroy
       flash[:notice] = 'Encoding job removed'
     else
@@ -40,54 +50,52 @@ class EncodingJobsController < PlugitController
     redirect_to encoding_jobs_path
   end
   
+  # Render a partial HTML response with the status of the job.
   def status
     response.headers["EbuIo-PlugIt-NoTemplate"] = ''
-    @encoding_job = EncodingJob.find(params[:id])
     render layout: false
   end
   
+  # Show the Dash.js player for a specific job.
   def play
-    @encoding_job = EncodingJob.find(params[:id])
     render layout: 'player'
   end
   
   def reference_presets
-    @encoding_job = EncodingJob.find(params[:id])
     set_reference_presets(@encoding_job, true)
     redirect_to play_encoding_job_path(@encoding_job)
   end
   
   def unreference_presets
-    @encoding_job = EncodingJob.find(params[:id])
     set_reference_presets(@encoding_job, false)
     redirect_to play_encoding_job_path(@encoding_job)
   end
   
   def reference
-    @encoding_job = EncodingJob.find(params[:id])
     @encoding_job.update_attribute(:is_reference, true)
     redirect_to play_encoding_job_path(@encoding_job)
   end
   
   def unreference
-    @encoding_job = EncodingJob.find(params[:id])
     @encoding_job.update_attribute(:is_reference, false)
     redirect_to play_encoding_job_path(@encoding_job)
   end
   
   def reference_source_files
-    @encoding_job = EncodingJob.find(params[:id])
     set_reference_source_file(@encoding_job, true)
     redirect_to play_encoding_job_path(@encoding_job)
   end
   
   def unreference_source_files
-    @encoding_job = EncodingJob.find(params[:id])
     set_reference_source_file(@encoding_job, false)
     redirect_to play_encoding_job_path(@encoding_job)
   end
   
   private
+  
+  def assign_job
+    @encoding_job = EncodingJob.find(params[:id])
+  end
   
   def set_reference_presets(job, value)
     job.post_processing_template.update_attribute(:is_reference, value) if job.post_processing_template

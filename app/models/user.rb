@@ -7,4 +7,8 @@ class User < ActiveRecord::Base
   validates :ebu_id, presence: true
   
   belongs_to :organization, primary_key: 'ebu_id', foreign_key: 'organization_id'
+  
+  def can_write?
+    organization.try(:can_write?) ? true : false
+  end
 end

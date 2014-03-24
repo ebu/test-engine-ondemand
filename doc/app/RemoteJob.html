@@ -323,8 +323,8 @@
       <span class="ruby-identifier">method</span><span class="ruby-operator">:</span> <span class="ruby-value">:post</span>,
       <span class="ruby-identifier">url</span><span class="ruby-operator">:</span> <span class="ruby-constant">EBU</span><span class="ruby-operator">::</span><span class="ruby-constant">HTTP_RUNNER_HOST</span>,
       <span class="ruby-identifier">payload</span><span class="ruby-operator">:</span> <span class="ruby-identifier">job</span>.<span class="ruby-identifier">to_runner_json</span>,
-      <span class="ruby-identifier">timeout</span><span class="ruby-operator">:</span> <span class="ruby-constant">EBU</span><span class="ruby-operator">::</span><span class="ruby-constant">TRANSCODER_TIMEOUT</span>,
-      <span class="ruby-identifier">open_timeout</span><span class="ruby-operator">:</span> <span class="ruby-constant">EBU</span><span class="ruby-operator">::</span><span class="ruby-constant">TRANSCODER_TIMEOUT</span>
+      <span class="ruby-identifier">timeout</span><span class="ruby-operator">:</span> <span class="ruby-constant">EBU</span><span class="ruby-operator">::</span><span class="ruby-constant">NETWORK_TIMEOUT</span>,
+      <span class="ruby-identifier">open_timeout</span><span class="ruby-operator">:</span> <span class="ruby-constant">EBU</span><span class="ruby-operator">::</span><span class="ruby-constant">NETWORK_TIMEOUT</span>
     )
     <span class="ruby-keyword">if</span> <span class="ruby-identifier">response</span>.<span class="ruby-identifier">code</span> <span class="ruby-operator">==</span> <span class="ruby-value">202</span>
       <span class="ruby-keyword">if</span> (<span class="ruby-identifier">obj</span> = <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">response</span>.<span class="ruby-identifier">to_str</span>))

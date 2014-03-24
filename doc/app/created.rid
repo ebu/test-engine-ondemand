@@ -1,16 +1,16 @@
-Mon, 24 Mar 2014 10:51:49 +0100
+Mon, 24 Mar 2014 15:42:38 +0100
 README.rdoc	Mon, 24 Mar 2014 10:51:47 +0100
 app/controllers/application_controller.rb	Mon, 24 Mar 2014 10:03:34 +0100
-app/controllers/basic_controller.rb	Mon, 24 Mar 2014 10:03:34 +0100
-app/controllers/codem_notifications_controller.rb	Mon, 24 Mar 2014 10:03:34 +0100
-app/controllers/cron_controller.rb	Mon, 24 Mar 2014 10:03:34 +0100
-app/controllers/dashboard_controller.rb	Mon, 24 Mar 2014 10:03:34 +0100
-app/controllers/encoding_jobs_controller.rb	Mon, 24 Mar 2014 10:03:34 +0100
+app/controllers/basic_controller.rb	Mon, 24 Mar 2014 15:17:57 +0100
+app/controllers/codem_notifications_controller.rb	Mon, 24 Mar 2014 15:22:28 +0100
+app/controllers/cron_controller.rb	Mon, 24 Mar 2014 15:23:01 +0100
+app/controllers/dashboard_controller.rb	Mon, 24 Mar 2014 15:24:14 +0100
+app/controllers/encoding_jobs_controller.rb	Mon, 24 Mar 2014 15:33:58 +0100
 app/controllers/file_assets_controller.rb	Mon, 24 Mar 2014 10:03:34 +0100
 app/controllers/http_runner_notifications_controller.rb	Mon, 24 Mar 2014 10:03:34 +0100
 app/controllers/media_controller.rb	Mon, 24 Mar 2014 10:03:34 +0100
 app/controllers/organizations_controller.rb	Mon, 24 Mar 2014 10:03:34 +0100
-app/controllers/plugit_controller.rb	Mon, 24 Mar 2014 10:03:34 +0100
+app/controllers/plugit_controller.rb	Mon, 24 Mar 2014 15:38:57 +0100
 app/controllers/preset_templates_controller.rb	Mon, 24 Mar 2014 10:03:34 +0100
 app/controllers/transcoders_controller.rb	Mon, 24 Mar 2014 10:03:34 +0100
 app/helpers/application_helper.rb	Mon, 24 Mar 2014 10:03:34 +0100
@@ -33,9 +33,9 @@ app/models/concerns/referencable.rb	Mon, 24 Mar 2014 10:03:34 +0100
 app/models/concerns/variant_job_statuses.rb	Mon, 24 Mar 2014 10:03:34 +0100
 app/models/encoding_job.rb	Mon, 24 Mar 2014 10:03:34 +0100
 app/models/file_asset.rb	Mon, 24 Mar 2014 10:03:34 +0100
-app/models/organization.rb	Mon, 24 Mar 2014 10:03:34 +0100
+app/models/organization.rb	Mon, 24 Mar 2014 11:04:49 +0100
 app/models/preset_template.rb	Mon, 24 Mar 2014 10:03:34 +0100
-app/models/remote_job.rb	Mon, 24 Mar 2014 10:03:34 +0100
-app/models/transcoder.rb	Mon, 24 Mar 2014 10:03:34 +0100
-app/models/user.rb	Mon, 24 Mar 2014 10:03:34 +0100
+app/models/remote_job.rb	Mon, 24 Mar 2014 11:05:03 +0100
+app/models/transcoder.rb	Mon, 24 Mar 2014 11:05:40 +0100
+app/models/user.rb	Mon, 24 Mar 2014 15:38:36 +0100
 app/models/variant_job.rb	Mon, 24 Mar 2014 10:03:34 +0100

@@ -88,6 +88,8 @@
 
   <section class="description">
     
+<p>Dashboard overview controller.</p>
+
   </section>
 
   
@@ -122,13 +124,15 @@
 
         <div class="method-description">
           
-          
+          <p>Index overview for the dashboard.</p>
+
+<p>Shows recently encoded jobs and any reference encoding jobs.</p>
           
           
 
           
           <div class="method-source-code" id="index-source">
-            <pre><span class="ruby-comment"># File app/controllers/dashboard_controller.rb, line 4</span>
+            <pre><span class="ruby-comment"># File app/controllers/dashboard_controller.rb, line 9</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
   <span class="ruby-ivar">@encoding_jobs</span> = <span class="ruby-constant">EncodingJob</span>.<span class="ruby-identifier">recently_encoded</span>
   <span class="ruby-ivar">@referenced_encoding_jobs</span> = <span class="ruby-constant">EncodingJob</span>.<span class="ruby-identifier">referenced_for_dashboard</span>
