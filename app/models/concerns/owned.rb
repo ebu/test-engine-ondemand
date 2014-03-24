@@ -23,4 +23,8 @@ module Owned
   def owned_by?(user)
     self.user_id == user.ebu_id
   end
+  
+  def can_be_destroyed_by?(user, is_admin)
+    (self.owned_by?(user) || is_admin) && !self.is_reference?
+  end
 end

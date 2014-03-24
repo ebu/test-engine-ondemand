@@ -16,7 +16,7 @@ class FileAssetsController < PlugitController
   
   def destroy
     @file_asset = FileAsset.find(params[:id])
-    if @file_asset.owned_by?(logged_in_user) && !@file_asset.is_reference? && @file_asset.destroy
+    if @file_asset.can_be_destroyed_by?(logged_in_user, is_admin?) && @file_asset.destroy
       flash[:notice] = "File removed."
     else
       flash[:alert] = "Unable to remove file."
