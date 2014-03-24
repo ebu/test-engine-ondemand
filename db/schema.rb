@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140324151347) do
+ActiveRecord::Schema.define(version: 20140324163753) do
 
   create_table "codem_notifications", force: true do |t|
     t.string   "status"
@@ -49,10 +49,10 @@ ActiveRecord::Schema.define(version: 20140324151347) do
     t.datetime "updated_at"
     t.string   "resource_file_name"
     t.string   "resource_content_type"
-    t.integer  "resource_file_size"
+    t.integer  "resource_file_size",    limit: 8
     t.datetime "resource_updated_at"
     t.integer  "user_id"
-    t.boolean  "is_reference",          default: false, null: false
+    t.boolean  "is_reference",                    default: false, null: false
   end
 
   add_index "file_assets", ["created_at"], name: "index_file_assets_on_created_at", using: :btree
