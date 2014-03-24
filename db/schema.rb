@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140313101251) do
+ActiveRecord::Schema.define(version: 20140324151347) do
 
   create_table "codem_notifications", force: true do |t|
     t.string   "status"
@@ -21,6 +21,10 @@ ActiveRecord::Schema.define(version: 20140313101251) do
     t.string   "codem_id"
     t.text     "message"
   end
+
+  add_index "codem_notifications", ["codem_id"], name: "index_codem_notifications_on_codem_id", using: :btree
+  add_index "codem_notifications", ["notified_at"], name: "index_codem_notifications_on_notified_at", using: :btree
+  add_index "codem_notifications", ["status"], name: "index_codem_notifications_on_status", using: :btree
 
   create_table "encoding_jobs", force: true do |t|
     t.string   "description"
@@ -36,6 +40,10 @@ ActiveRecord::Schema.define(version: 20140313101251) do
     t.boolean  "is_reference",                default: false, null: false
   end
 
+  add_index "encoding_jobs", ["created_at"], name: "index_encoding_jobs_on_created_at", using: :btree
+  add_index "encoding_jobs", ["is_reference"], name: "index_encoding_jobs_on_is_reference", using: :btree
+  add_index "encoding_jobs", ["status"], name: "index_encoding_jobs_on_status", using: :btree
+
   create_table "file_assets", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -46,6 +54,9 @@ ActiveRecord::Schema.define(version: 20140313101251) do
     t.integer  "user_id"
     t.boolean  "is_reference",          default: false, null: false
   end
+
+  add_index "file_assets", ["created_at"], name: "index_file_assets_on_created_at", using: :btree
+  add_index "file_assets", ["is_reference"], name: "index_file_assets_on_is_reference", using: :btree
 
   create_table "organizations", force: true do |t|
     t.string   "name",                       null: false
@@ -65,6 +76,10 @@ ActiveRecord::Schema.define(version: 20140313101251) do
     t.boolean  "is_reference",  default: false, null: false
   end
 
+  add_index "preset_templates", ["is_reference"], name: "index_preset_templates_on_is_reference", using: :btree
+  add_index "preset_templates", ["preset_type"], name: "index_preset_templates_on_preset_type", using: :btree
+  add_index "preset_templates", ["user_id"], name: "index_preset_templates_on_user_id", using: :btree
+
   create_table "remote_jobs", force: true do |t|
     t.string   "remote_id"
     t.text     "stderr"
@@ -75,6 +90,8 @@ ActiveRecord::Schema.define(version: 20140313101251) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "remote_jobs", ["remote_id"], name: "index_remote_jobs_on_remote_id", using: :btree
 
   create_table "transcoders", force: true do |t|
     t.string   "host_name"
@@ -94,6 +111,9 @@ ActiveRecord::Schema.define(version: 20140313101251) do
     t.datetime "updated_at"
   end
 
+  add_index "users", ["ebu_id"], name: "index_users_on_ebu_id", using: :btree
+  add_index "users", ["organization_id"], name: "index_users_on_organization_id", using: :btree
+
   create_table "variant_jobs", force: true do |t|
     t.integer  "encoding_job_id"
     t.integer  "encoder_preset_template_id"
@@ -107,5 +127,8 @@ ActiveRecord::Schema.define(version: 20140313101251) do
     t.integer  "transcoder_id"
     t.string   "destination_file_path"
   end
+
+  add_index "variant_jobs", ["codem_id"], name: "index_variant_jobs_on_codem_id", using: :btree
+  add_index "variant_jobs", ["encoding_job_id"], name: "index_variant_jobs_on_encoding_job_id", using: :btree
 
 end
