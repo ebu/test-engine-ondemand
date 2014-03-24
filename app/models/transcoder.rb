@@ -18,8 +18,8 @@ class Transcoder < ActiveRecord::Base
       response = RestClient::Request.execute(
         method: :get,
         url: build_jobs_url,
-        timeout: EBU::TRANSCODER_TIMEOUT,
-        open_timeout: EBU::TRANSCODER_TIMEOUT
+        timeout: EBU::NETWORK_TIMEOUT,
+        open_timeout: EBU::NETWORK_TIMEOUT
       )
       response.code == 200 ? true : false
     rescue Timeout::Error => e
@@ -45,8 +45,8 @@ class Transcoder < ActiveRecord::Base
         method: :post,
         url: build_jobs_url,
         payload: job.to_codem_json,
-        timeout: EBU::TRANSCODER_TIMEOUT,
-        open_timeout: EBU::TRANSCODER_TIMEOUT
+        timeout: EBU::NETWORK_TIMEOUT,
+        open_timeout: EBU::NETWORK_TIMEOUT
       )
       if response.code == 202
         if (obj = JSON.parse(response.to_str))
@@ -69,8 +69,8 @@ class Transcoder < ActiveRecord::Base
       response = RestClient::Request.execute(
         method: :get,
         url: [build_jobs_url, job.codem_id].join('/'),
-        timeout: EBU::TRANSCODER_TIMEOUT,
-        open_timeout: EBU::TRANSCODER_TIMEOUT
+        timeout: EBU::NETWORK_TIMEOUT,
+        open_timeout: EBU::NETWORK_TIMEOUT
       )
       if response.code == 200 && obj = JSON.parse(response.to_str)
         obj["progress"]

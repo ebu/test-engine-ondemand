@@ -23,8 +23,8 @@ class RemoteJob < ActiveRecord::Base
           method: :post,
           url: EBU::HTTP_RUNNER_HOST,
           payload: job.to_runner_json,
-          timeout: EBU::TRANSCODER_TIMEOUT,
-          open_timeout: EBU::TRANSCODER_TIMEOUT
+          timeout: EBU::NETWORK_TIMEOUT,
+          open_timeout: EBU::NETWORK_TIMEOUT
         )
         if response.code == 202
           if (obj = JSON.parse(response.to_str))

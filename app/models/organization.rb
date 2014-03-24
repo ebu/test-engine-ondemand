@@ -22,8 +22,8 @@ class Organization < ActiveRecord::Base
       response = RestClient::Request.execute(
         method: :get,
         url: EBU::API_URL + "/orgas",
-        timeout: EBU::TRANSCODER_TIMEOUT,
-        open_timeout: EBU::TRANSCODER_TIMEOUT
+        timeout: EBU::NETWORK_TIMEOUT,
+        open_timeout: EBU::NETWORK_TIMEOUT
       )
       if response.code == 200
         if (obj = JSON.parse(response.to_str))
