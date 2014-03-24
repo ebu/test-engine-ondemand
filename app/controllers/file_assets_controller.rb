@@ -1,5 +1,8 @@
+# Controller managing all the file assets/uploads.
 class FileAssetsController < PlugitController
+  # Only login required for index
   before_filter :require_login, only: [ :index ]
+  # Creating or destroying a file asset requires write access
   before_filter :require_write_access, only: [ :create, :destroy ]
   
   def index

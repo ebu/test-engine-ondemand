@@ -178,7 +178,7 @@
             <pre><span class="ruby-comment"># File app/controllers/preset_templates_controller.rb, line 27</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">destroy</span>
   <span class="ruby-ivar">@preset_template</span> = <span class="ruby-constant">PresetTemplate</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
-  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@preset_template</span>.<span class="ruby-identifier">owned_by?</span>(<span class="ruby-identifier">logged_in_user</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-ivar">@preset_template</span>.<span class="ruby-identifier">is_reference?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@preset_template</span>.<span class="ruby-identifier">destroy</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@preset_template</span>.<span class="ruby-identifier">can_be_destroyed_by?</span>(<span class="ruby-identifier">logged_in_user</span>, <span class="ruby-identifier">is_admin?</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@preset_template</span>.<span class="ruby-identifier">destroy</span>
     <span class="ruby-identifier">flash</span>[<span class="ruby-value">:notice</span>] = <span class="ruby-string">&quot;Preset template removed.&quot;</span>
   <span class="ruby-keyword">else</span>
     <span class="ruby-identifier">flash</span>[<span class="ruby-value">:alert</span>] = <span class="ruby-string">&quot;Unable to remove preset template.&quot;</span>

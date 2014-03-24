@@ -77,6 +77,8 @@
 
   <ul class="link-list" role="directory">
     
+    <li ><a href="#method-i-can_be_destroyed_by-3F">#can_be_destroyed_by?</a>
+    
     <li ><a href="#method-i-owned_by-3F">#owned_by?</a>
     
   </ul>
@@ -111,6 +113,39 @@
        <header>
          <h3>Public Instance Methods</h3>
        </header>
+
+    
+      <div id="method-i-can_be_destroyed_by-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">can_be_destroyed_by?</span><span
+            class="method-args">(user, is_admin)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="can_be_destroyed_by-3F-source">
+            <pre><span class="ruby-comment"># File app/models/concerns/owned.rb, line 27</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">can_be_destroyed_by?</span>(<span class="ruby-identifier">user</span>, <span class="ruby-identifier">is_admin</span>)
+  (<span class="ruby-keyword">self</span>.<span class="ruby-identifier">owned_by?</span>(<span class="ruby-identifier">user</span>) <span class="ruby-operator">||</span> <span class="ruby-identifier">is_admin</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-keyword">self</span>.<span class="ruby-identifier">is_reference?</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
 
     
       <div id="method-i-owned_by-3F" class="method-detail ">

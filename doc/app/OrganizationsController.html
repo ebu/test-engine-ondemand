@@ -90,6 +90,9 @@
 
   <section class="description">
     
+<p>Controller managing the organizations that have write access to the
+application.</p>
+
   </section>
 
   
@@ -130,7 +133,7 @@
 
           
           <div class="method-source-code" id="index-source">
-            <pre><span class="ruby-comment"># File app/controllers/organizations_controller.rb, line 5</span>
+            <pre><span class="ruby-comment"># File app/controllers/organizations_controller.rb, line 6</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
   <span class="ruby-ivar">@organizations</span> = <span class="ruby-constant">Organization</span>.<span class="ruby-identifier">all</span>
 <span class="ruby-keyword">end</span></pre>
@@ -163,7 +166,7 @@
 
           
           <div class="method-source-code" id="update_multiple-source">
-            <pre><span class="ruby-comment"># File app/controllers/organizations_controller.rb, line 9</span>
+            <pre><span class="ruby-comment"># File app/controllers/organizations_controller.rb, line 10</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">update_multiple</span>
   <span class="ruby-identifier">ids</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:organization_ids</span>] <span class="ruby-operator">||</span> []
   <span class="ruby-constant">Organization</span>.<span class="ruby-identifier">all</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">o</span><span class="ruby-operator">|</span>

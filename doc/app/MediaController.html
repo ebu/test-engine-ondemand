@@ -88,6 +88,9 @@
 
   <section class="description">
     
+<p>Serves as a fallback for development to serve media files. Not used in
+production.</p>
+
   </section>
 
   
@@ -128,7 +131,7 @@
 
           
           <div class="method-source-code" id="serve-source">
-            <pre><span class="ruby-comment"># File app/controllers/media_controller.rb, line 2</span>
+            <pre><span class="ruby-comment"># File app/controllers/media_controller.rb, line 3</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">serve</span>
   <span class="ruby-identifier">file</span> = [<span class="ruby-constant">Rails</span>.<span class="ruby-identifier">root</span>, <span class="ruby-string">&#39;public&#39;</span>, <span class="ruby-identifier">params</span>[<span class="ruby-value">:other</span>]].<span class="ruby-identifier">join</span>(<span class="ruby-constant">File</span><span class="ruby-operator">::</span><span class="ruby-constant">SEPARATOR</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-identifier">file</span>)

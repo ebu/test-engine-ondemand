@@ -1,3 +1,4 @@
+# Serves as a fallback for development to serve media files. Not used in production.
 class MediaController < ApplicationController
   def serve
     file = [Rails.root, 'public', params[:other]].join(File::SEPARATOR)

@@ -1,3 +1,4 @@
+# Controller managing notifications from http-runner.
 class HttpRunnerNotificationsController < ApplicationController
   skip_before_action :verify_authenticity_token, only: [ :create ]
   

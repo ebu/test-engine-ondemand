@@ -88,6 +88,8 @@
 
   <section class="description">
     
+<p>Controller managing notifications from http-runner.</p>
+
   </section>
 
   
@@ -128,7 +130,7 @@
 
           
           <div class="method-source-code" id="create-source">
-            <pre><span class="ruby-comment"># File app/controllers/http_runner_notifications_controller.rb, line 4</span>
+            <pre><span class="ruby-comment"># File app/controllers/http_runner_notifications_controller.rb, line 5</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">create</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">remote_job</span> = <span class="ruby-constant">RemoteJob</span>.<span class="ruby-identifier">find_by</span>(<span class="ruby-identifier">remote_id</span><span class="ruby-operator">:</span> <span class="ruby-identifier">params</span>[<span class="ruby-string">&quot;id&quot;</span>])
     <span class="ruby-identifier">remote_job</span>.<span class="ruby-identifier">update_attributes</span>({

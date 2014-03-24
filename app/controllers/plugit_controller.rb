@@ -1,3 +1,4 @@
+# Base controller for all PlugIt controllers.
 class PlugitController < ApplicationController
   before_filter :assign_ebu_variables
   before_filter :assign_base_uri
