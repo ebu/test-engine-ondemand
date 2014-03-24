@@ -4,21 +4,21 @@
 <head>
 <meta charset="utf-8">
 
-<title>module EncodingJob::Statuses - Rails Application Documentation</title>
+<title>module EncodingJobStatuses - Rails Application Documentation</title>
 
-<link href="../fonts.css" rel="stylesheet">
-<link href="../rdoc.css" rel="stylesheet">
+<link href="./fonts.css" rel="stylesheet">
+<link href="./rdoc.css" rel="stylesheet">
 
 <script type="text/javascript">
-  var rdoc_rel_prefix = "../";
+  var rdoc_rel_prefix = "./";
 </script>
 
-<script src="../js/jquery.js"></script>
-<script src="../js/navigation.js"></script>
-<script src="../js/search_index.js"></script>
-<script src="../js/search.js"></script>
-<script src="../js/searcher.js"></script>
-<script src="../js/darkfish.js"></script>
+<script src="./js/jquery.js"></script>
+<script src="./js/navigation.js"></script>
+<script src="./js/search_index.js"></script>
+<script src="./js/search.js"></script>
+<script src="./js/searcher.js"></script>
+<script src="./js/darkfish.js"></script>
 
 
 <body id="top" role="document" class="module">
@@ -26,13 +26,13 @@
   <div id="project-navigation">
     <div id="home-section" role="region" title="Quick navigation" class="nav-section">
   <h2>
-    <a href="../index.html" rel="home">Home</a>
+    <a href="./index.html" rel="home">Home</a>
   </h2>
 
   <div id="table-of-contents-navigation">
-    <a href="../table_of_contents.html#pages">Pages</a>
-    <a href="../table_of_contents.html#classes">Classes</a>
-    <a href="../table_of_contents.html#methods">Methods</a>
+    <a href="./table_of_contents.html#pages">Pages</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
   </div>
 </div>
 
@@ -77,6 +77,8 @@
 
   <ul class="link-list" role="directory">
     
+    <li ><a href="#method-i-initial-3F">#initial?</a>
+    
     <li ><a href="#method-i-transition">#transition</a>
     
   </ul>
@@ -85,9 +87,9 @@
   </div>
 </nav>
 
-<main role="main" aria-labelledby="module-EncodingJob::Statuses">
-  <h1 id="module-EncodingJob::Statuses" class="module">
-    module EncodingJob::Statuses
+<main role="main" aria-labelledby="module-EncodingJobStatuses">
+  <h1 id="module-EncodingJobStatuses" class="module">
+    module EncodingJobStatuses
   </h1>
 
   <section class="description">
@@ -113,6 +115,39 @@
        </header>
 
     
+      <div id="method-i-initial-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">initial?</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="initial-3F-source">
+            <pre><span class="ruby-comment"># File app/models/concerns/encoding_job_statuses.rb, line 31</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initial?</span>
+  (<span class="ruby-identifier">pending?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">did_finish_transcoding?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">did_finish_post_processing?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">did_finish_conformance_checking?</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
       <div id="method-i-transition" class="method-detail ">
         
         <div class="method-heading">
@@ -132,7 +167,7 @@
 
           
           <div class="method-source-code" id="transition-source">
-            <pre><span class="ruby-comment"># File app/models/concerns/encoding_job/statuses.rb, line 25</span>
+            <pre><span class="ruby-comment"># File app/models/concerns/encoding_job_statuses.rb, line 27</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">transition</span>
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">send</span>(<span class="ruby-node">&quot;transition_from_#{status}&quot;</span>)
 <span class="ruby-keyword">end</span></pre>

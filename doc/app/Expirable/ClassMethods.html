@@ -4,21 +4,21 @@
 <head>
 <meta charset="utf-8">
 
-<title>module VariantJob::Statuses::ClassMethods - Rails Application Documentation</title>
+<title>module Expirable::ClassMethods - Rails Application Documentation</title>
 
-<link href="../../fonts.css" rel="stylesheet">
-<link href="../../rdoc.css" rel="stylesheet">
+<link href="../fonts.css" rel="stylesheet">
+<link href="../rdoc.css" rel="stylesheet">
 
 <script type="text/javascript">
-  var rdoc_rel_prefix = "../../";
+  var rdoc_rel_prefix = "../";
 </script>
 
-<script src="../../js/jquery.js"></script>
-<script src="../../js/navigation.js"></script>
-<script src="../../js/search_index.js"></script>
-<script src="../../js/search.js"></script>
-<script src="../../js/searcher.js"></script>
-<script src="../../js/darkfish.js"></script>
+<script src="../js/jquery.js"></script>
+<script src="../js/navigation.js"></script>
+<script src="../js/search_index.js"></script>
+<script src="../js/search.js"></script>
+<script src="../js/searcher.js"></script>
+<script src="../js/darkfish.js"></script>
 
 
 <body id="top" role="document" class="module">
@@ -26,13 +26,13 @@
   <div id="project-navigation">
     <div id="home-section" role="region" title="Quick navigation" class="nav-section">
   <h2>
-    <a href="../../index.html" rel="home">Home</a>
+    <a href="../index.html" rel="home">Home</a>
   </h2>
 
   <div id="table-of-contents-navigation">
-    <a href="../../table_of_contents.html#pages">Pages</a>
-    <a href="../../table_of_contents.html#classes">Classes</a>
-    <a href="../../table_of_contents.html#methods">Methods</a>
+    <a href="../table_of_contents.html#pages">Pages</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
   </div>
 </div>
 
@@ -66,9 +66,9 @@
 
   <ul class="link-list" role="directory">
     
-    <li ><a href="#method-i-queue_position_for">#queue_position_for</a>
+    <li ><a href="#method-i-purge-21">#purge!</a>
     
-    <li ><a href="#method-i-transition">#transition</a>
+    <li ><a href="#method-i-to_purge">#to_purge</a>
     
   </ul>
 </div>
@@ -76,9 +76,9 @@
   </div>
 </nav>
 
-<main role="main" aria-labelledby="module-VariantJob::Statuses::ClassMethods">
-  <h1 id="module-VariantJob::Statuses::ClassMethods" class="module">
-    module VariantJob::Statuses::ClassMethods
+<main role="main" aria-labelledby="module-Expirable::ClassMethods">
+  <h1 id="module-Expirable::ClassMethods" class="module">
+    module Expirable::ClassMethods
   </h1>
 
   <section class="description">
@@ -104,43 +104,10 @@
        </header>
 
     
-      <div id="method-i-queue_position_for" class="method-detail ">
+      <div id="method-i-purge-21" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">queue_position_for</span><span
-            class="method-args">(j)</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-          
-
-          
-          <div class="method-source-code" id="queue_position_for-source">
-            <pre><span class="ruby-comment"># File app/models/concerns/variant_job/statuses.rb, line 20</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">queue_position_for</span>(<span class="ruby-identifier">j</span>)
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">queued_jobs</span>.<span class="ruby-identifier">index</span> <span class="ruby-identifier">j</span>
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-      <div id="method-i-transition" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">transition</span><span
+          <span class="method-name">purge!</span><span
             class="method-args">()</span>
           
           <span class="method-click-advice">click to toggle source</span>
@@ -155,10 +122,43 @@
           
 
           
-          <div class="method-source-code" id="transition-source">
-            <pre><span class="ruby-comment"># File app/models/concerns/variant_job/statuses.rb, line 16</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">transition</span>
-  <span class="ruby-identifier">eligible_jobs</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">j</span><span class="ruby-operator">|</span> <span class="ruby-identifier">j</span>.<span class="ruby-identifier">transition</span> }
+          <div class="method-source-code" id="purge-21-source">
+            <pre><span class="ruby-comment"># File app/models/concerns/expirable.rb, line 15</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">purge!</span>
+  <span class="ruby-identifier">to_purge</span>.<span class="ruby-identifier">destroy_all</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-to_purge" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">to_purge</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>class methods</p>
+          
+          
+
+          
+          <div class="method-source-code" id="to_purge-source">
+            <pre><span class="ruby-comment"># File app/models/concerns/expirable.rb, line 11</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">to_purge</span>
+  <span class="ruby-identifier">expired</span>.<span class="ruby-identifier">not_referenced</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           

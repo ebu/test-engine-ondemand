@@ -7,7 +7,7 @@ set :default_stage, "production"
 # set :scm, :git # You can set :scm explicitly or Capistrano will make an intelligent guess based on known version control directory names
 # Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
 set :scm, :git
-set :repository,  "https://github.com/madebyhiro/ebu-ondemand.git"
+set :repository,  "https://github.com/ebu/test-engine-ondemand.git"
 
 set :deploy_via, :copy
 set :copy_strategy, :export

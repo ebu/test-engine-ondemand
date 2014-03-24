@@ -68,6 +68,8 @@
     
     <li ><a href="#method-i-active_nav_item">#active_nav_item</a>
     
+    <li ><a href="#method-i-formatted_owner">#formatted_owner</a>
+    
   </ul>
 </div>
 
@@ -124,6 +126,46 @@
             <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 2</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">active_nav_item</span>(<span class="ruby-identifier">tgt_controller</span>)
   (<span class="ruby-identifier">tgt_controller</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">controller_name</span> <span class="ruby-operator">?</span> <span class="ruby-string">&quot;active&quot;</span> <span class="ruby-operator">:</span> <span class="ruby-string">&quot;&quot;</span>) 
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-formatted_owner" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">formatted_owner</span><span
+            class="method-args">(user)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="formatted_owner-source">
+            <pre><span class="ruby-comment"># File app/helpers/application_helper.rb, line 6</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">formatted_owner</span>(<span class="ruby-identifier">user</span>)
+  <span class="ruby-identifier">text</span> = <span class="ruby-keyword">if</span> <span class="ruby-identifier">user</span>.<span class="ruby-identifier">first_name</span>.<span class="ruby-identifier">blank?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">user</span>.<span class="ruby-identifier">last_name</span>.<span class="ruby-identifier">blank?</span>
+    <span class="ruby-identifier">user</span>.<span class="ruby-identifier">username</span>
+  <span class="ruby-keyword">else</span>
+    [<span class="ruby-identifier">user</span>.<span class="ruby-identifier">first_name</span>, <span class="ruby-identifier">user</span>.<span class="ruby-identifier">last_name</span>].<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39; &#39;</span>)
+  <span class="ruby-keyword">end</span>
+  
+  <span class="ruby-identifier">text</span> <span class="ruby-operator">+=</span> <span class="ruby-node">&quot; (#{user.organization_name})&quot;</span>
+  <span class="ruby-identifier">text</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           

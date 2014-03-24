@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8">
 
-<title>class Plugit::TemplateController - Rails Application Documentation</title>
+<title>module VariantJobStatuses::ClassMethods - Rails Application Documentation</title>
 
 <link href="../fonts.css" rel="stylesheet">
 <link href="../rdoc.css" rel="stylesheet">
@@ -21,7 +21,7 @@
 <script src="../js/darkfish.js"></script>
 
 
-<body id="top" role="document" class="class">
+<body id="top" role="document" class="module">
 <nav role="navigation">
   <div id="project-navigation">
     <div id="home-section" role="region" title="Quick navigation" class="nav-section">
@@ -57,14 +57,7 @@
 
   <div id="class-metadata">
     
-    <div id="parent-class-section" class="nav-section">
-  <h3>Parent</h3>
-
-  
-  <p class="link"><a href="../ApplicationController.html">ApplicationController</a>
-  
-</div>
-
+    
     
     
     <!-- Method Quickref -->
@@ -73,7 +66,9 @@
 
   <ul class="link-list" role="directory">
     
-    <li ><a href="#method-i-index">#index</a>
+    <li ><a href="#method-i-queue_position_for">#queue_position_for</a>
+    
+    <li ><a href="#method-i-transition">#transition</a>
     
   </ul>
 </div>
@@ -81,9 +76,9 @@
   </div>
 </nav>
 
-<main role="main" aria-labelledby="class-Plugit::TemplateController">
-  <h1 id="class-Plugit::TemplateController" class="class">
-    class Plugit::TemplateController
+<main role="main" aria-labelledby="module-VariantJobStatuses::ClassMethods">
+  <h1 id="module-VariantJobStatuses::ClassMethods" class="module">
+    module VariantJobStatuses::ClassMethods
   </h1>
 
   <section class="description">
@@ -109,10 +104,43 @@
        </header>
 
     
-      <div id="method-i-index" class="method-detail ">
+      <div id="method-i-queue_position_for" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">index</span><span
+          <span class="method-name">queue_position_for</span><span
+            class="method-args">(j)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="queue_position_for-source">
+            <pre><span class="ruby-comment"># File app/models/concerns/variant_job_statuses.rb, line 22</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">queue_position_for</span>(<span class="ruby-identifier">j</span>)
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">queued_jobs</span>.<span class="ruby-identifier">index</span> <span class="ruby-identifier">j</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-transition" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">transition</span><span
             class="method-args">()</span>
           
           <span class="method-click-advice">click to toggle source</span>
@@ -127,9 +155,10 @@
           
 
           
-          <div class="method-source-code" id="index-source">
-            <pre><span class="ruby-comment"># File app/controllers/plugit/template_controller.rb, line 4</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
+          <div class="method-source-code" id="transition-source">
+            <pre><span class="ruby-comment"># File app/models/concerns/variant_job_statuses.rb, line 18</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">transition</span>
+  <span class="ruby-identifier">eligible_jobs</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">j</span><span class="ruby-operator">|</span> <span class="ruby-identifier">j</span>.<span class="ruby-identifier">transition</span> }
 <span class="ruby-keyword">end</span></pre>
           </div>
           

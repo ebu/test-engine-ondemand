@@ -4,21 +4,21 @@
 <head>
 <meta charset="utf-8">
 
-<title>class Plugit::ActionController - Rails Application Documentation</title>
+<title>class MediaController - Rails Application Documentation</title>
 
-<link href="../fonts.css" rel="stylesheet">
-<link href="../rdoc.css" rel="stylesheet">
+<link href="./fonts.css" rel="stylesheet">
+<link href="./rdoc.css" rel="stylesheet">
 
 <script type="text/javascript">
-  var rdoc_rel_prefix = "../";
+  var rdoc_rel_prefix = "./";
 </script>
 
-<script src="../js/jquery.js"></script>
-<script src="../js/navigation.js"></script>
-<script src="../js/search_index.js"></script>
-<script src="../js/search.js"></script>
-<script src="../js/searcher.js"></script>
-<script src="../js/darkfish.js"></script>
+<script src="./js/jquery.js"></script>
+<script src="./js/navigation.js"></script>
+<script src="./js/search_index.js"></script>
+<script src="./js/search.js"></script>
+<script src="./js/searcher.js"></script>
+<script src="./js/darkfish.js"></script>
 
 
 <body id="top" role="document" class="class">
@@ -26,13 +26,13 @@
   <div id="project-navigation">
     <div id="home-section" role="region" title="Quick navigation" class="nav-section">
   <h2>
-    <a href="../index.html" rel="home">Home</a>
+    <a href="./index.html" rel="home">Home</a>
   </h2>
 
   <div id="table-of-contents-navigation">
-    <a href="../table_of_contents.html#pages">Pages</a>
-    <a href="../table_of_contents.html#classes">Classes</a>
-    <a href="../table_of_contents.html#methods">Methods</a>
+    <a href="./table_of_contents.html#pages">Pages</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
   </div>
 </div>
 
@@ -61,7 +61,7 @@
   <h3>Parent</h3>
 
   
-  <p class="link"><a href="../ApplicationController.html">ApplicationController</a>
+  <p class="link"><a href="ApplicationController.html">ApplicationController</a>
   
 </div>
 
@@ -73,7 +73,7 @@
 
   <ul class="link-list" role="directory">
     
-    <li ><a href="#method-i-index">#index</a>
+    <li ><a href="#method-i-serve">#serve</a>
     
   </ul>
 </div>
@@ -81,9 +81,9 @@
   </div>
 </nav>
 
-<main role="main" aria-labelledby="class-Plugit::ActionController">
-  <h1 id="class-Plugit::ActionController" class="class">
-    class Plugit::ActionController
+<main role="main" aria-labelledby="class-MediaController">
+  <h1 id="class-MediaController" class="class">
+    class MediaController
   </h1>
 
   <section class="description">
@@ -109,10 +109,10 @@
        </header>
 
     
-      <div id="method-i-index" class="method-detail ">
+      <div id="method-i-serve" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">index</span><span
+          <span class="method-name">serve</span><span
             class="method-args">()</span>
           
           <span class="method-click-advice">click to toggle source</span>
@@ -127,10 +127,15 @@
           
 
           
-          <div class="method-source-code" id="index-source">
-            <pre><span class="ruby-comment"># File app/controllers/plugit/action_controller.rb, line 2</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
-  <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> {}
+          <div class="method-source-code" id="serve-source">
+            <pre><span class="ruby-comment"># File app/controllers/media_controller.rb, line 2</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">serve</span>
+  <span class="ruby-identifier">file</span> = [<span class="ruby-constant">Rails</span>.<span class="ruby-identifier">root</span>, <span class="ruby-string">&#39;public&#39;</span>, <span class="ruby-identifier">params</span>[<span class="ruby-value">:other</span>]].<span class="ruby-identifier">join</span>(<span class="ruby-constant">File</span><span class="ruby-operator">::</span><span class="ruby-constant">SEPARATOR</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-identifier">file</span>)
+    <span class="ruby-identifier">send_file</span> <span class="ruby-identifier">file</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">render</span> <span class="ruby-identifier">plain</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;Not Found&quot;</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">404</span>
+  <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           

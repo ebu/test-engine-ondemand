@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8">
 
-<title>class FileAsset - Rails Application Documentation</title>
+<title>module Owned - Rails Application Documentation</title>
 
 <link href="./fonts.css" rel="stylesheet">
 <link href="./rdoc.css" rel="stylesheet">
@@ -21,7 +21,7 @@
 <script src="./js/darkfish.js"></script>
 
 
-<body id="top" role="document" class="class">
+<body id="top" role="document" class="module">
 <nav role="navigation">
   <div id="project-navigation">
     <div id="home-section" role="region" title="Quick navigation" class="nav-section">
@@ -57,42 +57,37 @@
 
   <div id="class-metadata">
     
-    <div id="parent-class-section" class="nav-section">
-  <h3>Parent</h3>
-
-  
-  <p class="link">ActiveRecord::Base
-  
-</div>
-
-    <div id="includes-section" class="nav-section">
-  <h3>Included Modules</h3>
+    
+    
+    <div id="extends-section" class="nav-section">
+  <h3>Extended With Modules</h3>
 
   <ul class="link-list">
+    
   
-  
-    <li><a class="include" href="Referencable.html">Referencable</a>
-  
-  
-  
-    <li><a class="include" href="Expirable.html">Expirable</a>
-  
-  
-  
-    <li><a class="include" href="Owned.html">Owned</a>
+    <li><span class="extend">ActiveSupport::Concern</span>
   
   
   </ul>
 </div>
 
+    <!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
     
+    <li ><a href="#method-i-owned_by-3F">#owned_by?</a>
     
+  </ul>
+</div>
+
   </div>
 </nav>
 
-<main role="main" aria-labelledby="class-FileAsset">
-  <h1 id="class-FileAsset" class="class">
-    class FileAsset
+<main role="main" aria-labelledby="module-Owned">
+  <h1 id="module-Owned" class="module">
+    module Owned
   </h1>
 
   <section class="description">
@@ -112,6 +107,47 @@
     
 
     
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-owned_by-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">owned_by?</span><span
+            class="method-args">(user)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>instance methods</p>
+          
+          
+
+          
+          <div class="method-source-code" id="owned_by-3F-source">
+            <pre><span class="ruby-comment"># File app/models/concerns/owned.rb, line 23</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">owned_by?</span>(<span class="ruby-identifier">user</span>)
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">user_id</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">user</span>.<span class="ruby-identifier">ebu_id</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
   </section>
 </main>
 

@@ -29,10 +29,6 @@
 <ul>
   <li class="file">
     <a href="README_rdoc.html">README</a>
-
-    <ul>
-      <li><a href="README_rdoc.html#label-README">README</a>
-    </ul>
   </li>
   
 </ul>
@@ -46,6 +42,9 @@
     <a href="ApplicationHelper.html">ApplicationHelper</a>
   </li>
   <li class="class">
+    <a href="BasicController.html">BasicController</a>
+  </li>
+  <li class="class">
     <a href="CodemNotification.html">CodemNotification</a>
   </li>
   <li class="class">
@@ -53,6 +52,12 @@
   </li>
   <li class="module">
     <a href="CodemNotificationsHelper.html">CodemNotificationsHelper</a>
+  </li>
+  <li class="class">
+    <a href="CronController.html">CronController</a>
+  </li>
+  <li class="module">
+    <a href="CronHelper.html">CronHelper</a>
   </li>
   <li class="class">
     <a href="DashboardController.html">DashboardController</a>
@@ -64,16 +69,22 @@
     <a href="EncodingJob.html">EncodingJob</a>
   </li>
   <li class="module">
-    <a href="EncodingJob/Statuses.html">EncodingJob::Statuses</a>
+    <a href="EncodingJobStatuses.html">EncodingJobStatuses</a>
   </li>
   <li class="module">
-    <a href="EncodingJob/Statuses/ClassMethods.html">EncodingJob::Statuses::ClassMethods</a>
+    <a href="EncodingJobStatuses/ClassMethods.html">EncodingJobStatuses::ClassMethods</a>
   </li>
   <li class="class">
     <a href="EncodingJobsController.html">EncodingJobsController</a>
   </li>
   <li class="module">
     <a href="EncodingJobsHelper.html">EncodingJobsHelper</a>
+  </li>
+  <li class="module">
+    <a href="Expirable.html">Expirable</a>
+  </li>
+  <li class="module">
+    <a href="Expirable/ClassMethods.html">Expirable::ClassMethods</a>
   </li>
   <li class="class">
     <a href="FileAsset.html">FileAsset</a>
@@ -90,32 +101,32 @@
   <li class="module">
     <a href="HttpRunnerNotificationsHelper.html">HttpRunnerNotificationsHelper</a>
   </li>
+  <li class="class">
+    <a href="MediaController.html">MediaController</a>
+  </li>
   <li class="module">
-    <a href="Plugit.html">Plugit</a>
+    <a href="MediaHelper.html">MediaHelper</a>
   </li>
   <li class="class">
-    <a href="Plugit/ActionController.html">Plugit::ActionController</a>
-  </li>
-  <li class="module">
-    <a href="Plugit/ActionHelper.html">Plugit::ActionHelper</a>
+    <a href="Organization.html">Organization</a>
   </li>
   <li class="class">
-    <a href="Plugit/BasicController.html">Plugit::BasicController</a>
+    <a href="OrganizationsController.html">OrganizationsController</a>
   </li>
   <li class="module">
-    <a href="Plugit/BasicHelper.html">Plugit::BasicHelper</a>
+    <a href="OrganizationsHelper.html">OrganizationsHelper</a>
+  </li>
+  <li class="module">
+    <a href="Owned.html">Owned</a>
+  </li>
+  <li class="module">
+    <a href="Owned/ClassMethods.html">Owned::ClassMethods</a>
   </li>
   <li class="class">
-    <a href="Plugit/MetaController.html">Plugit::MetaController</a>
+    <a href="PlugitController.html">PlugitController</a>
   </li>
   <li class="module">
-    <a href="Plugit/MetaHelper.html">Plugit::MetaHelper</a>
-  </li>
-  <li class="class">
-    <a href="Plugit/TemplateController.html">Plugit::TemplateController</a>
-  </li>
-  <li class="module">
-    <a href="Plugit/TemplateHelper.html">Plugit::TemplateHelper</a>
+    <a href="PlugitHelper.html">PlugitHelper</a>
   </li>
   <li class="class">
     <a href="PresetTemplate.html">PresetTemplate</a>
@@ -125,6 +136,12 @@
   </li>
   <li class="module">
     <a href="PresetTemplatesHelper.html">PresetTemplatesHelper</a>
+  </li>
+  <li class="module">
+    <a href="Referencable.html">Referencable</a>
+  </li>
+  <li class="module">
+    <a href="Referencable/ClassMethods.html">Referencable::ClassMethods</a>
   </li>
   <li class="class">
     <a href="RemoteJob.html">RemoteJob</a>
@@ -139,13 +156,16 @@
     <a href="TranscodersHelper.html">TranscodersHelper</a>
   </li>
   <li class="class">
+    <a href="User.html">User</a>
+  </li>
+  <li class="class">
     <a href="VariantJob.html">VariantJob</a>
   </li>
   <li class="module">
-    <a href="VariantJob/Statuses.html">VariantJob::Statuses</a>
+    <a href="VariantJobStatuses.html">VariantJobStatuses</a>
   </li>
   <li class="module">
-    <a href="VariantJob/Statuses/ClassMethods.html">VariantJob::Statuses::ClassMethods</a>
+    <a href="VariantJobStatuses/ClassMethods.html">VariantJobStatuses::ClassMethods</a>
   </li>
 </ul>
 
@@ -163,14 +183,29 @@
     <span class="container">CodemNotification</span>
 
   <li class="method">
-    <a href="EncodingJob.html#method-c-new_allowed-3F">::new_allowed?</a>
+    <a href="Organization.html#method-c-refresh">::refresh</a>
     &mdash;
-    <span class="container">EncodingJob</span>
+    <span class="container">Organization</span>
 
   <li class="method">
     <a href="ApplicationHelper.html#method-i-active_nav_item">#active_nav_item</a>
     &mdash;
     <span class="container">ApplicationHelper</span>
+
+  <li class="method">
+    <a href="PlugitHelper.html#method-i-auth_can_write-3F">#auth_can_write?</a>
+    &mdash;
+    <span class="container">PlugitHelper</span>
+
+  <li class="method">
+    <a href="PlugitHelper.html#method-i-auth_is_admin-3F">#auth_is_admin?</a>
+    &mdash;
+    <span class="container">PlugitHelper</span>
+
+  <li class="method">
+    <a href="EncodingJobsHelper.html#method-i-availability_label_for_template">#availability_label_for_template</a>
+    &mdash;
+    <span class="container">EncodingJobsHelper</span>
 
   <li class="method">
     <a href="TranscodersController.html#method-i-available">#available</a>
@@ -208,24 +243,9 @@
     <span class="container">EncodingJobsHelper</span>
 
   <li class="method">
-    <a href="CodemNotificationsController.html#method-i-create">#create</a>
-    &mdash;
-    <span class="container">CodemNotificationsController</span>
-
-  <li class="method">
-    <a href="HttpRunnerNotificationsController.html#method-i-create">#create</a>
-    &mdash;
-    <span class="container">HttpRunnerNotificationsController</span>
-
-  <li class="method">
     <a href="FileAssetsController.html#method-i-create">#create</a>
     &mdash;
     <span class="container">FileAssetsController</span>
-
-  <li class="method">
-    <a href="EncodingJobsController.html#method-i-create">#create</a>
-    &mdash;
-    <span class="container">EncodingJobsController</span>
 
   <li class="method">
     <a href="TranscodersController.html#method-i-create">#create</a>
@@ -238,14 +258,19 @@
     <span class="container">PresetTemplatesController</span>
 
   <li class="method">
-    <a href="TranscodersController.html#method-i-destroy">#destroy</a>
+    <a href="CodemNotificationsController.html#method-i-create">#create</a>
     &mdash;
-    <span class="container">TranscodersController</span>
+    <span class="container">CodemNotificationsController</span>
 
   <li class="method">
-    <a href="FileAssetsController.html#method-i-destroy">#destroy</a>
+    <a href="EncodingJobsController.html#method-i-create">#create</a>
     &mdash;
-    <span class="container">FileAssetsController</span>
+    <span class="container">EncodingJobsController</span>
+
+  <li class="method">
+    <a href="HttpRunnerNotificationsController.html#method-i-create">#create</a>
+    &mdash;
+    <span class="container">HttpRunnerNotificationsController</span>
 
   <li class="method">
     <a href="EncodingJobsController.html#method-i-destroy">#destroy</a>
@@ -253,9 +278,24 @@
     <span class="container">EncodingJobsController</span>
 
   <li class="method">
+    <a href="FileAssetsController.html#method-i-destroy">#destroy</a>
+    &mdash;
+    <span class="container">FileAssetsController</span>
+
+  <li class="method">
+    <a href="TranscodersController.html#method-i-destroy">#destroy</a>
+    &mdash;
+    <span class="container">TranscodersController</span>
+
+  <li class="method">
     <a href="PresetTemplatesController.html#method-i-destroy">#destroy</a>
     &mdash;
     <span class="container">PresetTemplatesController</span>
+
+  <li class="method">
+    <a href="EncodingJob.html#method-i-destroy_allowed-3F">#destroy_allowed?</a>
+    &mdash;
+    <span class="container">EncodingJob</span>
 
   <li class="method">
     <a href="EncodingJobsHelper.html#method-i-encoder_templates_for_select">#encoder_templates_for_select</a>
@@ -263,14 +303,19 @@
     <span class="container">EncodingJobsHelper</span>
 
   <li class="method">
-    <a href="RemoteJob.html#method-i-failed-3F">#failed?</a>
+    <a href="EncodingJobsHelper.html#method-i-encoding_job_new_allowed-3F">#encoding_job_new_allowed?</a>
     &mdash;
-    <span class="container">RemoteJob</span>
+    <span class="container">EncodingJobsHelper</span>
 
   <li class="method">
     <a href="CodemNotification.html#method-i-failed-3F">#failed?</a>
     &mdash;
     <span class="container">CodemNotification</span>
+
+  <li class="method">
+    <a href="RemoteJob.html#method-i-failed-3F">#failed?</a>
+    &mdash;
+    <span class="container">RemoteJob</span>
 
   <li class="method">
     <a href="EncodingJob.html#method-i-failed_conformance_checking-3F">#failed_conformance_checking?</a>
@@ -283,9 +328,9 @@
     <span class="container">EncodingJob</span>
 
   <li class="method">
-    <a href="CodemNotification.html#method-i-finished-3F">#finished?</a>
+    <a href="VariantJobStatuses.html#method-i-finished-3F">#finished?</a>
     &mdash;
-    <span class="container">CodemNotification</span>
+    <span class="container">VariantJobStatuses</span>
 
   <li class="method">
     <a href="RemoteJob.html#method-i-finished-3F">#finished?</a>
@@ -293,9 +338,14 @@
     <span class="container">RemoteJob</span>
 
   <li class="method">
-    <a href="VariantJob/Statuses.html#method-i-finished-3F">#finished?</a>
+    <a href="CodemNotification.html#method-i-finished-3F">#finished?</a>
     &mdash;
-    <span class="container">VariantJob::Statuses</span>
+    <span class="container">CodemNotification</span>
+
+  <li class="method">
+    <a href="ApplicationHelper.html#method-i-formatted_owner">#formatted_owner</a>
+    &mdash;
+    <span class="container">ApplicationHelper</span>
 
   <li class="method">
     <a href="PresetTemplatesHelper.html#method-i-formatted_preset_template_text">#formatted_preset_template_text</a>
@@ -308,6 +358,11 @@
     <span class="container">Transcoder</span>
 
   <li class="method">
+    <a href="PlugitController.html#method-i-has_write_access-3F">#has_write_access?</a>
+    &mdash;
+    <span class="container">PlugitController</span>
+
+  <li class="method">
     <a href="PresetTemplatesHelper.html#method-i-human_readable_preset_type">#human_readable_preset_type</a>
     &mdash;
     <span class="container">PresetTemplatesHelper</span>
@@ -318,9 +373,14 @@
     <span class="container">EncodingJobsHelper</span>
 
   <li class="method">
-    <a href="Plugit/TemplateController.html#method-i-index">#index</a>
+    <a href="DashboardController.html#method-i-index">#index</a>
     &mdash;
-    <span class="container">Plugit::TemplateController</span>
+    <span class="container">DashboardController</span>
+
+  <li class="method">
+    <a href="OrganizationsController.html#method-i-index">#index</a>
+    &mdash;
+    <span class="container">OrganizationsController</span>
 
   <li class="method">
     <a href="TranscodersController.html#method-i-index">#index</a>
@@ -328,9 +388,9 @@
     <span class="container">TranscodersController</span>
 
   <li class="method">
-    <a href="PresetTemplatesController.html#method-i-index">#index</a>
+    <a href="EncodingJobsController.html#method-i-index">#index</a>
     &mdash;
-    <span class="container">PresetTemplatesController</span>
+    <span class="container">EncodingJobsController</span>
 
   <li class="method">
     <a href="FileAssetsController.html#method-i-index">#index</a>
@@ -338,24 +398,14 @@
     <span class="container">FileAssetsController</span>
 
   <li class="method">
-    <a href="DashboardController.html#method-i-index">#index</a>
+    <a href="PresetTemplatesController.html#method-i-index">#index</a>
     &mdash;
-    <span class="container">DashboardController</span>
+    <span class="container">PresetTemplatesController</span>
 
   <li class="method">
-    <a href="EncodingJobsController.html#method-i-index">#index</a>
+    <a href="EncodingJobStatuses.html#method-i-initial-3F">#initial?</a>
     &mdash;
-    <span class="container">EncodingJobsController</span>
-
-  <li class="method">
-    <a href="Plugit/ActionController.html#method-i-index">#index</a>
-    &mdash;
-    <span class="container">Plugit::ActionController</span>
-
-  <li class="method">
-    <a href="Plugit/MetaController.html#method-i-index">#index</a>
-    &mdash;
-    <span class="container">Plugit::MetaController</span>
+    <span class="container">EncodingJobStatuses</span>
 
   <li class="method">
     <a href="RemoteJob.html#method-i-initialize_for_conformance_checking">#initialize_for_conformance_checking</a>
@@ -368,6 +418,16 @@
     <span class="container">RemoteJob</span>
 
   <li class="method">
+    <a href="PlugitController.html#method-i-is_admin-3F">#is_admin?</a>
+    &mdash;
+    <span class="container">PlugitController</span>
+
+  <li class="method">
+    <a href="CronController.html#method-i-job_state">#job_state</a>
+    &mdash;
+    <span class="container">CronController</span>
+
+  <li class="method">
     <a href="EncodingJobsHelper.html#method-i-job_status_label">#job_status_label</a>
     &mdash;
     <span class="container">EncodingJobsHelper</span>
@@ -376,6 +436,26 @@
     <a href="EncodingJobsHelper.html#method-i-link_to_add_variant_job">#link_to_add_variant_job</a>
     &mdash;
     <span class="container">EncodingJobsHelper</span>
+
+  <li class="method">
+    <a href="PlugitController.html#method-i-logged_in-3F">#logged_in?</a>
+    &mdash;
+    <span class="container">PlugitController</span>
+
+  <li class="method">
+    <a href="PlugitController.html#method-i-logged_in_user">#logged_in_user</a>
+    &mdash;
+    <span class="container">PlugitController</span>
+
+  <li class="method">
+    <a href="PlugitController.html#method-i-logged_in_user_id">#logged_in_user_id</a>
+    &mdash;
+    <span class="container">PlugitController</span>
+
+  <li class="method">
+    <a href="PlugitHelper.html#method-i-mpd_url">#mpd_url</a>
+    &mdash;
+    <span class="container">PlugitHelper</span>
 
   <li class="method">
     <a href="PresetTemplatesController.html#method-i-new">#new</a>
@@ -398,6 +478,21 @@
     <span class="container">EncodingJob</span>
 
   <li class="method">
+    <a href="Owned/ClassMethods.html#method-i-owned">#owned</a>
+    &mdash;
+    <span class="container">Owned::ClassMethods</span>
+
+  <li class="method">
+    <a href="Owned.html#method-i-owned_by-3F">#owned_by?</a>
+    &mdash;
+    <span class="container">Owned</span>
+
+  <li class="method">
+    <a href="Owned/ClassMethods.html#method-i-owned_or_referenced">#owned_or_referenced</a>
+    &mdash;
+    <span class="container">Owned::ClassMethods</span>
+
+  <li class="method">
     <a href="EncodingJobsHelper.html#method-i-panel_class_for">#panel_class_for</a>
     &mdash;
     <span class="container">EncodingJobsHelper</span>
@@ -418,9 +513,9 @@
     <span class="container">EncodingJobsHelper</span>
 
   <li class="method">
-    <a href="Plugit/BasicController.html#method-i-ping">#ping</a>
+    <a href="BasicController.html#method-i-ping">#ping</a>
     &mdash;
-    <span class="container">Plugit::BasicController</span>
+    <span class="container">BasicController</span>
 
   <li class="method">
     <a href="EncodingJobsController.html#method-i-play">#play</a>
@@ -431,6 +526,41 @@
     <a href="EncodingJobsHelper.html#method-i-play_link">#play_link</a>
     &mdash;
     <span class="container">EncodingJobsHelper</span>
+
+  <li class="method">
+    <a href="PlugitHelper.html#method-i-plugit_javascript_include_tag">#plugit_javascript_include_tag</a>
+    &mdash;
+    <span class="container">PlugitHelper</span>
+
+  <li class="method">
+    <a href="PlugitHelper.html#method-i-plugit_link_to">#plugit_link_to</a>
+    &mdash;
+    <span class="container">PlugitHelper</span>
+
+  <li class="method">
+    <a href="PlugitHelper.html#method-i-plugit_link_to_mpd">#plugit_link_to_mpd</a>
+    &mdash;
+    <span class="container">PlugitHelper</span>
+
+  <li class="method">
+    <a href="PlugitHelper.html#method-i-plugit_link_to_play">#plugit_link_to_play</a>
+    &mdash;
+    <span class="container">PlugitHelper</span>
+
+  <li class="method">
+    <a href="PlugitHelper.html#method-i-plugit_raw_mpd_link">#plugit_raw_mpd_link</a>
+    &mdash;
+    <span class="container">PlugitHelper</span>
+
+  <li class="method">
+    <a href="PlugitHelper.html#method-i-plugit_stream_url_for">#plugit_stream_url_for</a>
+    &mdash;
+    <span class="container">PlugitHelper</span>
+
+  <li class="method">
+    <a href="PlugitHelper.html#method-i-plugit_stylesheet_link_tag">#plugit_stylesheet_link_tag</a>
+    &mdash;
+    <span class="container">PlugitHelper</span>
 
   <li class="method">
     <a href="EncodingJobsHelper.html#method-i-post_processing_summary_for">#post_processing_summary_for</a>
@@ -448,9 +578,29 @@
     <span class="container">PresetTemplatesHelper</span>
 
   <li class="method">
+    <a href="EncodingJob.html#method-i-presets_available-3F">#presets_available?</a>
+    &mdash;
+    <span class="container">EncodingJob</span>
+
+  <li class="method">
+    <a href="EncodingJob.html#method-i-presets_referenced-3F">#presets_referenced?</a>
+    &mdash;
+    <span class="container">EncodingJob</span>
+
+  <li class="method">
     <a href="VariantJob.html#method-i-progress">#progress</a>
     &mdash;
     <span class="container">VariantJob</span>
+
+  <li class="method">
+    <a href="CronController.html#method-i-purge">#purge</a>
+    &mdash;
+    <span class="container">CronController</span>
+
+  <li class="method">
+    <a href="Expirable/ClassMethods.html#method-i-purge-21">#purge!</a>
+    &mdash;
+    <span class="container">Expirable::ClassMethods</span>
 
   <li class="method">
     <a href="EncodingJobsHelper.html#method-i-queue_position_for">#queue_position_for</a>
@@ -458,9 +608,9 @@
     <span class="container">EncodingJobsHelper</span>
 
   <li class="method">
-    <a href="VariantJob/Statuses/ClassMethods.html#method-i-queue_position_for">#queue_position_for</a>
+    <a href="VariantJobStatuses/ClassMethods.html#method-i-queue_position_for">#queue_position_for</a>
     &mdash;
-    <span class="container">VariantJob::Statuses::ClassMethods</span>
+    <span class="container">VariantJobStatuses::ClassMethods</span>
 
   <li class="method">
     <a href="EncodingJob.html#method-i-randomized_id">#randomized_id</a>
@@ -468,9 +618,34 @@
     <span class="container">EncodingJob</span>
 
   <li class="method">
-    <a href="EncodingJobsHelper.html#method-i-raw_mpd_link">#raw_mpd_link</a>
+    <a href="EncodingJobsController.html#method-i-reference">#reference</a>
     &mdash;
-    <span class="container">EncodingJobsHelper</span>
+    <span class="container">EncodingJobsController</span>
+
+  <li class="method">
+    <a href="EncodingJobsController.html#method-i-reference_presets">#reference_presets</a>
+    &mdash;
+    <span class="container">EncodingJobsController</span>
+
+  <li class="method">
+    <a href="EncodingJobsController.html#method-i-reference_source_files">#reference_source_files</a>
+    &mdash;
+    <span class="container">EncodingJobsController</span>
+
+  <li class="method">
+    <a href="PlugitController.html#method-i-require_admin">#require_admin</a>
+    &mdash;
+    <span class="container">PlugitController</span>
+
+  <li class="method">
+    <a href="PlugitController.html#method-i-require_login">#require_login</a>
+    &mdash;
+    <span class="container">PlugitController</span>
+
+  <li class="method">
+    <a href="PlugitController.html#method-i-require_write_access">#require_write_access</a>
+    &mdash;
+    <span class="container">PlugitController</span>
 
   <li class="method">
     <a href="VariantJob.html#method-i-requires_transcoding-3F">#requires_transcoding?</a>
@@ -488,14 +663,29 @@
     <span class="container">Transcoder</span>
 
   <li class="method">
+    <a href="MediaController.html#method-i-serve">#serve</a>
+    &mdash;
+    <span class="container">MediaController</span>
+
+  <li class="method">
     <a href="EncodingJobsController.html#method-i-show">#show</a>
     &mdash;
     <span class="container">EncodingJobsController</span>
 
   <li class="method">
+    <a href="EncodingJob.html#method-i-source_files_available-3F">#source_files_available?</a>
+    &mdash;
+    <span class="container">EncodingJob</span>
+
+  <li class="method">
     <a href="EncodingJobsHelper.html#method-i-source_files_for_select">#source_files_for_select</a>
     &mdash;
     <span class="container">EncodingJobsHelper</span>
+
+  <li class="method">
+    <a href="EncodingJob.html#method-i-source_files_referenced-3F">#source_files_referenced?</a>
+    &mdash;
+    <span class="container">EncodingJob</span>
 
   <li class="method">
     <a href="EncodingJobsController.html#method-i-status">#status</a>
@@ -508,11 +698,6 @@
     <span class="container">RemoteJob</span>
 
   <li class="method">
-    <a href="EncodingJobsHelper.html#method-i-stream_url_for">#stream_url_for</a>
-    &mdash;
-    <span class="container">EncodingJobsHelper</span>
-
-  <li class="method">
     <a href="CodemNotification.html#method-i-success-3F">#success?</a>
     &mdash;
     <span class="container">CodemNotification</span>
@@ -521,6 +706,11 @@
     <a href="VariantJob.html#method-i-to_codem_json">#to_codem_json</a>
     &mdash;
     <span class="container">VariantJob</span>
+
+  <li class="method">
+    <a href="Expirable/ClassMethods.html#method-i-to_purge">#to_purge</a>
+    &mdash;
+    <span class="container">Expirable::ClassMethods</span>
 
   <li class="method">
     <a href="RemoteJob.html#method-i-to_runner_json">#to_runner_json</a>
@@ -533,24 +723,49 @@
     <span class="container">TranscodersHelper</span>
 
   <li class="method">
-    <a href="VariantJob/Statuses/ClassMethods.html#method-i-transition">#transition</a>
+    <a href="EncodingJobStatuses/ClassMethods.html#method-i-transition">#transition</a>
     &mdash;
-    <span class="container">VariantJob::Statuses::ClassMethods</span>
+    <span class="container">EncodingJobStatuses::ClassMethods</span>
 
   <li class="method">
-    <a href="EncodingJob/Statuses/ClassMethods.html#method-i-transition">#transition</a>
+    <a href="VariantJobStatuses.html#method-i-transition">#transition</a>
     &mdash;
-    <span class="container">EncodingJob::Statuses::ClassMethods</span>
+    <span class="container">VariantJobStatuses</span>
 
   <li class="method">
-    <a href="EncodingJob/Statuses.html#method-i-transition">#transition</a>
+    <a href="VariantJobStatuses/ClassMethods.html#method-i-transition">#transition</a>
     &mdash;
-    <span class="container">EncodingJob::Statuses</span>
+    <span class="container">VariantJobStatuses::ClassMethods</span>
 
   <li class="method">
-    <a href="VariantJob/Statuses.html#method-i-transition">#transition</a>
+    <a href="EncodingJobStatuses.html#method-i-transition">#transition</a>
     &mdash;
-    <span class="container">VariantJob::Statuses</span>
+    <span class="container">EncodingJobStatuses</span>
+
+  <li class="method">
+    <a href="EncodingJobsController.html#method-i-unreference">#unreference</a>
+    &mdash;
+    <span class="container">EncodingJobsController</span>
+
+  <li class="method">
+    <a href="EncodingJobsController.html#method-i-unreference_presets">#unreference_presets</a>
+    &mdash;
+    <span class="container">EncodingJobsController</span>
+
+  <li class="method">
+    <a href="EncodingJobsController.html#method-i-unreference_source_files">#unreference_source_files</a>
+    &mdash;
+    <span class="container">EncodingJobsController</span>
+
+  <li class="method">
+    <a href="OrganizationsController.html#method-i-update_multiple">#update_multiple</a>
+    &mdash;
+    <span class="container">OrganizationsController</span>
+
+  <li class="method">
+    <a href="PlugitHelper.html#method-i-url_for_plugit">#url_for_plugit</a>
+    &mdash;
+    <span class="container">PlugitHelper</span>
 
   <li class="method">
     <a href="EncodingJobsHelper.html#method-i-variant_jobs_summary_for">#variant_jobs_summary_for</a>
@@ -558,9 +773,9 @@
     <span class="container">EncodingJobsHelper</span>
 
   <li class="method">
-    <a href="Plugit/BasicController.html#method-i-version">#version</a>
+    <a href="BasicController.html#method-i-version">#version</a>
     &mdash;
-    <span class="container">Plugit::BasicController</span>
+    <span class="container">BasicController</span>
 </ul>
 </main>
 

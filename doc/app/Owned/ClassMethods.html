@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8">
 
-<title>class Plugit::MetaController - Rails Application Documentation</title>
+<title>module Owned::ClassMethods - Rails Application Documentation</title>
 
 <link href="../fonts.css" rel="stylesheet">
 <link href="../rdoc.css" rel="stylesheet">
@@ -21,7 +21,7 @@
 <script src="../js/darkfish.js"></script>
 
 
-<body id="top" role="document" class="class">
+<body id="top" role="document" class="module">
 <nav role="navigation">
   <div id="project-navigation">
     <div id="home-section" role="region" title="Quick navigation" class="nav-section">
@@ -57,14 +57,7 @@
 
   <div id="class-metadata">
     
-    <div id="parent-class-section" class="nav-section">
-  <h3>Parent</h3>
-
-  
-  <p class="link"><a href="../ApplicationController.html">ApplicationController</a>
-  
-</div>
-
+    
     
     
     <!-- Method Quickref -->
@@ -73,7 +66,9 @@
 
   <ul class="link-list" role="directory">
     
-    <li ><a href="#method-i-index">#index</a>
+    <li ><a href="#method-i-owned">#owned</a>
+    
+    <li ><a href="#method-i-owned_or_referenced">#owned_or_referenced</a>
     
   </ul>
 </div>
@@ -81,9 +76,9 @@
   </div>
 </nav>
 
-<main role="main" aria-labelledby="class-Plugit::MetaController">
-  <h1 id="class-Plugit::MetaController" class="class">
-    class Plugit::MetaController
+<main role="main" aria-labelledby="module-Owned::ClassMethods">
+  <h1 id="module-Owned::ClassMethods" class="module">
+    module Owned::ClassMethods
   </h1>
 
   <section class="description">
@@ -109,11 +104,44 @@
        </header>
 
     
-      <div id="method-i-index" class="method-detail ">
+      <div id="method-i-owned" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">index</span><span
-            class="method-args">()</span>
+          <span class="method-name">owned</span><span
+            class="method-args">(user)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>class methods</p>
+          
+          
+
+          
+          <div class="method-source-code" id="owned-source">
+            <pre><span class="ruby-comment"># File app/models/concerns/owned.rb, line 13</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">owned</span>(<span class="ruby-identifier">user</span>)
+  <span class="ruby-identifier">where</span>(<span class="ruby-identifier">user_id</span><span class="ruby-operator">:</span> <span class="ruby-identifier">user</span>.<span class="ruby-identifier">ebu_id</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-owned_or_referenced" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">owned_or_referenced</span><span
+            class="method-args">(user)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -127,9 +155,10 @@
           
 
           
-          <div class="method-source-code" id="index-source">
-            <pre><span class="ruby-comment"># File app/controllers/plugit/meta_controller.rb, line 4</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
+          <div class="method-source-code" id="owned_or_referenced-source">
+            <pre><span class="ruby-comment"># File app/models/concerns/owned.rb, line 17</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">owned_or_referenced</span>(<span class="ruby-identifier">user</span>)
+  <span class="ruby-identifier">where</span>([<span class="ruby-string">&quot;user_id = ? OR is_reference = ?&quot;</span>, <span class="ruby-identifier">user</span>.<span class="ruby-identifier">ebu_id</span>, <span class="ruby-keyword">true</span>])
 <span class="ruby-keyword">end</span></pre>
           </div>
           

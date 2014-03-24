@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8">
 
-<title>class DashboardController - Rails Application Documentation</title>
+<title>class OrganizationsController - Rails Application Documentation</title>
 
 <link href="./fonts.css" rel="stylesheet">
 <link href="./rdoc.css" rel="stylesheet">
@@ -75,15 +75,17 @@
     
     <li ><a href="#method-i-index">#index</a>
     
+    <li ><a href="#method-i-update_multiple">#update_multiple</a>
+    
   </ul>
 </div>
 
   </div>
 </nav>
 
-<main role="main" aria-labelledby="class-DashboardController">
-  <h1 id="class-DashboardController" class="class">
-    class DashboardController
+<main role="main" aria-labelledby="class-OrganizationsController">
+  <h1 id="class-OrganizationsController" class="class">
+    class OrganizationsController
   </h1>
 
   <section class="description">
@@ -128,10 +130,48 @@
 
           
           <div class="method-source-code" id="index-source">
-            <pre><span class="ruby-comment"># File app/controllers/dashboard_controller.rb, line 4</span>
+            <pre><span class="ruby-comment"># File app/controllers/organizations_controller.rb, line 5</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
-  <span class="ruby-ivar">@encoding_jobs</span> = <span class="ruby-constant">EncodingJob</span>.<span class="ruby-identifier">recently_encoded</span>
-  <span class="ruby-ivar">@referenced_encoding_jobs</span> = <span class="ruby-constant">EncodingJob</span>.<span class="ruby-identifier">referenced_for_dashboard</span>
+  <span class="ruby-ivar">@organizations</span> = <span class="ruby-constant">Organization</span>.<span class="ruby-identifier">all</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-update_multiple" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">update_multiple</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="update_multiple-source">
+            <pre><span class="ruby-comment"># File app/controllers/organizations_controller.rb, line 9</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">update_multiple</span>
+  <span class="ruby-identifier">ids</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:organization_ids</span>] <span class="ruby-operator">||</span> []
+  <span class="ruby-constant">Organization</span>.<span class="ruby-identifier">all</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">o</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">allow_rw</span> = (<span class="ruby-identifier">ids</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">o</span>.<span class="ruby-identifier">id</span>.<span class="ruby-identifier">to_s</span>) <span class="ruby-operator">?</span> <span class="ruby-keyword">true</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">false</span>)
+    <span class="ruby-identifier">o</span>.<span class="ruby-identifier">update_attribute</span>(<span class="ruby-value">:can_write</span>, <span class="ruby-identifier">allow_rw</span>)
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">flash</span>[<span class="ruby-value">:notice</span>] = <span class="ruby-string">&quot;Updated organizations.&quot;</span>
+  <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">organizations_path</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           

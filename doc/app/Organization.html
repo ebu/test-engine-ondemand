@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8">
 
-<title>class DashboardController - Rails Application Documentation</title>
+<title>class Organization - Rails Application Documentation</title>
 
 <link href="./fonts.css" rel="stylesheet">
 <link href="./rdoc.css" rel="stylesheet">
@@ -61,7 +61,7 @@
   <h3>Parent</h3>
 
   
-  <p class="link"><a href="PlugitController.html">PlugitController</a>
+  <p class="link">ActiveRecord::Base
   
 </div>
 
@@ -73,7 +73,7 @@
 
   <ul class="link-list" role="directory">
     
-    <li ><a href="#method-i-index">#index</a>
+    <li ><a href="#method-c-refresh">::refresh</a>
     
   </ul>
 </div>
@@ -81,9 +81,9 @@
   </div>
 </nav>
 
-<main role="main" aria-labelledby="class-DashboardController">
-  <h1 id="class-DashboardController" class="class">
-    class DashboardController
+<main role="main" aria-labelledby="class-Organization">
+  <h1 id="class-Organization" class="class">
+    class Organization
   </h1>
 
   <section class="description">
@@ -103,16 +103,16 @@
     
 
     
-     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
        <header>
-         <h3>Public Instance Methods</h3>
+         <h3>Public Class Methods</h3>
        </header>
 
     
-      <div id="method-i-index" class="method-detail ">
+      <div id="method-c-refresh" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">index</span><span
+          <span class="method-name">refresh</span><span
             class="method-args">()</span>
           
           <span class="method-click-advice">click to toggle source</span>
@@ -127,11 +127,17 @@
           
 
           
-          <div class="method-source-code" id="index-source">
-            <pre><span class="ruby-comment"># File app/controllers/dashboard_controller.rb, line 4</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
-  <span class="ruby-ivar">@encoding_jobs</span> = <span class="ruby-constant">EncodingJob</span>.<span class="ruby-identifier">recently_encoded</span>
-  <span class="ruby-ivar">@referenced_encoding_jobs</span> = <span class="ruby-constant">EncodingJob</span>.<span class="ruby-identifier">referenced_for_dashboard</span>
+          <div class="method-source-code" id="refresh-source">
+            <pre><span class="ruby-comment"># File app/models/organization.rb, line 7</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">refresh</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">organizations</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">get_orga_list</span>
+    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">destroy_all</span>([<span class="ruby-string">&quot;ebu_id NOT IN (?)&quot;</span>, <span class="ruby-identifier">organizations</span>.<span class="ruby-identifier">collect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">o</span><span class="ruby-operator">|</span> <span class="ruby-identifier">o</span>[<span class="ruby-string">&quot;id&quot;</span>] }])
+    <span class="ruby-identifier">organizations</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">o</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">organization</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">find_or_initialize_by</span>(<span class="ruby-identifier">ebu_id</span><span class="ruby-operator">:</span> <span class="ruby-identifier">o</span>[<span class="ruby-string">&quot;id&quot;</span>])
+      <span class="ruby-identifier">organization</span>.<span class="ruby-identifier">name</span> = <span class="ruby-identifier">o</span>[<span class="ruby-string">&quot;name&quot;</span>]
+      <span class="ruby-identifier">organization</span>.<span class="ruby-identifier">save</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           

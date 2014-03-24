@@ -66,11 +66,15 @@
 
   <ul class="link-list" role="directory">
     
+    <li ><a href="#method-i-availability_label_for_template">#availability_label_for_template</a>
+    
     <li ><a href="#method-i-collapsable_group">#collapsable_group</a>
     
     <li ><a href="#method-i-conformance_checking_summary_for">#conformance_checking_summary_for</a>
     
     <li ><a href="#method-i-encoder_templates_for_select">#encoder_templates_for_select</a>
+    
+    <li ><a href="#method-i-encoding_job_new_allowed-3F">#encoding_job_new_allowed?</a>
     
     <li ><a href="#method-i-human_readable_summary_for">#human_readable_summary_for</a>
     
@@ -94,11 +98,7 @@
     
     <li ><a href="#method-i-queue_position_for">#queue_position_for</a>
     
-    <li ><a href="#method-i-raw_mpd_link">#raw_mpd_link</a>
-    
     <li ><a href="#method-i-source_files_for_select">#source_files_for_select</a>
-    
-    <li ><a href="#method-i-stream_url_for">#stream_url_for</a>
     
     <li ><a href="#method-i-variant_jobs_summary_for">#variant_jobs_summary_for</a>
     
@@ -136,6 +136,43 @@
        </header>
 
     
+      <div id="method-i-availability_label_for_template" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">availability_label_for_template</span><span
+            class="method-args">(template)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="availability_label_for_template-source">
+            <pre><span class="ruby-comment"># File app/helpers/encoding_jobs_helper.rb, line 165</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">availability_label_for_template</span>(<span class="ruby-identifier">template</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">template</span>.<span class="ruby-identifier">blank?</span>
+    <span class="ruby-identifier">content_tag</span> <span class="ruby-value">:span</span>, <span class="ruby-string">&#39;not available&#39;</span>, <span class="ruby-identifier">class</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;label label-danger&quot;</span>, <span class="ruby-identifier">title</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;This template is no longer available to make a reference. It might have been deleted.&quot;</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">content_tag</span> <span class="ruby-value">:span</span>, <span class="ruby-string">&#39;available&#39;</span>, <span class="ruby-identifier">class</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;label label-success&quot;</span>, <span class="ruby-identifier">title</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;This template is still available to make a reference.&quot;</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
       <div id="method-i-collapsable_group" class="method-detail ">
         
         <div class="method-heading">
@@ -155,7 +192,7 @@
 
           
           <div class="method-source-code" id="collapsable_group-source">
-            <pre><span class="ruby-comment"># File app/helpers/encoding_jobs_helper.rb, line 79</span>
+            <pre><span class="ruby-comment"># File app/helpers/encoding_jobs_helper.rb, line 94</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">collapsable_group</span>(<span class="ruby-identifier">text</span>, <span class="ruby-identifier">id</span>, <span class="ruby-identifier">data</span>)
   (<span class="ruby-node">&quot;&lt;div class=&#39;collapse-group&#39;&gt;#{text}&quot;</span> <span class="ruby-operator">+</span>
   <span class="ruby-node">&quot;&lt;a style=&#39;float: right&#39; class=&#39;btn btn-default&#39; data-toggle=&#39;collapse&#39; data-target=&#39;##{id}&#39;&gt;View/hide details&lt;/a&gt;&quot;</span> <span class="ruby-operator">+</span>
@@ -190,7 +227,7 @@
 
           
           <div class="method-source-code" id="conformance_checking_summary_for-source">
-            <pre><span class="ruby-comment"># File app/helpers/encoding_jobs_helper.rb, line 63</span>
+            <pre><span class="ruby-comment"># File app/helpers/encoding_jobs_helper.rb, line 78</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">conformance_checking_summary_for</span>(<span class="ruby-identifier">job</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">job</span>.<span class="ruby-identifier">conformance_checking?</span>
     <span class="ruby-string">&#39;Waiting for conformance-checking to complete...&#39;</span>
@@ -237,7 +274,49 @@
           <div class="method-source-code" id="encoder_templates_for_select-source">
             <pre><span class="ruby-comment"># File app/helpers/encoding_jobs_helper.rb, line 2</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">encoder_templates_for_select</span>
-  <span class="ruby-constant">PresetTemplate</span>.<span class="ruby-identifier">encoder_preset</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span> [<span class="ruby-identifier">p</span>.<span class="ruby-identifier">description</span>, <span class="ruby-identifier">p</span>.<span class="ruby-identifier">id</span>, {<span class="ruby-string">&#39;data-preset&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">p</span>.<span class="ruby-identifier">template_text</span>}] }
+  <span class="ruby-identifier">user</span> = <span class="ruby-identifier">controller</span>.<span class="ruby-identifier">logged_in_user</span>
+  <span class="ruby-constant">PresetTemplate</span>.<span class="ruby-identifier">encoder_preset</span>.<span class="ruby-identifier">owned_or_referenced</span>(<span class="ruby-identifier">user</span>).<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span> [<span class="ruby-identifier">p</span>.<span class="ruby-identifier">description</span>, <span class="ruby-identifier">p</span>.<span class="ruby-identifier">id</span>, {<span class="ruby-string">&#39;data-preset&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">p</span>.<span class="ruby-identifier">template_text</span>}] }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-encoding_job_new_allowed-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">encoding_job_new_allowed?</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Check if it&#39;s currently allowed to create a new
+<code>EncodingJob</code>.</p>
+
+<p>A new <code>EncodingJob</code> requires at least the availability of a
+<code>FileAsset</code>, a <code>PresetTemplate</code> for the encoder and a
+<code>PresetTemplate</code> for the post processor.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="encoding_job_new_allowed-3F-source">
+            <pre><span class="ruby-comment"># File app/helpers/encoding_jobs_helper.rb, line 22</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">encoding_job_new_allowed?</span>
+  <span class="ruby-identifier">user</span> = <span class="ruby-identifier">controller</span>.<span class="ruby-identifier">logged_in_user</span>
+  <span class="ruby-constant">FileAsset</span>.<span class="ruby-identifier">owned_or_referenced</span>(<span class="ruby-identifier">user</span>).<span class="ruby-identifier">any?</span> <span class="ruby-operator">&amp;&amp;</span>
+  <span class="ruby-constant">PresetTemplate</span>.<span class="ruby-identifier">owned_or_referenced</span>(<span class="ruby-identifier">user</span>).<span class="ruby-identifier">encoder_preset</span>.<span class="ruby-identifier">any?</span> <span class="ruby-operator">&amp;&amp;</span>
+  <span class="ruby-constant">PresetTemplate</span>.<span class="ruby-identifier">owned_or_referenced</span>(<span class="ruby-identifier">user</span>).<span class="ruby-identifier">post_processing_preset</span>.<span class="ruby-identifier">any?</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -268,7 +347,7 @@
 
           
           <div class="method-source-code" id="human_readable_summary_for-source">
-            <pre><span class="ruby-comment"># File app/helpers/encoding_jobs_helper.rb, line 22</span>
+            <pre><span class="ruby-comment"># File app/helpers/encoding_jobs_helper.rb, line 37</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">human_readable_summary_for</span>(<span class="ruby-identifier">job</span>)
   <span class="ruby-keyword">case</span> <span class="ruby-identifier">job</span>.<span class="ruby-identifier">status</span>
   <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;pending&#39;</span>
@@ -316,7 +395,7 @@
 
           
           <div class="method-source-code" id="job_status_label-source">
-            <pre><span class="ruby-comment"># File app/helpers/encoding_jobs_helper.rb, line 129</span>
+            <pre><span class="ruby-comment"># File app/helpers/encoding_jobs_helper.rb, line 144</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">job_status_label</span>(<span class="ruby-identifier">job</span>)
   <span class="ruby-identifier">text</span> = <span class="ruby-identifier">job</span>.<span class="ruby-identifier">status</span>.<span class="ruby-identifier">titleize</span>
   <span class="ruby-keyword">case</span> <span class="ruby-identifier">job</span>.<span class="ruby-identifier">status</span>
@@ -357,7 +436,7 @@
 
           
           <div class="method-source-code" id="link_to_add_variant_job-source">
-            <pre><span class="ruby-comment"># File app/helpers/encoding_jobs_helper.rb, line 14</span>
+            <pre><span class="ruby-comment"># File app/helpers/encoding_jobs_helper.rb, line 29</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">link_to_add_variant_job</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">f</span>, <span class="ruby-identifier">parent</span>)
   <span class="ruby-identifier">new_object</span> = <span class="ruby-constant">VariantJob</span>.<span class="ruby-identifier">new</span>
   <span class="ruby-identifier">fields</span> = <span class="ruby-identifier">f</span>.<span class="ruby-identifier">fields_for</span>(<span class="ruby-value">:variant_jobs</span>, <span class="ruby-identifier">new_object</span>, <span class="ruby-value">:child_index</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;new_variant_job&quot;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">builder</span><span class="ruby-operator">|</span>
@@ -394,7 +473,7 @@
 
           
           <div class="method-source-code" id="panel_class_for-source">
-            <pre><span class="ruby-comment"># File app/helpers/encoding_jobs_helper.rb, line 85</span>
+            <pre><span class="ruby-comment"># File app/helpers/encoding_jobs_helper.rb, line 100</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">panel_class_for</span>(<span class="ruby-identifier">job</span>)
   <span class="ruby-keyword">case</span> <span class="ruby-identifier">job</span>.<span class="ruby-identifier">status</span>
     <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;success&#39;</span> <span class="ruby-keyword">then</span> <span class="ruby-string">&#39;panel-success&#39;</span>
@@ -431,7 +510,7 @@
 
           
           <div class="method-source-code" id="panel_class_for_conformance_checking-source">
-            <pre><span class="ruby-comment"># File app/helpers/encoding_jobs_helper.rb, line 117</span>
+            <pre><span class="ruby-comment"># File app/helpers/encoding_jobs_helper.rb, line 132</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">panel_class_for_conformance_checking</span>(<span class="ruby-identifier">job</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">job</span>.<span class="ruby-identifier">completed_conformance_checking?</span>
     <span class="ruby-identifier">job</span>.<span class="ruby-identifier">conformance_checking_job</span>.<span class="ruby-identifier">stdout_contains_exceptions?</span> <span class="ruby-operator">?</span> <span class="ruby-string">&#39;panel-warning&#39;</span> <span class="ruby-operator">:</span> <span class="ruby-string">&#39;panel-success&#39;</span>
@@ -472,7 +551,7 @@
 
           
           <div class="method-source-code" id="panel_class_for_post_processing-source">
-            <pre><span class="ruby-comment"># File app/helpers/encoding_jobs_helper.rb, line 105</span>
+            <pre><span class="ruby-comment"># File app/helpers/encoding_jobs_helper.rb, line 120</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">panel_class_for_post_processing</span>(<span class="ruby-identifier">job</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">job</span>.<span class="ruby-identifier">completed_post_processing?</span>
     <span class="ruby-string">&#39;panel-success&#39;</span>
@@ -513,7 +592,7 @@
 
           
           <div class="method-source-code" id="panel_class_for_variant_jobs-source">
-            <pre><span class="ruby-comment"># File app/helpers/encoding_jobs_helper.rb, line 93</span>
+            <pre><span class="ruby-comment"># File app/helpers/encoding_jobs_helper.rb, line 108</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">panel_class_for_variant_jobs</span>(<span class="ruby-identifier">job</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">job</span>.<span class="ruby-identifier">variant_jobs</span>.<span class="ruby-identifier">any?</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-identifier">v</span>.<span class="ruby-identifier">failed?</span> }
     <span class="ruby-string">&#39;panel-danger&#39;</span>
@@ -554,7 +633,7 @@
 
           
           <div class="method-source-code" id="play_link-source">
-            <pre><span class="ruby-comment"># File app/helpers/encoding_jobs_helper.rb, line 141</span>
+            <pre><span class="ruby-comment"># File app/helpers/encoding_jobs_helper.rb, line 156</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">play_link</span>(<span class="ruby-identifier">job</span>)
   <span class="ruby-identifier">link_to</span>(<span class="ruby-string">&#39;Open in Dash.js player&#39;</span>, <span class="ruby-identifier">play_encoding_job_path</span>(<span class="ruby-identifier">job</span>), <span class="ruby-identifier">class</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;btn btn-primary&#39;</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -587,7 +666,7 @@
 
           
           <div class="method-source-code" id="post_processing_summary_for-source">
-            <pre><span class="ruby-comment"># File app/helpers/encoding_jobs_helper.rb, line 51</span>
+            <pre><span class="ruby-comment"># File app/helpers/encoding_jobs_helper.rb, line 66</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">post_processing_summary_for</span>(<span class="ruby-identifier">job</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">job</span>.<span class="ruby-identifier">post_processing?</span>
     <span class="ruby-string">&#39;Waiting for post-processing to complete...&#39;</span>
@@ -628,9 +707,10 @@
 
           
           <div class="method-source-code" id="post_processing_templates_for_select-source">
-            <pre><span class="ruby-comment"># File app/helpers/encoding_jobs_helper.rb, line 6</span>
+            <pre><span class="ruby-comment"># File app/helpers/encoding_jobs_helper.rb, line 7</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">post_processing_templates_for_select</span>
-  <span class="ruby-constant">PresetTemplate</span>.<span class="ruby-identifier">post_processing_preset</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span> [<span class="ruby-identifier">p</span>.<span class="ruby-identifier">description</span>, <span class="ruby-identifier">p</span>.<span class="ruby-identifier">id</span>, {<span class="ruby-string">&#39;data-preset&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">p</span>.<span class="ruby-identifier">template_text</span>}] }
+  <span class="ruby-identifier">user</span> = <span class="ruby-identifier">controller</span>.<span class="ruby-identifier">logged_in_user</span>
+  <span class="ruby-constant">PresetTemplate</span>.<span class="ruby-identifier">post_processing_preset</span>.<span class="ruby-identifier">owned_or_referenced</span>(<span class="ruby-identifier">user</span>).<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span> [<span class="ruby-identifier">p</span>.<span class="ruby-identifier">description</span>, <span class="ruby-identifier">p</span>.<span class="ruby-identifier">id</span>, {<span class="ruby-string">&#39;data-preset&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">p</span>.<span class="ruby-identifier">template_text</span>}] }
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -661,43 +741,10 @@
 
           
           <div class="method-source-code" id="queue_position_for-source">
-            <pre><span class="ruby-comment"># File app/helpers/encoding_jobs_helper.rb, line 153</span>
+            <pre><span class="ruby-comment"># File app/helpers/encoding_jobs_helper.rb, line 160</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">queue_position_for</span>(<span class="ruby-identifier">variant_job</span>)
   <span class="ruby-identifier">pos</span> = <span class="ruby-constant">VariantJob</span>.<span class="ruby-identifier">queue_position_for</span>(<span class="ruby-identifier">variant_job</span>)
   (<span class="ruby-identifier">pos</span>.<span class="ruby-identifier">nil?</span>) <span class="ruby-operator">?</span> <span class="ruby-string">&#39;&#39;</span> <span class="ruby-operator">:</span> <span class="ruby-node">&quot;Queued (#{pos + 1})&quot;</span>
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-      <div id="method-i-raw_mpd_link" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">raw_mpd_link</span><span
-            class="method-args">(job)</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-          
-
-          
-          <div class="method-source-code" id="raw_mpd_link-source">
-            <pre><span class="ruby-comment"># File app/helpers/encoding_jobs_helper.rb, line 145</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">raw_mpd_link</span>(<span class="ruby-identifier">job</span>)
-  <span class="ruby-string">&quot;Raw public MPD link: &quot;</span>.<span class="ruby-identifier">html_safe</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">link_to</span>(<span class="ruby-identifier">stream_url_for</span>(<span class="ruby-identifier">job</span>), <span class="ruby-identifier">stream_url_for</span>(<span class="ruby-identifier">job</span>))
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -728,42 +775,10 @@
 
           
           <div class="method-source-code" id="source_files_for_select-source">
-            <pre><span class="ruby-comment"># File app/helpers/encoding_jobs_helper.rb, line 10</span>
+            <pre><span class="ruby-comment"># File app/helpers/encoding_jobs_helper.rb, line 12</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">source_files_for_select</span>
-  <span class="ruby-constant">FileAsset</span>.<span class="ruby-identifier">all</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span> [<span class="ruby-identifier">f</span>.<span class="ruby-identifier">resource_file_name</span>, <span class="ruby-identifier">f</span>.<span class="ruby-identifier">id</span>] }
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
-      <div id="method-i-stream_url_for" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">stream_url_for</span><span
-            class="method-args">(job)</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-          
-
-          
-          <div class="method-source-code" id="stream_url_for-source">
-            <pre><span class="ruby-comment"># File app/helpers/encoding_jobs_helper.rb, line 149</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">stream_url_for</span>(<span class="ruby-identifier">job</span>)
-  <span class="ruby-identifier">url_for</span>(<span class="ruby-identifier">controller</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;dashboard&#39;</span>, <span class="ruby-identifier">action</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;index&#39;</span>, <span class="ruby-identifier">only_path</span><span class="ruby-operator">:</span> <span class="ruby-keyword">false</span>) <span class="ruby-operator">+</span> [<span class="ruby-string">&#39;dash&#39;</span>, <span class="ruby-identifier">job</span>.<span class="ruby-identifier">randomized_id</span>, <span class="ruby-string">&#39;dash.mpd&#39;</span>].<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;/&#39;</span>)
+  <span class="ruby-identifier">user</span> = <span class="ruby-identifier">controller</span>.<span class="ruby-identifier">logged_in_user</span>
+  <span class="ruby-constant">FileAsset</span>.<span class="ruby-identifier">owned_or_referenced</span>(<span class="ruby-identifier">user</span>).<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span> [<span class="ruby-identifier">f</span>.<span class="ruby-identifier">resource_file_name</span>, <span class="ruby-identifier">f</span>.<span class="ruby-identifier">id</span>] }
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -794,7 +809,7 @@
 
           
           <div class="method-source-code" id="variant_jobs_summary_for-source">
-            <pre><span class="ruby-comment"># File app/helpers/encoding_jobs_helper.rb, line 41</span>
+            <pre><span class="ruby-comment"># File app/helpers/encoding_jobs_helper.rb, line 56</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">variant_jobs_summary_for</span>(<span class="ruby-identifier">job</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">job</span>.<span class="ruby-identifier">variant_jobs</span>.<span class="ruby-identifier">any?</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-identifier">v</span>.<span class="ruby-identifier">failed?</span> }
     <span class="ruby-string">&#39;One or more variant jobs failed transcoding.&#39;</span>

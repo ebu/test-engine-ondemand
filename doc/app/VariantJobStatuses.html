@@ -4,21 +4,21 @@
 <head>
 <meta charset="utf-8">
 
-<title>module EncodingJob::Statuses::ClassMethods - Rails Application Documentation</title>
+<title>module VariantJobStatuses - Rails Application Documentation</title>
 
-<link href="../../fonts.css" rel="stylesheet">
-<link href="../../rdoc.css" rel="stylesheet">
+<link href="./fonts.css" rel="stylesheet">
+<link href="./rdoc.css" rel="stylesheet">
 
 <script type="text/javascript">
-  var rdoc_rel_prefix = "../../";
+  var rdoc_rel_prefix = "./";
 </script>
 
-<script src="../../js/jquery.js"></script>
-<script src="../../js/navigation.js"></script>
-<script src="../../js/search_index.js"></script>
-<script src="../../js/search.js"></script>
-<script src="../../js/searcher.js"></script>
-<script src="../../js/darkfish.js"></script>
+<script src="./js/jquery.js"></script>
+<script src="./js/navigation.js"></script>
+<script src="./js/search_index.js"></script>
+<script src="./js/search.js"></script>
+<script src="./js/searcher.js"></script>
+<script src="./js/darkfish.js"></script>
 
 
 <body id="top" role="document" class="module">
@@ -26,13 +26,13 @@
   <div id="project-navigation">
     <div id="home-section" role="region" title="Quick navigation" class="nav-section">
   <h2>
-    <a href="../../index.html" rel="home">Home</a>
+    <a href="./index.html" rel="home">Home</a>
   </h2>
 
   <div id="table-of-contents-navigation">
-    <a href="../../table_of_contents.html#pages">Pages</a>
-    <a href="../../table_of_contents.html#classes">Classes</a>
-    <a href="../../table_of_contents.html#methods">Methods</a>
+    <a href="./table_of_contents.html#pages">Pages</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
   </div>
 </div>
 
@@ -59,12 +59,25 @@
     
     
     
+    <div id="extends-section" class="nav-section">
+  <h3>Extended With Modules</h3>
+
+  <ul class="link-list">
     
+  
+    <li><span class="extend">ActiveSupport::Concern</span>
+  
+  
+  </ul>
+</div>
+
     <!-- Method Quickref -->
 <div id="method-list-section" class="nav-section">
   <h3>Methods</h3>
 
   <ul class="link-list" role="directory">
+    
+    <li ><a href="#method-i-finished-3F">#finished?</a>
     
     <li ><a href="#method-i-transition">#transition</a>
     
@@ -74,9 +87,9 @@
   </div>
 </nav>
 
-<main role="main" aria-labelledby="module-EncodingJob::Statuses::ClassMethods">
-  <h1 id="module-EncodingJob::Statuses::ClassMethods" class="module">
-    module EncodingJob::Statuses::ClassMethods
+<main role="main" aria-labelledby="module-VariantJobStatuses">
+  <h1 id="module-VariantJobStatuses" class="module">
+    module VariantJobStatuses
   </h1>
 
   <section class="description">
@@ -102,6 +115,39 @@
        </header>
 
     
+      <div id="method-i-finished-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">finished?</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="finished-3F-source">
+            <pre><span class="ruby-comment"># File app/models/concerns/variant_job_statuses.rb, line 31</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">finished?</span>
+  <span class="ruby-identifier">success?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">failed?</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
       <div id="method-i-transition" class="method-detail ">
         
         <div class="method-heading">
@@ -121,13 +167,9 @@
 
           
           <div class="method-source-code" id="transition-source">
-            <pre><span class="ruby-comment"># File app/models/concerns/encoding_job/statuses.rb, line 16</span>
+            <pre><span class="ruby-comment"># File app/models/concerns/variant_job_statuses.rb, line 27</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">transition</span>
-  <span class="ruby-identifier">j</span> = <span class="ruby-identifier">eligible_jobs</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">j</span>.<span class="ruby-identifier">any?</span>
-    <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Examining transition states for #{j.count} encoding jobs.&quot;</span>
-    <span class="ruby-identifier">j</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">j</span><span class="ruby-operator">|</span> <span class="ruby-identifier">j</span>.<span class="ruby-identifier">transition</span> }
-  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">send</span>(<span class="ruby-node">&quot;transition_from_#{status}&quot;</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">finished?</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
