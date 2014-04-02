@@ -143,7 +143,7 @@ class EncodingJob < ActiveRecord::Base
   end
   
   def forum_message_template
-    mpd_url = "#{EBU::APP_HOST}/media/" + ['dash', self.randomized_id, 'dash.mpd'].join('/')
+    mpd_url = "#{EBU::APP_HOST}/#{Rails.application.config.ebu_plugit_local_root}/media/" + ['dash', self.randomized_id, 'dash.mpd'].join('/')
     template = "A new encoding was added to the test encoding platform using the following settings: 
 
 * * *
