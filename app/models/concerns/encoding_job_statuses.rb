@@ -149,15 +149,18 @@ module EncodingJobStatuses
   end
   
   def enter_failed
-    # TODO: Remove all intermediate files and output files
+    # Remove all intermediate files and output files
     remove_intermediate_files
     remove_output_files
     update_attribute(:status, :failed)
   end
   
   def enter_success
-    # TODO: Remove all intermediate files
+    # Remove all intermediate files
     remove_intermediate_files
     update_attribute(:status, :success)
+    
+    # Post to forum
+    post_to_forum
   end
 end

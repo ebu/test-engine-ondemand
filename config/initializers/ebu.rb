@@ -63,4 +63,10 @@ module EBU
     when "production" then "http://ebu.io/plugit/#{Rails.application.secrets.plugit}/14"
     else "http://ebu.io/plugit/#{Rails.application.secrets.plugit}/13"
   end
+  
+  APP_HOST = case Rails.env
+    when "production" then "http://ebu-ondemand.madebyhiro.com"
+    when "development_remote" then "http://madebyhiro.com:8000"
+    else "http://localhost"
+  end
 end

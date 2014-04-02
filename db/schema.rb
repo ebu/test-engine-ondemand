@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140324163753) do
+ActiveRecord::Schema.define(version: 20140402085222) do
 
   create_table "codem_notifications", force: true do |t|
     t.string   "status"
@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(version: 20140324163753) do
     t.string   "random_id"
     t.integer  "user_id"
     t.boolean  "is_reference",                default: false, null: false
+    t.string   "forum_url"
   end
 
   add_index "encoding_jobs", ["created_at"], name: "index_encoding_jobs_on_created_at", using: :btree

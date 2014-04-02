@@ -75,6 +75,33 @@ class EncodingJob < ActiveRecord::Base
   def destroy_allowed?
     success? || failed? || initial?
   end
+
+  # Post encoding job to EBU.io forum. Will silently fail is something goes wrong, so the
+  # job will not be marked as failed.
+  def post_to_forum
+    begin
+      response = RestClient::Request.execute(
+        method: :post,
+        url: EBU::API_URL + "/ebuio/forum/",
+        timeout: EBU::NETWORK_TIMEOUT,
+        open_timeout: EBU::NETWORK_TIMEOUT,
+        payload: {
+          subject: "New encoding: #{self.description}",
+          author: self.user_id.to_s,
+          message: forum_message_template,
+          tags: "encoding"
+        }
+      )
+      if response.code == 200 && obj = JSON.parse(response.to_str)
+        self.update_attribute(:forum_url, obj["url"])
+      end
+    rescue Timeout::Error => e
+      nil
+    rescue => e
+      nil
+    end
+  end
+  
   
   private
 
@@ -113,5 +140,34 @@ class EncodingJob < ActiveRecord::Base
   def create_conformance_checking_job
     self.conformance_checking_job = RemoteJob.initialize_for_conformance_checking(self)
     self.save
+  end
+  
+  def forum_message_template
+    mpd_url = "#{EBU::APP_HOST}/media/" + ['dash', self.randomized_id, 'dash.mpd'].join('/')
+    template = "A new encoding was added to the test encoding platform using the following settings: 
+
+* * *
+
+### Variant Jobs
+
+"
+
+self.variant_jobs.each do |v|
+  template << "
+* **Source file**: `#{v.source_file.resource_file_name}`
+* **Preset settings**: `#{v.encoder_flags}`
+
+  "
+end
+
+template << "
+### Post-processing preset
+
+`#{self.post_processing_flags}`
+
+
+[View this video in Dash.js player](http://ebu.io/#{Rails.application.config.ebu_plugit_root}/encoding_jobs/#{self.id}/play)
+
+Raw MPD: [#{mpd_url}](#{mpd_url})"
   end
 end
