@@ -21,7 +21,7 @@ class Organization < ActiveRecord::Base
     begin
       response = RestClient::Request.execute(
         method: :get,
-        url: EBU::API_URL + "/orgas",
+        url: EBU::API_URL + "/orgas/",
         timeout: EBU::NETWORK_TIMEOUT,
         open_timeout: EBU::NETWORK_TIMEOUT
       )
