@@ -50,6 +50,7 @@ EbuOndemand::Application.routes.draw do
   
   get 'cron/job_state'
   get 'cron/purge'
+  get 'cron/organizations'
   
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
