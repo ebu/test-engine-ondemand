@@ -67,7 +67,7 @@ class PlugitController < ApplicationController
   
   def assign_ebu_variables
     ebu_headers = Hash.new.tap do |h|
-      request.headers.map { |k, v| k.start_with?('HTTP_X_PLUGIT_') ? h[k] = parse_value(v) : nil }
+      request.headers.map { |k, v| k.is_a? String and k.start_with?('HTTP_X_PLUGIT_') ? h[k] = parse_value(v) : nil }
     end
     @plugit_env = ebu_headers    
   end
