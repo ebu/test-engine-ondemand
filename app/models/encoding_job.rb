@@ -85,6 +85,7 @@ class EncodingJob < ActiveRecord::Base
         url: EBU::API_URL + "/ebuio/forum/",
         timeout: EBU::NETWORK_TIMEOUT,
         open_timeout: EBU::NETWORK_TIMEOUT,
+        headers: { 'Accept-Charset' => 'utf-8' },
         payload: {
           subject: "New encoding: #{self.description}",
           author: self.user_id.to_s,
