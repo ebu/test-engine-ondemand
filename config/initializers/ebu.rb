@@ -35,7 +35,7 @@ module EBU
   CALLBACK_URL_FOR_CODEM = case Rails.env
     when 'development' then 'http://localhost:3000/codem_notifications'
     when 'development_remote' then 'http://localhost:3000/codem_notifications'
-    when 'production' then 'http://ebu-ondemand.madebyhiro.com/codem_notifications'
+    when 'production' then 'http://on-demand.ebu.io/codem_notifications'
     else raise "Codem callback URL not yet configured."
   end
   
@@ -43,7 +43,7 @@ module EBU
   CALLBACK_URL_FOR_HTTP_RUNNER = case Rails.env
     when 'development' then 'http://localhost:3000/http_runner_notifications'
     when 'development_remote' then 'http://localhost:3000/http_runner_notifications'
-    when 'production' then 'http://ebu-ondemand.madebyhiro.com/http_runner_notifications'
+    when 'production' then 'http://on-demand.ebu.io/http_runner_notifications'
     else raise "http-runner callback URL not yet configured."
   end
   
@@ -65,7 +65,7 @@ module EBU
   end
   
   APP_HOST = case Rails.env
-    when "production" then "http://ebu-ondemand.madebyhiro.com"
+    when "production" then "http://on-demand.ebu.io"
     when "development_remote" then "http://madebyhiro.com:8000"
     else "http://localhost"
   end

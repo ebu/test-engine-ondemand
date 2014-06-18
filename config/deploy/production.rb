@@ -1,4 +1,4 @@
-set :deploy_host, "ebu-ondemand.madebyhiro.com"
+set :deploy_host, "on-demand.ebu.io"
 set :deploy_to, "/var/www/#{application}/rails"
 
 set :branch, "master"
