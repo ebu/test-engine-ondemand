@@ -30,3 +30,5 @@
 
 # Ignore all compiled Java code
 *.class
+
+.keys
