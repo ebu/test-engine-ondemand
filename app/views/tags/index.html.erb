@@ -1,13 +1,23 @@
 <div class="panel panel-default">
   <div class="panel-heading">
-    <h3 class="panel-title">Tags for encoding jobs</h3>
+    <h3 class="panel-title">Tags for encoding job device playout</h3>
   </div>
 
   <div class="panel-body">
-    <p><em>These are the tags that can be assigned to encoding jobs. Any changes made here are performed live.</em></p>
-    <%= render partial: 'tags/encoding_job_tags', object: @encoding_job_tags %>
+    <p><em>These are the tags that can be assigned to encoding jobs regarding the device playout. This will allow users to specify what kind of devices are targetted (e.g. Tablet, Televisions, etc.).</em></p>
+    <%= render partial: 'tags/tags', locals: { tags: @encoding_job_device_playout_tags, tag_type: Tag.tag_types["encoding_job_device_playout"] } %>
+  </div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Tags for encoding job target specification</h3>
   </div>
 
+  <div class="panel-body">
+    <p><em>These are the tags that can be assigned to encoding jobs regarding the targetted specifications. This will allow users to specify what kind of specifications are targetted (e.g. HBBTV).</em></p>
+    <%= render partial: 'tags/tags', locals: { tags: @encoding_job_specification_tags, tag_type: Tag.tag_types["encoding_job_specification"] } %>
+  </div>
 </div>
 
 <div class="panel panel-default">
@@ -16,8 +26,7 @@
   </div>
 
   <div class="panel-body">
-    <p><em>These are the tags that can be assigned to preset templates. Any changes made here are performed live.</em></p>
-    <%= render partial: 'tags/preset_template_tags', object: @preset_template_tags %>
+    <p><em>These are the tags that can be assigned to preset templates. These allow for additional filtering on the forum.</em></p>
+    <%= render partial: 'tags/tags', locals: { tags: @preset_template_tags, tag_type: Tag.tag_types["preset_template"] } %>
   </div>
-
 </div>

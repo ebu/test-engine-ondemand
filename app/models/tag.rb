@@ -1,6 +1,6 @@
 class Tag < ActiveRecord::Base
   # Tags can be applied to either encoding_jobs or preset_templates
-  enum tag_type: [ :encoding_job, :preset_template ]
+  enum tag_type: [ :encoding_job_device_playout, :encoding_job_specification, :preset_template ]
   
   # Tags must have a unique name within a certain tag_type
   validates :name, uniqueness: { scope: :tag_type }, presence: true

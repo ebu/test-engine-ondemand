@@ -1,0 +1,13 @@
+<input type="text" name="tags" placeholder="Add new tags..." id="tags_<%= tag_type %>" />
+
+<%= javascript_tag do %>
+$('#tags_<%= tag_type %>').tagsManager({
+  AjaxPush: '/<%= Rails.application.config.ebu_plugit_root %>/tags',
+  AjaxPushAllTags: true,
+  AjaxPushParameters: {
+    'csrfmiddlewaretoken': '{~__PLUGIT_CSRF_TOKEN__~}',
+    'tag_type': <%= tag_type %>
+  },
+  prefilled: <%= tags.collect(&:name).to_json.html_safe %>
+})
+<% end %>
