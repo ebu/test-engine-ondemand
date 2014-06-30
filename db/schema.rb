@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140402085222) do
+ActiveRecord::Schema.define(version: 20140630114656) do
 
   create_table "codem_notifications", force: true do |t|
     t.string   "status"
@@ -93,6 +93,15 @@ ActiveRecord::Schema.define(version: 20140402085222) do
   end
 
   add_index "remote_jobs", ["remote_id"], name: "index_remote_jobs_on_remote_id", using: :btree
+
+  create_table "tags", force: true do |t|
+    t.string   "name"
+    t.integer  "tag_type",   default: 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "tags", ["tag_type"], name: "index_tags_on_tag_type", using: :btree
 
   create_table "transcoders", force: true do |t|
     t.string   "host_name"
