@@ -16,6 +16,14 @@
 <%= f.text_area :template_text, placeholder: "Template for preset. Write your own settings or use one of the pre-fill buttons as a starting point.", class: "form-control", rows: 5, data: { required: true } %><br/>
 </div>
 
+<div class="form-group">
+<%= f.label 'Tags: ' %>
+<span><em>Tags help with identifying different use cases on the EBU.io forum. Add them to describe the preset.</em></span>
+<%= checkboxes_for_tags f, :tags, Tag.preset_template %>
+</div>
+
+<hr>
+
 <%= plugit_link_to "Cancel", preset_templates_path, class: "btn btn-default" %>
 <%= f.submit class: "btn btn-primary", value: "Save" %>
 

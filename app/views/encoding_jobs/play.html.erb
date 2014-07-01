@@ -75,6 +75,18 @@
         </div>
     </div>
 
+    <div class="row">
+      <div class="panel panel-default">
+          <div class="panel-heading panel-top">
+              <h3 class="panel-title">Description</h3>
+          </div>
+          <div class="panel-body">
+            <p><%= @encoding_job.description%></p>
+            <p><%= tags_for(@encoding_job.combined_tags) %></p>
+          </div>
+      </div>
+    </div>
+
     <% unless @encoding_job.forum_url.blank? %>
     <div class="row">
       <div class="panel panel-default">

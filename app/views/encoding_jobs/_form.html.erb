@@ -5,6 +5,20 @@
 <%= f.text_field :description, placeholder: "Description for job, e.g. 'Test adaptive 3 variants'.", class: "form-control", data: { required: true } %><br/>
 </div>
 
+<div class="form-group">
+<%= f.label 'Device playout tags: ' %>
+<span><em>These tags indicate the devices you are targetting with this encoding job (e.g. phones, tables, etc.).</em></span>
+<%= checkboxes_for_tags f, :device_playout_tags, Tag.encoding_job_device_playout %>
+</div>
+
+<hr>
+
+<div class="form-group">
+<%= f.label 'Specification tags: ' %>
+<span><em>These tags indicate what kind of specifications you are targetting (e.g. DVB, HbbTV).</em></span>
+<%= checkboxes_for_tags f, :specification_tags, Tag.encoding_job_specification %>
+</div>
+
 <div class="panel panel-default" id="variant_jobs_list">
   <div class="panel-heading">
     <strong>Variant jobs</strong> <%= link_to_add_variant_job('Add encoding variant', f, @encoding_job) %>

@@ -16,8 +16,18 @@ class EncodingJob < ActiveRecord::Base
   
   accepts_nested_attributes_for :variant_jobs
   
+  serialize :device_playout_tags, Array
+  serialize :specification_tags, Array
+  serialize :combined_tags, Array
+  
   before_create do
     self.random_id = SecureRandom.hex(8)
+    self.combined_tags = (
+      device_playout_tags +
+      specification_tags +
+      variant_jobs.collect(&:tags) +
+      post_processing_template.tags
+    ).flatten.uniq.reject { |t| t.blank? }
   end
   
   scope :recently_encoded, -> { success.limit(10).order("created_at DESC") }
@@ -90,7 +100,7 @@ class EncodingJob < ActiveRecord::Base
           subject: "New encoding: #{self.description}",
           author: self.user_id.to_s,
           message: forum_message_template,
-          tags: "encoding"
+          tags: combined_tags.blank? ? "encoding" : combined_tags.join(',')
         }
       )
       if response.code == 200 && obj = JSON.parse(response.to_str)
@@ -102,7 +112,6 @@ class EncodingJob < ActiveRecord::Base
       nil
     end
   end
-  
   
   private
 

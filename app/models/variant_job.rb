@@ -27,6 +27,10 @@ class VariantJob < ActiveRecord::Base
     codem_id.blank?
   end
   
+  def tags
+    encoder_preset_template.try(:tags)
+  end
+  
   def progress
     @progress ||= if success?
       1.0

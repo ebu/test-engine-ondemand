@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140630114656) do
+ActiveRecord::Schema.define(version: 20140701073507) do
 
   create_table "codem_notifications", force: true do |t|
     t.string   "status"
@@ -39,6 +39,9 @@ ActiveRecord::Schema.define(version: 20140630114656) do
     t.integer  "user_id"
     t.boolean  "is_reference",                default: false, null: false
     t.string   "forum_url"
+    t.text     "device_playout_tags"
+    t.text     "specification_tags"
+    t.text     "combined_tags"
   end
 
   add_index "encoding_jobs", ["created_at"], name: "index_encoding_jobs_on_created_at", using: :btree
@@ -75,6 +78,7 @@ ActiveRecord::Schema.define(version: 20140630114656) do
     t.string   "description"
     t.integer  "user_id"
     t.boolean  "is_reference",  default: false, null: false
+    t.text     "tags"
   end
 
   add_index "preset_templates", ["is_reference"], name: "index_preset_templates_on_is_reference", using: :btree

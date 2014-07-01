@@ -5,5 +5,6 @@
     <b class="small"><%= human_readable_preset_type referenced_preset_template %></b><br>
     <%= formatted_preset_template_text referenced_preset_template.template_text %>
   </td>
+  <td><%= tags_for referenced_preset_template.tags %></td>
   <td><%= formatted_owner(referenced_preset_template.user) %></td>
 </tr>

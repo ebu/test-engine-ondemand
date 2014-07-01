@@ -1,6 +1,7 @@
 <tr>
   <td><%= encoding_job.id %></td>
   <td><%= plugit_link_to encoding_job.description, encoding_job_path(encoding_job) %></td>
+  <td><%= tags_for(encoding_job.combined_tags)%></td>
   <td><%= job_status_label encoding_job %></td>
   <td>
     <% if auth_can_write? %>

@@ -31,6 +31,9 @@ class EncodingJobsController < PlugitController
   def create
     @encoding_job = EncodingJob.new(user_params)
     @encoding_job.user_id = logged_in_user_id
+    @encoding_job.device_playout_tags = @encoding_job.device_playout_tags.uniq.reject { |t| t.blank? }
+    @encoding_job.specification_tags = @encoding_job.specification_tags.uniq.reject { |t| t.blank? }
+    
     if @encoding_job.save
       flash[:notice] = 'Created new encoding job'
       redirect_to encoding_jobs_path
@@ -126,6 +129,8 @@ class EncodingJobsController < PlugitController
       :post_processing_template_id,
       :post_processing_flags,
       :user_id,
-      variant_jobs_attributes: [ :encoder_preset_template_id, :encoder_flags, :source_file_id ])
+      variant_jobs_attributes: [ :encoder_preset_template_id, :encoder_flags, :source_file_id ],
+      device_playout_tags: [],
+      specification_tags: [])
   end
 end
