@@ -14,7 +14,7 @@ class EncodingJobsController < PlugitController
   
   # Index action shows own jobs and reference jobs.
   def index
-    @encoding_jobs = EncodingJob.owned(logged_in_user)
+    @encoding_jobs = EncodingJob.owned(logged_in_user).order("created_at DESC")
     @referenced_encoding_jobs = EncodingJob.referenced_for_dashboard
   end
   

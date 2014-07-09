@@ -1,15 +1,34 @@
+/*
+
+This file contains Original Code and/or Modifications of Original Code
+as defined in and that are subject to the Apple Public Source License
+Version 2.0 (the 'License'). You may not use this file except in
+compliance with the License. Please obtain a copy of the License at
+http://www.opensource.apple.com/apsl/ and read it before using this
+file.
+
+The Original Code and all software distributed under the License are
+distributed on an 'AS IS' basis, WITHOUT WARRANTY OF ANY KIND, EITHER
+EXPRESS OR IMPLIED, AND APPLE HEREBY DISCLAIMS ALL SUCH WARRANTIES,
+INCLUDING WITHOUT LIMITATION, ANY WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE, QUIET ENJOYMENT OR NON-INFRINGEMENT.
+Please see the License for the specific language governing rights and
+limitations under the License.
+
+*/
+
+
 #include <limits>
 #include "HelperMethods.h"
 #include "PostprocessData.h"
+#include <math.h> 
+#include <sstream>
 
 #define scaleToTIR(x) ((long double)(x)/(long double)tir->mediaTimeScale)
 
 void checkDASHBoxOrder(long cnt, atomOffsetEntry *list, long segmentInfoSize, bool initializationSegment, UInt64 *segmentSizes, MovieInfoRec *mir)
 {
     UInt64 offset = 0;
-
-    bool psshInInit = false;
-    bool tencInInit = false;
     
     if(initializationSegment)
     {
@@ -25,12 +44,6 @@ void checkDASHBoxOrder(long cnt, atomOffsetEntry *list, long segmentInfoSize, bo
                 {
                     errprint("mdat found in initialization segment: Section 6.3.4.2. of ISO/IEC 23009-1:2012(E): The Initialization Segment shall not contain any media data with an assigned presentation time.\n");
                 }
-
-                if(vg.dash264enc && list[i].type == 'pssh')
-                    psshInInit = true;
-                
-                if(vg.dash264enc && list[i].type == 'tenc')
-                    tencInInit = true;
             }
         }
         
@@ -46,8 +59,6 @@ void checkDASHBoxOrder(long cnt, atomOffsetEntry *list, long segmentInfoSize, bo
         bool boxAtSegmentStartFound = false;
         bool sidxFoundInSegment = false;
         bool ssixFoundInSegment = false;
-        bool psshFoundInSegment = false;
-        bool tencFoundInSegment = false;
         
         for (int i = 0; i < cnt; i++) 
         {
@@ -86,12 +97,6 @@ void checkDASHBoxOrder(long cnt, atomOffsetEntry *list, long segmentInfoSize, bo
 							errprint("no ftyp box found, violating: Section 4.3 of ISO/IEC 14496-12:2012(E)\n");
 						}
 					}
-
-                    if(vg.dash264enc && list[i].type == 'pssh')
-                        psshFoundInSegment = true;
-                    
-                    if(vg.dash264enc && list[i].type == 'tenc')
-                        tencFoundInSegment = true;
                     
                     if(list[j].type == 'moof')
                     {                        
@@ -130,11 +135,11 @@ void checkDASHBoxOrder(long cnt, atomOffsetEntry *list, long segmentInfoSize, bo
                 if(vg.dsms[index] && !moovInSegmentFound)
                     errprint("Segment %d has dsms compatible brand (Self-initializing media segment), however, moov box not found in this segment as expected.\n",index+1);
                 
-                if(vg.dash264enc && !psshInInit && !psshFoundInSegment)
-                    errprint("DASH264 DRM checks: No pssh found in initialization segment and also missing in media Segment %d.\n",index+1);
+                if(vg.dash264enc && !vg.psshInInit && !vg.psshFoundInSegment[index])
+                    errprint("DASH264 DRM checks: No pssh found in initialization segment and also missing in media Segment %d.\n",index);
 
-                if(vg.dash264enc && !tencInInit && !tencFoundInSegment)
-                    errprint("DASH264 DRM checks: No tenc found in initialization segment and also missing in media Segment %d.\n",index+1);
+                if(vg.dash264enc && !vg.tencInInit && !vg.tencFoundInSegment[index])
+                    errprint("DASH264 DRM checks: No tenc found in initialization segment and also missing in media Segment %d.\n",index);
             }
 
             if(boxAtSegmentStartFound == true)
@@ -145,7 +150,7 @@ void checkDASHBoxOrder(long cnt, atomOffsetEntry *list, long segmentInfoSize, bo
                     sidxFound = true;
 
                     if(!initializationSegment && !vg.msixInFtyp)
-                        errprint("msix not found in ftyp of a self-intializing segment %d, indxing info found, violating: Section 6.3.4.3. of ISO/IEC 23009-1:2012(E): Each Media Segment shall carry 'msix' as a compatible brand \n",index);
+                        warnprint("msix not found in ftyp of a self-intializing segment %d, indxing info found, violating: Section 6.3.4.3. of ISO/IEC 23009-1:2012(E): Each Media Segment shall carry 'msix' as a compatible brand \n",index);
                         
                 }
                 
@@ -153,7 +158,7 @@ void checkDASHBoxOrder(long cnt, atomOffsetEntry *list, long segmentInfoSize, bo
                 {
                     ssixFoundInSegment = true;
                     if(!vg.simsInStyp[index])
-                        errprint("ssix found in Segment %d, but brand 'sims' not found in the styp for the segment, violating: Section 6.3.4.4. of ISO/IEC 23009-1:2012(E): It shall carry 'sims' in the Segment Type box ('styp') as a compatible brand.",index);
+                        warnprint("ssix found in Segment %d, but brand 'sims' not found in the styp for the segment, violating: Section 6.3.4.4. of ISO/IEC 23009-1:2012(E): It shall carry 'sims' in the Segment Type box ('styp') as a compatible brand.",index);
                 }
             }
 
@@ -272,7 +277,8 @@ void initializeLeafInfo(MovieInfoRec *mir, long numMediaSegments)
                     {
                         mir->tirList[i].leafInfo[mediaSegmentNumber - 1].lastMoofIndex = mir->moofInfo[k-1].index;
                         mir->tirList[i].leafInfo[mediaSegmentNumber - 1].lastPresentationTime = mir->moofInfo[k-1].moofLastPresentationTimePerTrack[i];
-                        mir->tirList[i].leafInfo[mediaSegmentNumber - 1].presentationEndTime = mir->moofInfo[k-1].moofPresentationEndTimePerTrack[i];
+                        mir->tirList[i].leafInfo[mediaSegmentNumber - 1].presentationEndTime = mir->moofInfo[k-1].moofPresentationEndTimePerTrack[i];                        
+                        mir->tirList[i].leafInfo[mediaSegmentNumber - 1].offset = mir->moofInfo[k-1].offset;
                     }
 
                     if((long)mediaSegmentNumber == (numMediaSegments - 1))
@@ -280,6 +286,7 @@ void initializeLeafInfo(MovieInfoRec *mir, long numMediaSegments)
                         mir->tirList[i].leafInfo[mediaSegmentNumber].lastMoofIndex = mir->moofInfo[mir->numFragments-1].index;
                         mir->tirList[i].leafInfo[mediaSegmentNumber].lastPresentationTime = mir->moofInfo[mir->numFragments-1].moofLastPresentationTimePerTrack[i];
                         mir->tirList[i].leafInfo[mediaSegmentNumber].presentationEndTime = mir->moofInfo[mir->numFragments-1].moofPresentationEndTimePerTrack[i];
+                        mir->tirList[i].leafInfo[mediaSegmentNumber].offset = mir->moofInfo[mir->numFragments-1].offset;
                     }
 
                     mediaSegmentNumber++;
@@ -751,7 +758,7 @@ void checkSegmentStartWithSAP(int startWithSAP, MovieInfoRec *mir)
 
 OSErr processIndexingInfo(MovieInfoRec *mir)
 {
-    UInt32 i, sidxIndex;
+    UInt32 i;
     UInt64 absoluteOffset;
     UInt64 referenceEPT;
     UInt64 lastLeafEPT = 0;
@@ -761,7 +768,7 @@ OSErr processIndexingInfo(MovieInfoRec *mir)
     UInt64 segmentOffset = 0;
     
     int firstMediaSegment = vg.initializationSegment ? 1 : 0;
-	sidxIndex = 0;
+    
     for(long trackIndex = 0 ; trackIndex < mir->numTIRs ; trackIndex++)
     {
         for(i = firstMediaSegment ; i < (UInt32)vg.segmentInfoSize ; i++)
@@ -783,8 +790,7 @@ OSErr processIndexingInfo(MovieInfoRec *mir)
                                     
                 if(mir->sidxInfo[j].offset >= segmentOffset && (previousSidx == NULL || previousSidx->offset < segmentOffset))
                 {
-                    firstSidxOfSegment = &mir->sidxInfo[j];
-					sidxIndex = j;
+                    firstSidxOfSegment = &mir->sidxInfo[j];                    
                     break;
                 }
             }
@@ -793,55 +799,29 @@ OSErr processIndexingInfo(MovieInfoRec *mir)
             if(firstSidxOfSegment == NULL)
                 continue;
 
-            UInt32 ref_size = 0;
             long double segmentDurationSec = 0;
 
             for(UInt32 j = 0 ; j < mir->numFragments; j++)
             {
-				/*compute size of segment*/
-				if (!ref_size) {
-					for (UInt32 k=0; k<firstSidxOfSegment->reference_count; k++) {
-						ref_size += firstSidxOfSegment->references[k].referenced_size;
-					}
-				}
+				if (mir->moofInfo[j].offset >= segmentOffset && mir->moofInfo[j].offset < firstSidxOfSegment->offset)
+                   errprint("Section 6.3.4.3. of ISO/IEC 23009-1:2012(E): If 'sidx' is present in a Media Segment, the first 'sidx' box shall be placed before any 'moof' box. Violated for fragment number %d\n", j + 1);
 
-                if(mir->moofInfo[j].offset >= segmentOffset && mir->moofInfo[j].offset < firstSidxOfSegment->offset)
-                    errprint("Section 6.3.4.3. of ISO/IEC 23009-1:2012(E): If 'sidx' is present in a Media Segment, the first 'sidx' box shall be placed before any 'moof' box. Violated for fragment number %d\n",j+1);
-
-				/*check that segment indexing covers the entire moof's duration*/
-				if (segmentOffset + ref_size < mir->moofInfo[j].offset) {
-					long double diff = ABS(segmentDurationSec - firstSidxOfSegment->cumulatedDuration);		            
-					if(diff > (long double)1.0/(long double)mir->tirList[trackIndex].mediaTimeScale)
-						;//errprint("Section 6.3.4.3. of ISO/IEC 23009-1:2012(E): If 'sidx' is present in a Media Segment, the first 'sidx' box ... shall document the entire Segment. Violated for Media Segment %d. Segment duration %Lf, Sidx documents %Lf for track %d, diff %Lf\n",i-firstMediaSegment+1,segmentDurationSec,firstSidxOfSegment->cumulatedDuration,mir->tirList[trackIndex].trackID,diff);
-
-					/*find next sidx*/
-					for(UInt32 k = sidxIndex ; k < mir->numSidx ; k++) {
-						if (mir->sidxInfo[k].offset >= segmentOffset + ref_size) {
-							sidxIndex = k;
-							ref_size = 0;
-		                    firstSidxOfSegment = &mir->sidxInfo[k];
-							segmentOffset = firstSidxOfSegment->offset;
-							segmentDurationSec = 0;
-							break;
-						}
-					}
-				}
 
                 if(mir->moofInfo[j].samplesToBePresented && mir->moofInfo[j].offset >= segmentOffset && mir->moofInfo[j].offset < (segmentOffset+vg.segmentSizes[i]) )
                 {
                     segmentDurationSec += (mir->moofInfo[j].moofPresentationEndTimePerTrack[trackIndex] - mir->moofInfo[j].moofEarliestPresentationTimePerTrack[trackIndex]);
                 }
             }
-			if (ref_size) {                        
-				long double diff = ABS(segmentDurationSec - firstSidxOfSegment->cumulatedDuration);
-	            
-				if(diff > (long double)1.0/(long double)mir->tirList[trackIndex].mediaTimeScale)
-					errprint("Section 6.3.4.3. of ISO/IEC 23009-1:2012(E): If 'sidx' is present in a Media Segment, the first 'sidx' box ... shall document the entire Segment. Violated for Media Segment %d. Segment duration %Lf, Sidx documents %Lf for track %d, diff %Lf\n",i-firstMediaSegment+1,segmentDurationSec,firstSidxOfSegment->cumulatedDuration,mir->tirList[trackIndex].trackID,diff);
+            
+			long double diff = ABS(segmentDurationSec - firstSidxOfSegment->cumulatedDuration);
+            
+			if(diff > (long double)1.0/(long double)mir->tirList[trackIndex].mediaTimeScale)
+				errprint("Section 6.3.4.3. of ISO/IEC 23009-1:2012(E): If 'sidx' is present in a Media Segment, the first 'sidx' box ... shall document the entire Segment. Violated for Media Segment %d. Segment duration %Lf, Sidx documents %Lf for track %d, diff %Lf\n",i-firstMediaSegment+1,segmentDurationSec,firstSidxOfSegment->cumulatedDuration,mir->tirList[trackIndex].trackID,diff);
 
-				segmentOffset += vg.segmentSizes[i];  
-			}
-        }
+			segmentOffset += vg.segmentSizes[i];  
+		}
     }
+
     
     if(vg.isoLive && mir->numTIRs > 1 && !vg.msixInFtyp)
         errprint("Check failed for DASH ISO Base media file format live profile, multiple streams yet no 'msix' compatible brand, violating Section 8.4.3. of ISO/IEC 23009-1:2012(E): Media Segments containing multiple Media Components shall comply with the formats defined in 6.3.4.3, i.e. the brand 'msix'\n");        
@@ -874,8 +854,10 @@ OSErr processIndexingInfo(MovieInfoRec *mir)
 
                 if((double)referenceEPT/(double)mir->sidxInfo[i].timescale != (double)sidx->earliest_presentation_time/(double)sidx->timescale)
                     errprint("Referenced sidx earliest_presentation_time %lf does not match to reference EPT %lf for sidx number %d at reference count %d\n",(double)sidx->earliest_presentation_time/(double)sidx->timescale,(double)referenceEPT/(double)mir->sidxInfo[i].timescale,i+1,j);
-                
-                if((double)((long double)mir->sidxInfo[i].references[j].subsegment_duration/(long double)mir->sidxInfo[i].timescale) != (double)sidx->cumulatedDuration)
+
+                 long double diff = ABS((double)((long double)mir->sidxInfo[i].references[j].subsegment_duration/(long double)mir->sidxInfo[i].timescale) - (double)sidx->cumulatedDuration);
+                 
+                 if(diff > (long double)1.0/(long double)mir->tirList[trackIndex].mediaTimeScale)
                     errprint("Referenced sidx duration %Lf does not match to subsegment_duration %Lf for sidx number %d at reference count %d\n",sidx->cumulatedDuration,((long double)mir->sidxInfo[i].references[j].subsegment_duration/(long double)mir->sidxInfo[i].timescale),i+1,j);
 
 				if(mir->sidxInfo[i].references[j].starts_with_SAP > 0)
@@ -941,6 +923,7 @@ OSErr processIndexingInfo(MovieInfoRec *mir)
                     tir->leafInfo[leafsProcessed - 1].lastPresentationTime = mir->moofInfo[moofIndex - 1].moofLastPresentationTimePerTrack[trackIndex];
                     tir->leafInfo[leafsProcessed - 1].presentationEndTime = mir->moofInfo[moofIndex - 1].moofPresentationEndTimePerTrack[trackIndex];
                     tir->leafInfo[leafsProcessed - 1].lastMoofIndex = mir->moofInfo[moofIndex - 1].index;
+                    tir->leafInfo[leafsProcessed - 1].offset = mir->moofInfo[moofIndex - 1].offset;
                 }
 
                 if(leafsProcessed == (tir->numLeafs - 1))
@@ -948,6 +931,7 @@ OSErr processIndexingInfo(MovieInfoRec *mir)
                     tir->leafInfo[leafsProcessed].lastPresentationTime = mir->moofInfo[mir->numFragments - 1].moofLastPresentationTimePerTrack[trackIndex];
                     tir->leafInfo[leafsProcessed].presentationEndTime= mir->moofInfo[mir->numFragments - 1].moofPresentationEndTimePerTrack[trackIndex];
                     tir->leafInfo[leafsProcessed].lastMoofIndex = mir->moofInfo[mir->numFragments - 1].index;
+                    tir->leafInfo[leafsProcessed].offset = mir->moofInfo[mir->numFragments - 1].offset;
                 }
                 
                 tir->leafInfo[leafsProcessed].firstInSegment = leafsProcessed > 0 ? checkSegmentBoundry(mir->moofInfo[moofIndex - 1].offset, absoluteOffset) : true;
@@ -1053,7 +1037,8 @@ OSErr processIndexingInfo(MovieInfoRec *mir)
 
 void processBuffering(long cnt, atomOffsetEntry *list, MovieInfoRec *mir)
 {
-    UInt64 initSize = 0;
+
+    SInt64 initSize = 0;
 
     //Find initialization information size, we remove initialization from this, otherwise this becomes too complex and confusing: initialization info is necessary for random access but fetching this is a clearly separate part of the process (most often if not always this is a 2-step fetch)
     for (int i = 0; i < cnt; i++) 
@@ -1071,54 +1056,90 @@ void processBuffering(long cnt, atomOffsetEntry *list, MovieInfoRec *mir)
     
     for(int i = 0 ; i < mir->numTIRs ; i++)
     {
-        TrackInfoRec *tir = &(mir->tirList[i]);
-        UInt64 bufferFullness = (UInt64)((long double)vg.bandwidth)*vg.minBufferTime;  //bits (not Bytes)
         bool trackNonConforming = false;
-        UInt64 lastOffset = initSize;
-        //fprintf(stderr,"Buffered bytes: %Lf\n",(UInt64)((long double)vg.bandwidth)*vg.minBufferTime/8.0);
-                
-        for(UInt32 j = 0 ; j < mir->numFragments ; j++)
+        long double currentBandwidth = (long double)vg.bandwidth;
+        long double bandwidthIncrement = 100;
+        std::stringstream errStr;
+        
+        do
         {
-            MoofInfoRec *moof = &mir->moofInfo[j];
+            TrackInfoRec *tir = &(mir->tirList[i]);
+            long double bufferFullness = currentBandwidth*vg.minBufferTime;  //bits (not Bytes)
+            SInt64 lastOffset = initSize;
+            SInt64 timeNowInTicks = (SInt64)(vg.minBufferTime*(long double)tir->mediaTimeScale);
 
-            UInt64 offset = moof->offset - initSize;
-            
-            if(moof->announcedSAP && bufferFullness > (UInt64)(vg.bandwidth*vg.minBufferTime)) //There is no buffer overflow for DASH buffer model, only case is on a SAP, as DASH spec. defines the requiremnt that the playback could be from any SAP and at the SAP, the buffer fullness is bandwidth*minBufferTime
-                bufferFullness = (UInt64)((long double)vg.bandwidth)*vg.minBufferTime;
-            
-            for(UInt32 k = 0; k < moof->numTrackFragments ; k++)
+            long double totalDataRemoved = 0;
+            long double totalBitsAdded = 0;
+            trackNonConforming = false;
+                    
+            for(UInt32 j = 0 ; j < mir->numFragments ; j++)
             {
-                if(moof->trafInfo[k].track_ID == tir->trackID && moof->trafInfo[k].numTrun > 0) //Assuming 'trun' cannot be empty, 14496-12 version 4 does not indicate such a possiblity.
+                MoofInfoRec *moof = &mir->moofInfo[j];
+
+                SInt64 offset = moof->offset - initSize;
+                
+                if(moof->announcedSAP && bufferFullness > currentBandwidth*vg.minBufferTime) //There is no buffer overflow for DASH buffer model, only case is on a SAP, as DASH spec. defines the requiremnt that the playback could be from any SAP and at the SAP, the buffer fullness is bandwidth*minBufferTime
                 {
-                    for(UInt32 l = 0 ; l < moof->trafInfo[k].numTrun ; l++)
+                    totalDataRemoved += ((bufferFullness - currentBandwidth*vg.minBufferTime)/8.0); //The clipped data, for debug information
+                    bufferFullness = currentBandwidth*vg.minBufferTime;
+                }
+                
+                for(UInt32 k = 0; k < moof->numTrackFragments ; k++)
+                {
+                    if(moof->trafInfo[k].track_ID == tir->trackID && moof->trafInfo[k].numTrun > 0) //Assuming 'trun' cannot be empty, 14496-12 version 4 does not indicate such a possiblity.
                     {
-                        if(moof->trafInfo[k].trunInfo[l].data_offset_present)
-                            offset = moof->offset - initSize + moof->trafInfo[k].trunInfo[l].data_offset;
-                        else if(l == 0)
-                            errprint("data_offset absent for the first run of fragment number %d (absolute moof file offset %lld), unexpected!\n",k+1,moof->offset);
-                        
-                        for(UInt32 m = 0 ; m < moof->trafInfo[k].trunInfo[l].sample_count ; m++)
-                        {            
-                            //bool sample_is_non_sync_sample = (moof->trafInfo[k].trunInfo[l].sample_flags[m] & 0x10000 >> 16) != 0;
-                            //bool sample_is_SAP = !sample_is_non_sync_sample || moof->trafInfo[k].trunInfo[l].sap3[m] || moof->trafInfo[k].trunInfo[l].sap4[m];
-                                
-                            offset += moof->trafInfo[k].trunInfo[l].sample_size[m];
+                        for(UInt32 l = 0 ; l < moof->trafInfo[k].numTrun ; l++)
+                        {
+                            if(moof->trafInfo[k].trunInfo[l].data_offset_present)
+                                offset = moof->offset - initSize + moof->trafInfo[k].trunInfo[l].data_offset;
+                            else if(l == 0)
+                                errprint("data_offset absent for the first run of fragment number %d (absolute moof file offset %lld), unexpected!\n",k+1,moof->offset);
+                            
+                            for(UInt32 m = 0 ; m < moof->trafInfo[k].trunInfo[l].sample_count ; m++)
+                            {            
+                                //bool sample_is_non_sync_sample = (moof->trafInfo[k].trunInfo[l].sample_flags[m] & 0x10000 >> 16) != 0;
+                                //bool sample_is_SAP = !sample_is_non_sync_sample || moof->trafInfo[k].trunInfo[l].sap3[m] || moof->trafInfo[k].trunInfo[l].sap4[m];
 
-                            UInt64 dataSizeToRemove = offset - lastOffset;
-                            //fprintf(stderr,"Size to remove: %lld, Buffer Fullness %Lf, SAP %d, duration %Lf\n",dataSizeToRemove,((long double)bufferFullness)/8.0,moof->announcedSAP,((long double)moof->trafInfo[k].trunInfo[l].sample_duration[m]/(long double)tir->mediaTimeScale));
+								offset += moof->trafInfo[k].trunInfo[l].sample_size[m];
 
-                            lastOffset = offset;
+                                long double dataSizeToRemove = (long double)(offset - lastOffset);
+                                totalDataRemoved += dataSizeToRemove;
+                                //fprintf(stderr,"Total bits removed: %Lf, Size to remove: %Lf, Buffer Fullness: %Lf, average input rate: %Lf, duration: %Lf, sample %d, run %d, track fragment %d, fragment %d, track id %d (sample absolute offset %lld, fragment absolute file offset %lld)\n",totalDataRemoved,dataSizeToRemove,bufferFullness/8.0,totalBitsAdded/(((long double)timeNowInTicks/(long double)tir->mediaTimeScale)-0),((long double)moof->trafInfo[k].trunInfo[l].sample_duration[m]/(long double)tir->mediaTimeScale),m+1,l+1,k+1,j+1,tir->trackID,offset - moof->trafInfo[k].trunInfo[l].sample_size[m] + initSize, moof->offset);
 
-                            if(dataSizeToRemove*8 > bufferFullness)   //Bufferfullness is in bits
-                            {
-                                errprint("Buffer underrun conformance error: first (and only one reported here) for sample %d of run %d of track fragment %d of fragment %d of track id %d (sample absolute file offset %lld, fragment absolute file offset %lld)\n",m+1,l+1,k+1,j+1,tir->trackID,offset - moof->trafInfo[k].trunInfo[l].sample_size[m] + initSize, moof->offset);
-                                trackNonConforming = true;
-                                break;
+                                lastOffset = offset;
+
+                                if(dataSizeToRemove*8 > bufferFullness)   //Bufferfullness is in bits
+                                {
+                                    if(!trackNonConforming)
+                                    {
+                                        if(currentBandwidth == (long double)vg.bandwidth)
+                                            errStr << "Buffer underrun conformance error: first (and only one reported here) for sample " << m+1 << " of run " << l+1 <<" of track fragment " << k+1 << " of fragment " << j+1 <<" of track id " << tir->trackID << " (sample absolute file offset " << offset - moof->trafInfo[k].trunInfo[l].sample_size[m] + initSize << ", fragment absolute file offset " << moof->offset << ", bandwidth: " << (UInt64)currentBandwidth;
+
+                                        trackNonConforming = true;
+                                        break;
+                                    }
+                                    
+                                    long double finalBufferFullness = bufferFullness - dataSizeToRemove*8;
+                                    long double targetBitrate = (long double)(8*(offset - initSize))/((long double)timeNowInTicks/(long double)tir->mediaTimeScale); // Direct bitrate calculation
+                                    
+                                    //fprintf(stderr,"Recalculated: targetBitrate %Lf, byte offset %lld, time %lld: %Lf, total removed %Lf\n",targetBitrate,offset - initSize,timeNowInTicks,((long double)timeNowInTicks/(long double)tir->mediaTimeScale),totalDataRemoved,((long double)offset - initSize)-totalDataRemoved);
+
+                                    if(targetBitrate <= currentBandwidth)
+                                    {
+                                        ;//fprintf(stderr,"Program error: unexpected: calculated target bitrate %Lf for this non-conforming track (with buffer under-run) is less than or equal to its actual bandwidth %Lf , exiting!\n",targetBitrate,currentBandwidth);
+                                        //exit(-1);
+                                    }
+
+                                    //break;
+                                }
+
+                                bufferFullness -= (dataSizeToRemove*8);
+
+                                bufferFullness += (currentBandwidth*((long double)moof->trafInfo[k].trunInfo[l].sample_duration[m]/(long double)tir->mediaTimeScale));
+                                totalBitsAdded += (currentBandwidth*((long double)moof->trafInfo[k].trunInfo[l].sample_duration[m]/(long double)tir->mediaTimeScale));
+                                timeNowInTicks += moof->trafInfo[k].trunInfo[l].sample_duration[m];
                             }
-
-                            bufferFullness -= (dataSizeToRemove*8);
-
-                            bufferFullness += (UInt64)((long double)vg.bandwidth*((long double)moof->trafInfo[k].trunInfo[l].sample_duration[m]/(long double)tir->mediaTimeScale));
+                            if(trackNonConforming) break;
                         }
                         if(trackNonConforming) break;
                     }
@@ -1126,7 +1147,21 @@ void processBuffering(long cnt, atomOffsetEntry *list, MovieInfoRec *mir)
                 }
                 if(trackNonConforming) break;
             }
-            if(trackNonConforming) break;
+
+            if(trackNonConforming)
+            {
+                currentBandwidth += bandwidthIncrement;
+            }
+        }
+        while(trackNonConforming && vg.suggestBandwidth);
+
+        if(trackNonConforming || (currentBandwidth != (long double)vg.bandwidth))   //Latter means vg.suggestBandwidth is set and new bw is calculated
+        {
+            if(vg.suggestBandwidth)
+                errStr << ", estimated bandwidth: " << (UInt64)currentBandwidth;
+
+           errStr << ")\n";
+           errprint(errStr.str().c_str());
         }
     }
 

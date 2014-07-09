@@ -1,5 +1,26 @@
+/*
+
+This file contains Original Code and/or Modifications of Original Code
+as defined in and that are subject to the Apple Public Source License
+Version 2.0 (the 'License'). You may not use this file except in
+compliance with the License. Please obtain a copy of the License at
+http://www.opensource.apple.com/apsl/ and read it before using this
+file.
+
+The Original Code and all software distributed under the License are
+distributed on an 'AS IS' basis, WITHOUT WARRANTY OF ANY KIND, EITHER
+EXPRESS OR IMPLIED, AND APPLE HEREBY DISCLAIMS ALL SUCH WARRANTIES,
+INCLUDING WITHOUT LIMITATION, ANY WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE, QUIET ENJOYMENT OR NON-INFRINGEMENT.
+Please see the License for the specific language governing rights and
+limitations under the License.
+
+*/
+
+
 #include "HelperMethods.h"
 #include "PostprocessData.h"
+#include <math.h> 
 
 //==========================================================================================
 
@@ -152,6 +173,61 @@ bool checkSegmentBoundry(UInt64 offsetLow, UInt64 offsetHigh)
         
 }
 
+int getSegmentNumberByOffset(UInt64 offset)
+{
+    UInt64 currentBoundry = 0;
+
+    for(int i = 0 ; i < (vg.segmentInfoSize - 1) ; i++)
+    {
+        currentBoundry += vg.segmentSizes[i];
+        
+        if(offset >= currentBoundry )
+            return i;
+    }
+
+    return vg.segmentInfoSize;
+        
+}
+
+void logtempInfo(MovieInfoRec *mir)
+{
+    FILE *leafInfoFile = fopen("sidxinfo.txt","wt");
+    if(leafInfoFile == NULL)
+    {
+        printf("Error opening sidxinfo.txt, logging will not be done!\n");
+        return;
+    }
+    
+    fprintf(leafInfoFile,"%ld\n",mir->numTIRs);
+    
+    for(int i = 0 ; i < mir->numTIRs ; i++)
+    {
+        TrackInfoRec *tir = &(mir->tirList[i]);
+        fprintf(leafInfoFile,"%lu\n",tir->mediaTimeScale);
+    }
+        
+    
+    for(int i = 0 ; i < mir->numTIRs ; i++)
+    {
+        TrackInfoRec *tir = &(mir->tirList[i]);
+
+        UInt32 actualLeafCount = 0;
+
+        for(UInt32 j = 0 ; j < tir->numLeafs ; j++)
+            if(tir->leafInfo[j].hasFragments)
+                actualLeafCount ++;
+        
+        fprintf(leafInfoFile,"%u\n",(unsigned int)actualLeafCount);
+        
+        for(UInt32 j = 0 ; j < tir->numLeafs ; j++)
+            if(tir->leafInfo[j].hasFragments)
+                fprintf(leafInfoFile,"%d, %llu, %llu\n",tir->leafInfo[j].firstInSegment,(UInt64)roundl(tir->leafInfo[j].earliestPresentationTime*(long double)tir->mediaTimeScale),tir->leafInfo[j].offset);
+            
+    }
+
+    fclose(leafInfoFile);
+}
+
 void logLeafInfo(MovieInfoRec *mir)
 {
     FILE *leafInfoFile = fopen("leafinfo.txt","wt");
@@ -192,5 +268,9 @@ void logLeafInfo(MovieInfoRec *mir)
     }
 
     fclose(leafInfoFile);
+
+    logtempInfo(mir);
 }
+
+
 

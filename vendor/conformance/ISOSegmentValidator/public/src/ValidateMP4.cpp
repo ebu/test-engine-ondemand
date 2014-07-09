@@ -1,97 +1,22 @@
 /*
 
+This file contains Original Code and/or Modifications of Original Code
+as defined in and that are subject to the Apple Public Source License
+Version 2.0 (the 'License'). You may not use this file except in
+compliance with the License. Please obtain a copy of the License at
+http://www.opensource.apple.com/apsl/ and read it before using this
+file.
 
-############################################################################
-##                Test Tools Source Code License Notice                   ##
-############################################################################
-                 Internet Streaming Media Alliance (ISMA)
+The Original Code and all software distributed under the License are
+distributed on an 'AS IS' basis, WITHOUT WARRANTY OF ANY KIND, EITHER
+EXPRESS OR IMPLIED, AND APPLE HEREBY DISCLAIMS ALL SUCH WARRANTIES,
+INCLUDING WITHOUT LIMITATION, ANY WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE, QUIET ENJOYMENT OR NON-INFRINGEMENT.
+Please see the License for the specific language governing rights and
+limitations under the License.
 
-          TEST TOOLS SOURCE CODE RELATED TO THE ISMA SPECIFICATION
-
-ISMA Member Apple ('Submitting Member'), submitting the 
-Contributed Code in this Test Tools source code has agreed to the
-following terms and conditions by including this notice. 'Contributed Code'
-means the code originally written by, or code modifications made by, the 
-Submitting Member included in this Test Tools source code.  This submission
-by Apple was registered as Contribution IN009.
-
-COMPANYNAME1, COMPANYNAME2, COMPANYNAME3, COMPANYNAME4, and COMPANYNAME5
-('Previous Submitting Members'), which previously submitted contributed 
-code to this Test Tools source code, have agreed to the following terms 
-and conditions in their respective submissions.
-
---------- ISMA Members downloading and/or using this Test Tool ------------
- PLEASE READ BEFORE COPYING, INSTALLING, OR USING.  By loading or using 
- the Test Tools, you agree to the terms and conditions herein.  If you do 
- not wish to so agree, do not load, install, or use this Test Tool.  
----------------------------------------------------------------------------
-
-1.   Terms and Conditions:
-
-1.1  Submitting Member hereby grants to ISMA an IRREVOCABLE, world-wide,
-     royalty-free, non-exclusive license:
-     (a) to intellectual property rights (Copyright and Patent) in the
-         Contributed Code in this Test Tools submission Licensable 
-         by the Submitting Member.
-
-        'Licensable' means having the right to grant, to the maximum
-         extent possible, whether at the time of the initial grant or
-         subsequently acquired, any and all of the rights conveyed herein.
-
-     (b) to use, reproduce and DISTRIBUTE, the submitted Test Tools
-         as ISMA deems appropriate.
-
-1.2  Submitting Member hereby grants to all ISMA Members a world-wide,
-     royalty-free, non-exclusive license:
-     (a) to intellectual property rights (Copyright and Patent) in the
-         Contributed Code in this Test Tools submission Licensable 
-         by the Submitting Member.
-     (b) to use, reproduce and modify the Test Tools for the non-Commercial
-         Use of self-testing the ISMA Member's own products in reference
-         to the ISMA specifications.
-
-        'Commercial Use' means distribution or otherwise making the
-         sumbitted source code available to a non-ISMA Member.
-
-     (c) to make derivative works of the Test Tools that improve or extend
-         the utility of the Test Tools so long as the ISMA Member that
-         creates such derivative work submits it back to ISMA, subject to
-         the same terms and conditions described herein.
-     (d) which does not include the right to sublicense or assign, or the
-         right to incorporate the Test Tools in the ISMA Member's own products.
-     (e) for as long as the Member remains an ISMA Member.
-
-1.3  Submitting Member, Previous Submitting Members and ISMA, MAKE NO WARRANTY 
-     OF NONINFRINGEMENT OF THE INTELLECTUAL PROPERTY RIGHTS OF THIRD PARTIES.  
-     ISMA Member agrees that ISMA, Submitting Member, and the Previous Submitting
-     Members shall NOT be liable or held responsible if use of the Test Tools 
-     is found to infringe the intellectual property rights of third parties.
-
-1.4  Submitting Member represents that it holds a good faith belief that the
-     Test Tools source code submitted may be of assistance to ISMA Members
-     in self-testing their products with reference to the ISMA Specification.
-     HOWEVER, SUBMITTING MEMBER, PREVIOUS SUBMITTING MEMBERS, AND ISMA MAKE
-     NO WARRANTIES, EXPRESS OR IMPLIED AND, IN PARTICULAR, NO WARRANTY OF 
-     MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE. ISMA MEMBERS 
-     UTILIZING THE TEST TOOLS DO SO AT THEIR OWN RISK.  SUBMITTING MEMBER, 
-     PREVIOUS SUBMITTING MEMBERS, AND ISMA DISCLAIM ALL RESPONSIBILITY 
-     FOR DAMAGES OR LIABILITY OF ANY KIND TO MEMBERS.
-
-1.5  If the Submitting Member has knowledge that a license under a third 
-     party's intellectual property rights may be required to exercise the
-     rights granted by Submitting Member under Sections 1.1(b) or 1.2(b,c,d,e),
-     the Submitting Member agrees to include a text file with the Test Tools 
-     submitted titled 'LEGAL-3PARTY' which describes the claim and the party 
-     making the claim in sufficient detail that a user will know whom to contact.
-
-1.6  Submitting Member and Previous Submitting Members assume no 
-     obligation to support or to update the submitted Test Tools 
-     beyond the requirements of 1.5
-
-1.7  ISMA assumes no obligation to support or to update any Test Tools and
-     reserves the right to remove from the ISMA web site at any time any 
-     Test Tools it finds to be infringing or otherwise problematical.
 */
+
 
 #include "ValidateMP4.h"
 #if STAND_ALONE_APP
@@ -215,6 +140,7 @@ int main(void)
     vg.checkSubSegAlignment = false;
     vg.minBufferTime = -1;
     vg.bandwidth = -1;
+    vg.suggestBandwidth = false;
     vg.isoLive = false;
     vg.isoondemand = false;
     vg.dynamic = false;
@@ -283,6 +209,8 @@ int main(void)
             getNextArgStr( &temp, "minbuffertime" ); vg.minBufferTime = atof(temp);
         } else if ( keymatch( arg, "bandwidth", 9 ) ) {
             getNextArgStr( &temp, "bandwidth" ); vg.bandwidth = atoi(temp);
+        } else if ( keymatch( arg, "sbw", 3 ) ) {
+                vg.suggestBandwidth = true;
         } else if ( keymatch( arg, "isolive", 7 ) ) {
                 vg.isoLive = true;
         } else if ( keymatch( arg, "isoondemand", 7 ) ) {
@@ -454,6 +382,8 @@ int main(void)
                 vg.segmentSizes = (UInt64 *)malloc(sizeof(UInt64)*numSegments);
                 vg.segmentInfoSize = numSegments;
                 vg.simsInStyp = (bool *)malloc(sizeof(bool)*numSegments);
+                vg.psshFoundInSegment = (bool *)malloc(sizeof(bool)*numSegments);
+                vg.tencFoundInSegment = (bool *)malloc(sizeof(bool)*numSegments);
                 vg.dsms = (bool *)malloc(sizeof(bool)*numSegments);
             }
 
@@ -471,6 +401,8 @@ int main(void)
                 {
                     vg.segmentSizes[numSegments] = temp2;
                     vg.simsInStyp[numSegments] = false;
+                    vg.psshFoundInSegment[numSegments] = false;
+                    vg.tencFoundInSegment[numSegments] = false;
                     vg.dsms[numSegments] = false;
                 }
                 numSegments++;
@@ -500,10 +432,17 @@ int main(void)
         vg.segmentSizes[0] = aoe.size;
         vg.simsInStyp = (bool *)malloc(sizeof(bool)*1);
         vg.simsInStyp[0] = false;
+        vg.psshFoundInSegment = (bool *)malloc(sizeof(bool)*1);
+        vg.psshFoundInSegment[0] = false;
+        vg.tencFoundInSegment = (bool *)malloc(sizeof(bool)*1);
+        vg.tencFoundInSegment[0] = false;
         vg.dsms = (bool *)malloc(sizeof(bool)*1);
         vg.dsms[0] = false;
         vg.dashSegment = false;
     }
+    
+    vg.psshInInit = false;
+    vg.tencInInit = false;
     vg.processedStypes = 0;
     vg.accessUnitDurationNonIndexedTrack = 0;
 
@@ -553,6 +492,7 @@ usageError:
 	fprintf( stderr, "    -ssegal -         Check Subegment alignment based on <Leaf Info File>\n" );
 	fprintf( stderr, "    -bandwidth        For checking @bandwidth/@minBufferTime\n" );
 	fprintf( stderr, "    -minbuffertime    For checking @bandwidth/@minBufferTime\n" );
+	fprintf( stderr, "    -sbw              Suggest a good @bandwidth if the one provided is non-conforming\n" );
 	fprintf( stderr, "    -isolive          Make checks specific for media segments conforming to ISO Base media file format live profile\n" );
 	fprintf( stderr, "    -isoondemand      Make checks specific for media segments conforming to ISO Base media file format On Demand profile\n" );
 	fprintf( stderr, "    -isomain          Make checks specific for media segments conforming to ISO Base media file format main profile\n" );
