@@ -13,7 +13,7 @@ class RemoteJob < ActiveRecord::Base
     def initialize_for_conformance_checking(job)
       new({
         command: 'ant',
-        arguments: "run -f #{EBU::CONFORMANCE_ANT_BUILD_FILE} -Dinput=#{job.output_destination}"
+        arguments: "run -f #{EBU::CONFORMANCE_ANT_BUILD_FILE} -Dinput=#{job.output_destination} -Dschema=schemas/DASH-MPD.xsd"
       })
     end
     
