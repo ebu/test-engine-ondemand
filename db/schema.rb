@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140701073507) do
+ActiveRecord::Schema.define(version: 20140804092548) do
 
   create_table "codem_notifications", force: true do |t|
     t.string   "status"
@@ -133,7 +133,7 @@ ActiveRecord::Schema.define(version: 20140701073507) do
     t.integer  "encoder_preset_template_id"
     t.integer  "source_file_id"
     t.string   "source_file_path"
-    t.string   "encoder_flags"
+    t.text     "encoder_flags"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "status",                     default: 0
