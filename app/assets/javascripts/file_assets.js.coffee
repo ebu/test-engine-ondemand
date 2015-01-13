@@ -2,7 +2,7 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 jQuery ->
-  if ($('#plugit_wrapper').data('controller') == 'file_assets' && $('#plugit_wrapper').data('action') == 'index')
+  if ($('#wrapper').data('controller') == 'file_assets' && $('#wrapper').data('action') == 'index')
     $('#file_asset_resource').on 'change', changeHandler
     $('#submit').on 'click', submitHandler
 

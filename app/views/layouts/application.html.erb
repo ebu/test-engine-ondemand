@@ -13,7 +13,7 @@
   <div class="container">
   <%= render 'layouts/navigation' %>
 
-  <div id="plugit_wrapper" data-controller="<%= "#{params[:controller]}" %>" data-action="<%= "#{params[:action]}" %>">
+  <div id="wrapper" data-controller="<%= "#{params[:controller]}" %>" data-action="<%= "#{params[:action]}" %>">
   <main role="main">
       <%= render 'layouts/flash' %>
       <%= yield %>
@@ -21,7 +21,5 @@
   </div>
 </div>
 
-<div id="csrf_proxy" data-csrf-param="csrfmiddlewaretoken" data-csrf-token="{~__PLUGIT_CSRF_TOKEN__~}">
-  
 </body>
 </html>

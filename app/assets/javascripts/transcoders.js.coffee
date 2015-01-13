@@ -2,7 +2,7 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 jQuery ->
-  if ($('#plugit_wrapper').data('controller') == 'transcoders' && $('#plugit_wrapper').data('action') == 'index')
+  if ($('#wrapper').data('controller') == 'transcoders' && $('#wrapper').data('action') == 'index')
     refreshTranscoderStatus()
 
 refreshTranscoderStatus = () =>

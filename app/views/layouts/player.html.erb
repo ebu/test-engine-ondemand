@@ -2,18 +2,18 @@
 <html ng-app="DashPlayer">
 <head>
   <title>EBU on-demand test engine</title>
-  <%= plugit_stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= yield :additional_styles %>
-  <%= plugit_javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= yield :additional_scripts %>
-  <%#= csrf_meta_tags %>
+  <%= csrf_meta_tags %>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body ng-controller="DashController" data-controller="<%= "#{params[:controller]}" %>" data-action="<%= "#{params[:action]}" %>">
   <div class="container">
   <%= render 'layouts/navigation' %>
 
-  <div id="plugit_wrapper" data-controller="<%= "#{params[:controller]}" %>" data-action="<%= "#{params[:action]}" %>">
+  <div id="wrapper" data-controller="<%= "#{params[:controller]}" %>" data-action="<%= "#{params[:action]}" %>">
   <main role="main">
       <%= render 'layouts/flash' %>
       <%= yield %>

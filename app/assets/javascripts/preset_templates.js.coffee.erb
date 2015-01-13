@@ -12,7 +12,7 @@ presets = {
 }
 
 jQuery ->
-  if ($('#plugit_wrapper').data('controller') == 'preset_templates' && ($('#plugit_wrapper').data('action') == 'new' || $('#plugit_wrapper').data('action') == 'create'))
+  if ($('#wrapper').data('controller') == 'preset_templates' && ($('#wrapper').data('action') == 'new' || $('#wrapper').data('action') == 'create'))
     $('#preset_template_preset_type').on 'change', changeHandler
     $('#preset_template_preset_type').change()
 
