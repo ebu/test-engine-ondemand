@@ -7,33 +7,33 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <%= plugit_link_to 'Dashboard', root_path, class: "navbar-brand #{active_nav_item("dashboard")}" %>
+      <%= link_to 'Dashboard', root_path, class: "navbar-brand #{active_nav_item("dashboard")}" %>
     </div>
     <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
       <ul class="nav navbar-nav">
         <li class="<%= active_nav_item("file_assets") %>">
-          <%= plugit_link_to 'Assets Library', file_assets_path %>
+          <%= link_to 'Assets Library', file_assets_path %>
         </li>
         <li class="<%= active_nav_item("preset_templates") %>">
-          <%= plugit_link_to 'Preset Templates', preset_templates_path %>
+          <%= link_to 'Preset Templates', preset_templates_path %>
         </li>
         <li class="<%= active_nav_item("encoding_jobs") %>">
-          <%= plugit_link_to 'Encoding Jobs', encoding_jobs_path %>
+          <%= link_to 'Encoding Jobs', encoding_jobs_path %>
         </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <% if auth_is_admin? %>
+        <% if true %>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin tools <b class="caret"></b></a>
           <ul class="dropdown-menu">
             <li class="<%= active_nav_item("transcoders") %>">
-              <%= plugit_link_to 'Transcoders', transcoders_path %>
+              <%= link_to 'Transcoders', transcoders_path %>
             </li>
             <li class="<%= active_nav_item("organizations") %>">
-              <%= plugit_link_to 'Organizations', organizations_path %>
+              <%= link_to 'Organizations', organizations_path %>
             </li>
             <li class="<%= active_nav_item("tags") %>">
-              <%= plugit_link_to 'Tags', tags_path %>
+              <%= link_to 'Tags', tags_path %>
             </li>
           </ul>
         </li>
