@@ -1,6 +1,4 @@
-class TagsController < PlugitController
-  before_filter :require_admin
-
+class TagsController < ApplicationController
   def index
     @encoding_job_device_playout_tags = Tag.encoding_job_device_playout
     @encoding_job_specification_tags  = Tag.encoding_job_specification

@@ -1,6 +1,5 @@
 # Controller managing the organizations that have write access to the application.
-class OrganizationsController < PlugitController
-  before_filter :require_admin
+class OrganizationsController < ApplicationController
   before_filter :update_organizations, only: [ :index ]
   
   def index

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140804092548) do
+ActiveRecord::Schema.define(version: 20150113133307) do
 
   create_table "codem_notifications", force: true do |t|
     t.string   "status"
@@ -115,18 +115,12 @@ ActiveRecord::Schema.define(version: 20140804092548) do
   end
 
   create_table "users", force: true do |t|
-    t.integer  "ebu_id"
-    t.string   "first_name"
-    t.string   "last_name"
-    t.string   "organization_name"
-    t.integer  "organization_id"
-    t.string   "username"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "uid"
   end
 
-  add_index "users", ["ebu_id"], name: "index_users_on_ebu_id", using: :btree
-  add_index "users", ["organization_id"], name: "index_users_on_organization_id", using: :btree
+  add_index "users", ["uid"], name: "index_users_on_uid", using: :btree
 
   create_table "variant_jobs", force: true do |t|
     t.integer  "encoding_job_id"

@@ -1,6 +1,7 @@
 # Controller managing notifications from http-runner.
 class HttpRunnerNotificationsController < ApplicationController
   skip_before_action :verify_authenticity_token, only: [ :create ]
+  skip_before_action :require_login, only: [ :create ]
   
   def create
     if remote_job = RemoteJob.find_by(remote_id: params["id"])

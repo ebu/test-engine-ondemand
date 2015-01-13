@@ -1,8 +1,5 @@
 # Dashboard overview controller.
-class DashboardController < PlugitController
-  # All users that can login can access this controller.
-  before_filter :require_login
-  
+class DashboardController < ApplicationController
   # Index overview for the dashboard.
   #
   # Shows recently encoded jobs and any reference encoding jobs.

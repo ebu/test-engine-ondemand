@@ -1,6 +1,4 @@
-class TranscodersController < PlugitController
-  before_filter :require_admin
-
+class TranscodersController < ApplicationController
   def index
     @transcoders = Transcoder.all
   end

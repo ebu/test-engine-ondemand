@@ -1,13 +1,8 @@
 # Encoding Jobs controller. Handles all actions related to encoding jobs.
-class EncodingJobsController < PlugitController
+class EncodingJobsController < ApplicationController
   # Only a login is required for the read-only actions index, show, status and play.
-  before_filter :require_login, only: [ :index, :show, :status, :play ]
-  # Write access is required for creating, destroying jobs.
-  before_filter :require_write_access, only: [ :new, :create, :destroy ]
-  # Require admin access for referencing/unreferencing.
-  before_filter :require_admin, only: [ :reference_presets, :unreference_presets, :reference, :unreference,
-                                        :reference_source_files, :unreference_source_files ]
-                                        
+  before_filter :require_login, only: [ :index, :show, :status, :play, :new, :create, :destroy, :reference_presets, :unreference_presets,
+                                        :reference, :unreference, :reference_source_files, :unreference_source_files ]
   # Assign the job for specific actions
   before_filter :assign_job, only: [ :show, :destroy, :status, :play, :reference_presets, :unreference_presets,
                                      :reference, :unreference, :reference_source_files, :unreference_source_files ]

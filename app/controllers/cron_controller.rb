@@ -1,5 +1,7 @@
 # Controller containing periodic actions that can be called for example from cron.
 class CronController < ApplicationController
+  skip_before_action :require_login, only: [ :job_state, :purge, :organizations ]
+  
   # Transition all jobs if needed.
   def job_state
     EncodingJob.transition

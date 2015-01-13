@@ -2,6 +2,7 @@
 class CodemNotificationsController < ApplicationController
   # The Codem callback does not use the authenticity token.
   skip_before_action :verify_authenticity_token, only: [ :create ]
+  skip_before_action :require_login, only: [ :create ]
   
   # Create and save a new Codem notification.
   def create

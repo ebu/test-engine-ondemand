@@ -1,7 +1,4 @@
-class PresetTemplatesController < PlugitController
-  before_filter :require_login, only: [ :index ]
-  before_filter :require_write_access, only: [ :new, :create, :destroy ]
-  
+class PresetTemplatesController < ApplicationController
   def index
     @encoder_presets = PresetTemplate.owned(logged_in_user).encoder_preset
     @post_processing_presets = PresetTemplate.owned(logged_in_user).post_processing_preset
