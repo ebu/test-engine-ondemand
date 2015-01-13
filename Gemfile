@@ -35,10 +35,6 @@ end
 group :development do
   # Use foreman in development mode
   gem 'foreman'
-  
-  gem "capistrano", '~> 2.15.5'
-  gem "capistrano-ext"
-  gem 'capistrano_colors'
 end
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
