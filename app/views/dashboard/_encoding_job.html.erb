@@ -1,7 +1,7 @@
 <tr>
   <td><%= encoding_job.id %></td>
   <td><%= encoding_job.description %></td>
-  <td><%= tags_for encoding_job.combined_tags %></td>
+  <td><%#= tags_for encoding_job.tags %></td>
   <td><%= time_ago_in_words encoding_job.created_at %> ago</td>
   <td><%= formatted_owner(encoding_job.user) %></td>
   <td>

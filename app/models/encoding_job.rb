@@ -1,6 +1,5 @@
 class EncodingJob < ActiveRecord::Base
   include EncodingJobStatuses
-  include Referencable
   include Expirable
   include Owned
   
@@ -16,42 +15,17 @@ class EncodingJob < ActiveRecord::Base
   
   accepts_nested_attributes_for :variant_jobs
   
-  serialize :device_playout_tags, Array
-  serialize :specification_tags, Array
-  serialize :combined_tags, Array
+  serialize :tags, Array
   
   before_create do
     self.random_id = SecureRandom.hex(8)
-    self.combined_tags = (
-      device_playout_tags +
-      specification_tags +
-      variant_jobs.collect(&:tags) +
-      post_processing_template.tags
-    ).flatten.uniq.reject { |t| t.blank? }
   end
-  
-  scope :recently_encoded, -> { success.limit(10).order("created_at DESC") }
-  scope :referenced_for_dashboard, -> { success.referenced.order("created_at DESC") }
   
   before_destroy :verify_destroy
   after_destroy :remove_output_files
-
-  # Check if presets are still available
-  def presets_available?
-    !post_processing_template.blank? && variant_jobs.all? { |v| !v.encoder_preset_template.blank? }
-  end
   
-  # Check if presets are referenced
-  def presets_referenced?
-    post_processing_template.try(:is_reference?) && variant_jobs.all? { |v| v.encoder_preset_template.try(:is_reference?) }
-  end
-  
-  def source_files_available?
-    variant_jobs.all? { |v| !v.source_file.blank? }
-  end
-
-  def source_files_referenced?
-    variant_jobs.all? { |v| v.source_file.try(:is_reference?) }
+  def self.recently_encoded(user)
+    owned(user).success.limit(10).order('created_at DESC')
   end
   
   # Check if post-processing completed successfully.
@@ -88,33 +62,6 @@ class EncodingJob < ActiveRecord::Base
 
   def mpd_url
     '/' + ['dash', self.randomized_id, 'dash.mpd'].join('/')
-  end
-  
-  # Post encoding job to EBU.io forum. Will silently fail is something goes wrong, so the
-  # job will not be marked as failed.
-  def post_to_forum
-    begin
-      response = RestClient::Request.execute(
-        method: :post,
-        url: EBU::API_URL + "/ebuio/forum/",
-        timeout: EBU::NETWORK_TIMEOUT,
-        open_timeout: EBU::NETWORK_TIMEOUT,
-        headers: { 'Accept-Charset' => 'utf-8' },
-        payload: {
-          subject: "New encoding: #{self.description}",
-          author: self.user_id.to_s,
-          message: forum_message_template,
-          tags: combined_tags.blank? ? "encoding" : combined_tags.join(',')
-        }
-      )
-      if response.code == 200 && obj = JSON.parse(response.to_str)
-        self.update_attribute(:forum_url, obj["url"])
-      end
-    rescue Timeout::Error => e
-      nil
-    rescue => e
-      nil
-    end
   end
   
   private
@@ -154,34 +101,5 @@ class EncodingJob < ActiveRecord::Base
   def create_conformance_checking_job
     self.conformance_checking_job = RemoteJob.initialize_for_conformance_checking(self)
     self.save
-  end
-  
-  def forum_message_template
-    mpd_url = "#{EBU::APP_HOST}/#{Rails.application.config.ebu_plugit_local_root}/media/" + ['dash', self.randomized_id, 'dash.mpd'].join('/')
-    template = "A new encoding was added to the test encoding platform using the following settings: 
-
-* * *
-
-### Variant Jobs
-
-"
-
-self.variant_jobs.each do |v|
-  template << "
-* **Source file**: `#{v.source_file.resource_file_name}`
-* **Preset settings**: `#{v.encoder_flags}`
-
-  "
-end
-
-template << "
-### Post-processing preset
-
-`#{self.post_processing_flags}`
-
-
-[View this video in Dash.js player](http://ebu.io/#{Rails.application.config.ebu_plugit_root}/encoding_jobs/#{self.id}/play)
-
-Raw MPD: [#{mpd_url}](#{mpd_url})"
   end
 end

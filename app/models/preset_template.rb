@@ -1,10 +1,7 @@
 class PresetTemplate < ActiveRecord::Base
-  include Referencable
   include Owned
   
   enum preset_type: [ :encoder_preset, :post_processing_preset ]
-  
-  serialize :tags, Array
   
   HUMAN_READABLE_PRESET_TYPES = [ 'Encoder preset (ffmpeg)', 'Post-processing preset (MP4Box)' ].freeze
   
