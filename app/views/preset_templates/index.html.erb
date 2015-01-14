@@ -45,6 +45,4 @@
   </div>
 </div>
 
-<% if auth_can_write? %>
-<%= plugit_link_to "Add preset template", new_preset_template_path, class: "btn btn-primary" %>
-<% end %>
+<%= link_to "Add preset template", new_preset_template_path, class: "btn btn-primary" %>

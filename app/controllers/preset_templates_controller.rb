@@ -11,7 +11,7 @@ class PresetTemplatesController < ApplicationController
   
   def create
     @preset_template = PresetTemplate.new(user_params)
-    @preset_template.user_id = logged_in_user_id
+    @preset_template.user = logged_in_user
     @preset_template.tags = @preset_template.tags.uniq.reject { |t| t.blank? }
     
     if @preset_template.save
@@ -25,7 +25,7 @@ class PresetTemplatesController < ApplicationController
   
   def destroy
     @preset_template = PresetTemplate.find(params[:id])
-    if @preset_template.can_be_destroyed_by?(logged_in_user, is_admin?) && @preset_template.destroy
+    if @preset_template.can_be_destroyed_by?(logged_in_user) && @preset_template.destroy
       flash[:notice] = "Preset template removed."
     else
       flash[:alert] = "Unable to remove preset template."
@@ -36,6 +36,6 @@ class PresetTemplatesController < ApplicationController
   private
   
   def user_params
-    params.require(:preset_template).permit(:preset_type, :template_text, :description, :user_id, tags: [])
+    params.require(:preset_template).permit(:preset_type, :template_text, :description, tags: [])
   end
 end
