@@ -101,7 +101,6 @@
     </div>
     <% end %>
     
-    <% if auth_is_admin? %>
     <div class="row">
       <div class="panel panel-default">
           <div class="panel-heading panel-top">
@@ -143,8 +142,6 @@
       </div>
     </div>
 
-    <% end %>
-
     <div class="row">
       <div class="panel panel-default">
         <div class="panel-heading">
@@ -169,19 +166,17 @@
             </li>
           </ul>
           
-          <% if auth_is_admin? %>
             <% if @encoding_job.presets_available? %>
               <% if @encoding_job.presets_referenced? %>
-                <%= plugit_link_to 'Remove preset templates as reference', unreference_presets_encoding_job_path(@encoding_job), method: 'PUT', class: 'btn btn-danger', data: { confirm: "This will remove the presets as a reference and prevent others from reusing them. Are you sure?" } %>
+                <%= link_to 'Remove preset templates as reference', unreference_presets_encoding_job_path(@encoding_job), method: 'PUT', class: 'btn btn-danger', data: { confirm: "This will remove the presets as a reference and prevent others from reusing them. Are you sure?" } %>
                 <em>These preset templates are currently a reference.</em>
               <% else %>
-                <%= plugit_link_to 'Make preset templates a reference', reference_presets_encoding_job_path(@encoding_job), method: 'PUT', class: 'btn btn-success' %>
+                <%= link_to 'Make preset templates a reference', reference_presets_encoding_job_path(@encoding_job), method: 'PUT', class: 'btn btn-success' %>
                 <em>These preset templates are currently not a reference.</em>
               <% end %>
             <% else %>
               <em>Not all preset templates are still available. They can't me made a reference.</em>
             <% end %>
-          <% end %>
         </div>
       </div>
     </div>

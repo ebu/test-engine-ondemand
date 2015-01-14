@@ -25,7 +25,7 @@ class EncodingJobsController < ApplicationController
   # Create a new encoding job belonging to the logged in user.
   def create
     @encoding_job = EncodingJob.new(user_params)
-    @encoding_job.user_id = logged_in_user_id
+    @encoding_job.user = logged_in_user
     @encoding_job.device_playout_tags = @encoding_job.device_playout_tags.uniq.reject { |t| t.blank? }
     @encoding_job.specification_tags = @encoding_job.specification_tags.uniq.reject { |t| t.blank? }
     
@@ -40,7 +40,7 @@ class EncodingJobsController < ApplicationController
   
   # Destroy the specified encoding job.
   def destroy
-    if @encoding_job.can_be_destroyed_by?(logged_in_user, is_admin?) && @encoding_job.destroy
+    if @encoding_job.can_be_destroyed_by?(logged_in_user) && @encoding_job.destroy
       flash[:notice] = 'Encoding job removed'
     else
       flash[:warn] = "Unable to remove encoding job."
@@ -50,7 +50,6 @@ class EncodingJobsController < ApplicationController
   
   # Render a partial HTML response with the status of the job.
   def status
-    response.headers["EbuIo-PlugIt-NoTemplate"] = ''
     render layout: false
   end
   
@@ -123,7 +122,6 @@ class EncodingJobsController < ApplicationController
       :description,
       :post_processing_template_id,
       :post_processing_flags,
-      :user_id,
       variant_jobs_attributes: [ :encoder_preset_template_id, :encoder_flags, :source_file_id ],
       device_playout_tags: [],
       specification_tags: [])
