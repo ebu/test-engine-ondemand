@@ -1,4 +1,4 @@
-<%= form_for @transcoder, url: url_for_plugit(transcoders_path), html: {role: "form" } do |f| %>
+<%= form_for @transcoder, url: transcoders_path, html: {role: "form" } do |f| %>
 <input type="hidden" name="csrfmiddlewaretoken" value="{~__PLUGIT_CSRF_TOKEN__~}"/>
 <div class="form-group">
 <%= f.label 'Host name: ' %>
@@ -10,7 +10,7 @@
 <%= f.text_field :port, :placeholder => "Port of transcoder, e.g. '8080'", :class => "form-control", data: { required: true } %><br/>
 </div>
 
-<%= plugit_link_to "Cancel", transcoders_path, :class => "btn btn-default" %>
+<%= link_to "Cancel", transcoders_path, :class => "btn btn-default" %>
 <%= f.submit :class => "btn btn-primary", :value => "Save" %>
 
 <% end %>

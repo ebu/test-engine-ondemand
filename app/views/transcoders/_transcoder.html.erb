@@ -2,8 +2,8 @@
   <td><%= transcoder.id %></td>
   <td><%= transcoder.host_name %></td>
   <td><%= transcoder.port %></td>
-  <td data-availability-url="<%= url_for_plugit(available_transcoder_path(transcoder)) %>"><span class="label label-default">Unknown</span></td>
+  <td data-availability-url="<%= available_transcoder_path(transcoder) %>"><span class="label label-default">Unknown</span></td>
   <td>
-    <%= plugit_link_to "Remove", transcoder_path(transcoder), method: 'delete', data: { confirm: 'This will remove your transcoder from the pool. Are you sure?' }, class: "btn btn-danger btn-sm" %>
+    <%= link_to "Remove", transcoder_path(transcoder), method: 'delete', data: { confirm: 'This will remove your transcoder from the pool. Are you sure?' }, class: "btn btn-danger btn-sm" %>
   </td>
 </tr>

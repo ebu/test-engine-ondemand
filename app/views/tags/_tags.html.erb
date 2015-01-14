@@ -2,7 +2,7 @@
 
 <%= javascript_tag do %>
 $('#tags_<%= tag_type %>').tagsManager({
-  AjaxPush: '/<%= Rails.application.config.ebu_plugit_root %>/tags',
+  AjaxPush: '<%= tags_path %>',
   AjaxPushAllTags: true,
   AjaxPushParameters: {
     'csrfmiddlewaretoken': '{~__PLUGIT_CSRF_TOKEN__~}',

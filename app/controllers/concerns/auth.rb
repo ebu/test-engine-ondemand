@@ -19,6 +19,6 @@ module Auth
   end
   
   def logged_in_user
-    (session && session['uid']) ? User.find_by(uid: session['uid']) : nil
+    @user ||= (session && session['uid']) ? User.find_by(uid: session['uid']) : nil
   end
 end
