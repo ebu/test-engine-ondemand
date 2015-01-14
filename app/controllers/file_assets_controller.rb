@@ -10,14 +10,14 @@ class FileAssetsController < ApplicationController
   
   def create
     @file_asset = FileAsset.new(user_params)
-    @file_asset.user_id = logged_in_user_id
+    @file_asset.user = logged_in_user
     @file_asset.save!
     render :ok, nothing: true
   end
   
   def destroy
     @file_asset = FileAsset.find(params[:id])
-    if @file_asset.can_be_destroyed_by?(logged_in_user, is_admin?) && @file_asset.destroy
+    if @file_asset.can_be_destroyed_by?(logged_in_user) && @file_asset.destroy
       flash[:notice] = "File removed."
     else
       flash[:alert] = "Unable to remove file."
@@ -28,6 +28,6 @@ class FileAssetsController < ApplicationController
   private
   
   def user_params
-    params.require(:file_asset).permit(:resource, :user_id)
+    params.require(:file_asset).permit(:resource)
   end
 end
