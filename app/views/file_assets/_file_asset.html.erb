@@ -4,8 +4,6 @@
   <td><%= number_to_human_size file_asset.resource_file_size %></td>
   <td class="hidden-xs"><%= l file_asset.created_at, :format => :long %></td>
   <td>
-    <% if auth_can_write? %>
-    <%= link_to "Remove", url_for_plugit(file_asset_path(file_asset)), method: 'delete', data: { confirm: 'This will remove your source file. Are you sure?' }, class: "btn btn-danger btn-sm", disabled: file_asset.is_reference? %>
-    <% end %>
+    <%= link_to "Remove", file_asset_path(file_asset), method: 'delete', data: { confirm: 'This will remove your source file. Are you sure?' }, class: "btn btn-danger btn-sm", disabled: file_asset.is_reference? %>
   </td>
 </tr>

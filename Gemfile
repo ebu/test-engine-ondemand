@@ -19,7 +19,7 @@ gem 'coffee-rails', '~> 4.0.0'
 gem 'jquery-rails'
 
 # Use bootstrap SCSS gem
-gem 'bootstrap-sass', '~> 3.1.0'
+gem 'bootstrap-sass', '~> 3.3.1'
 
 # Use paperclip for file uploads
 gem "paperclip", "~> 3.0"

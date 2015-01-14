@@ -5,7 +5,6 @@ $('#tags_<%= tag_type %>').tagsManager({
   AjaxPush: '<%= tags_path %>',
   AjaxPushAllTags: true,
   AjaxPushParameters: {
-    'csrfmiddlewaretoken': '{~__PLUGIT_CSRF_TOKEN__~}',
     'tag_type': <%= tag_type %>
   },
   prefilled: <%= tags.collect(&:name).to_json.html_safe %>

@@ -28,7 +28,7 @@ EbuOndemand::Application.routes.draw do
     end
   end
 
-  resources :tags
+  resources :tags, only: [:index, :create]
   
   # Dynamic route to send files from public/media. Better done using a Apache
   # rewrite rule in production! This is only included here as a fallback.
