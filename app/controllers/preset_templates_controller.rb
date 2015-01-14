@@ -2,7 +2,6 @@ class PresetTemplatesController < ApplicationController
   def index
     @encoder_presets = PresetTemplate.owned(logged_in_user).encoder_preset
     @post_processing_presets = PresetTemplate.owned(logged_in_user).post_processing_preset
-    @referenced_preset_templates = PresetTemplate.referenced
   end
   
   def new

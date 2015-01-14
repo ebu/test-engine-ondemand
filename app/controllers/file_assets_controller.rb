@@ -5,7 +5,6 @@ class FileAssetsController < ApplicationController
   
   def index
     @file_assets = FileAsset.owned(logged_in_user).order("created_at DESC")
-    @referenced_file_assets = FileAsset.referenced
   end
   
   def create
