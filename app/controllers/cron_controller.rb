@@ -14,10 +14,4 @@ class CronController < ApplicationController
     FileAsset.purge!
     render :ok, nothing: true
   end
-  
-  # Refresh organisations list
-  def organizations
-    Organization.refresh
-    render :ok, nothing: true
-  end
 end
