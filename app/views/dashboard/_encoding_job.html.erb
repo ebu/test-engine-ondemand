@@ -5,7 +5,7 @@
   <td><%= time_ago_in_words encoding_job.created_at %> ago</td>
   <td><%= formatted_owner(encoding_job.user) %></td>
   <td>
-    <%= plugit_link_to_play(encoding_job) %>
-    <%= plugit_link_to_mpd(encoding_job) %>
+    <%= link_to('Play now', play_encoding_job_path(encoding_job), class: 'btn btn-primary btn-sm') %>
+    <%= link_to 'Raw MPD', raw_mpd_url(encoding_job) %>
   </td>
 </tr>

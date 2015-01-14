@@ -108,11 +108,11 @@
           </div>
           <div class="panel-body">
             <% if @encoding_job.is_reference? %>
-              <%= plugit_link_to 'Remove encoding as a reference', unreference_encoding_job_path(@encoding_job), method: 'PUT', class: 'btn btn-danger', data: { confirm: "This will remove the encoding as a reference. This means it may be expired and deleted."} %>
+              <%= link_to 'Remove encoding as a reference', unreference_encoding_job_path(@encoding_job), method: 'PUT', class: 'btn btn-danger', data: { confirm: "This will remove the encoding as a reference. This means it may be expired and deleted."} %>
               <em>This encoding is currently a reference. It won't be removed
                   by the normal clean-up tasks.</em>
             <% else %>
-                  <%= plugit_link_to 'Make encoding a reference', reference_encoding_job_path(@encoding_job), method: 'PUT', class: 'btn btn-success' %>
+                  <%= link_to 'Make encoding a reference', reference_encoding_job_path(@encoding_job), method: 'PUT', class: 'btn btn-success' %>
                   <em>This encoding is currently not a reference. It will be removed
                   in <%= distance_of_time_in_words(Time.now, @encoding_job.created_at + EBU::MAX_AGE) %>
                   if it is not made a reference.</em>
@@ -129,10 +129,10 @@
           <div class="panel-body">
             <% if @encoding_job.source_files_available? %>
               <% if @encoding_job.source_files_referenced? %>
-                <%= plugit_link_to 'Remove source files as reference', unreference_source_files_encoding_job_path(@encoding_job), method: 'PUT', class: 'btn btn-danger', data: { confirm: "This will remove the source files as a reference and prevent others from reusing them. Are you sure?" } %>
+                <%= link_to 'Remove source files as reference', unreference_source_files_encoding_job_path(@encoding_job), method: 'PUT', class: 'btn btn-danger', data: { confirm: "This will remove the source files as a reference and prevent others from reusing them. Are you sure?" } %>
                 <em>These source files are currently a reference.</em>
               <% else %>
-                <%= plugit_link_to 'Make source files a reference', reference_source_files_encoding_job_path(@encoding_job), method: 'PUT', class: 'btn btn-success' %>
+                <%= link_to 'Make source files a reference', reference_source_files_encoding_job_path(@encoding_job), method: 'PUT', class: 'btn btn-success' %>
                 <em>These source files are currently not a reference.</em>
               <% end %>
             <% else %>
@@ -152,7 +152,7 @@
           <ul>
             <% @encoding_job.variant_jobs.each do |v| %>
             <li>
-              <%= availability_label_for_template(v.encoder_preset_template) if auth_is_admin? %>
+              <%= availability_label_for_template(v.encoder_preset_template) %>
               <%= v.encoder_flags %>
             </li>
             <% end %>
@@ -161,7 +161,7 @@
           <b>MP4Box DASH settings:</b><br>
           <ul>
             <li>
-              <%= availability_label_for_template(@encoding_job.post_processing_template) if auth_is_admin? %>
+              <%= availability_label_for_template(@encoding_job.post_processing_template) %>
               <%= @encoding_job.post_processing_flags %>
             </li>
           </ul>
@@ -213,7 +213,7 @@
 <%= javascript_tag do %>
 $(window).on('load', function(e) {
   var scope = angular.element('body').scope();
-  scope.setStream({url: '<%= mpd_url @encoding_job %>'});
+  scope.setStream({url: '<%= @encoding_job.mpd_url %>'});
   scope.doLoad();
 })
 <% end %>

@@ -30,10 +30,6 @@ EbuOndemand::Application.routes.draw do
 
   resources :tags, only: [:index, :create]
   
-  # Dynamic route to send files from public/media. Better done using a Apache
-  # rewrite rule in production! This is only included here as a fallback.
-  get('/media/*other', to: "media#serve", format: false) unless Rails.env.production?
-  
   put  'codem_notifications'       => 'codem_notifications#create'
   post 'http_runner_notifications' => 'http_runner_notifications#create'
   

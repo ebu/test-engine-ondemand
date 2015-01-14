@@ -86,6 +86,10 @@ class EncodingJob < ActiveRecord::Base
     success? || failed? || initial?
   end
 
+  def mpd_url
+    '/' + ['dash', self.randomized_id, 'dash.mpd'].join('/')
+  end
+  
   # Post encoding job to EBU.io forum. Will silently fail is something goes wrong, so the
   # job will not be marked as failed.
   def post_to_forum

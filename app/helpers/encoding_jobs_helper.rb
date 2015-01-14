@@ -157,6 +157,10 @@ module EncodingJobsHelper
     link_to('Open in Dash.js player', play_encoding_job_path(job), class: 'btn btn-primary')
   end
 
+  def raw_mpd_url(job)
+    (root_url + job.mpd_url).gsub('//','/')
+  end
+  
   def queue_position_for(variant_job)
     pos = VariantJob.queue_position_for(variant_job)
     (pos.nil?) ? '' : "Queued (#{pos + 1})"

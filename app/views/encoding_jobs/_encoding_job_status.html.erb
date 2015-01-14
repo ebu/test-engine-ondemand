@@ -6,8 +6,8 @@
     <p><%= human_readable_summary_for encoding_job %></p>
     <% if encoding_job.success? %>
     <div>
-      <%#= plugit_link_to_play(encoding_job) %>
-      <%#= plugit_raw_mpd_link(encoding_job) %>
+      <%= link_to('Play now', play_encoding_job_path(encoding_job), class: 'btn btn-primary btn-sm') %>
+      <%= link_to raw_mpd_url(encoding_job), raw_mpd_url(encoding_job) %>
     </div>
     <% end %>
   </div>
