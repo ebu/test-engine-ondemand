@@ -1,7 +1,7 @@
 class PresetTemplatesController < ApplicationController
   def index
-    @encoder_presets = PresetTemplate.owned(logged_in_user).encoder_preset
-    @post_processing_presets = PresetTemplate.owned(logged_in_user).post_processing_preset
+    @encoder_presets = PresetTemplate.owned(@logged_in_user).encoder_preset
+    @post_processing_presets = PresetTemplate.owned(@logged_in_user).post_processing_preset
   end
   
   def new
@@ -10,7 +10,7 @@ class PresetTemplatesController < ApplicationController
   
   def create
     @preset_template = PresetTemplate.new(user_params)
-    @preset_template.user = logged_in_user
+    @preset_template.user = @logged_in_user
     @preset_template.tags = @preset_template.tags.uniq.reject { |t| t.blank? }
     
     if @preset_template.save
@@ -24,7 +24,7 @@ class PresetTemplatesController < ApplicationController
   
   def destroy
     @preset_template = PresetTemplate.find(params[:id])
-    if @preset_template.can_be_destroyed_by?(logged_in_user) && @preset_template.destroy
+    if @preset_template.can_be_destroyed_by?(@logged_in_user) && @preset_template.destroy
       flash[:notice] = "Preset template removed."
     else
       flash[:alert] = "Unable to remove preset template."

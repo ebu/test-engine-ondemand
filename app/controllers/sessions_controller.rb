@@ -20,9 +20,9 @@ class SessionsController < ApplicationController
   
   def create_session(user_info={})
     if user_info['uid']
-      session['uid'] = User.find_or_create(uid: user_info['uid'])
+      session['uid'] = User.find_or_create_by(uid: user_info['uid']).uid
     elsif !Rails.application.config.perform_omniauth_authentication
-      session['uid'] = User.find_or_create(uid: 'anonymous')
+      session['uid'] = User.find_or_create_by(uid: 'anonymous').uid
     end
   end
 end

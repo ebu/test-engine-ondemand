@@ -36,4 +36,7 @@ EbuOndemand::Application.routes.draw do
   get 'cron/job_state'
   get 'cron/purge'
   get 'cron/organizations'
+  
+  match '/auth/:provider/callback', to: "sessions#create", via: [:get, :post]
+  get '/login', to: 'sessions#login'
 end

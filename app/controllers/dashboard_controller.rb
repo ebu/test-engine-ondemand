@@ -4,6 +4,6 @@ class DashboardController < ApplicationController
   #
   # Shows recently encoded jobs.
   def index
-    @encoding_jobs = EncodingJob.recently_encoded logged_in_user
+    @encoding_jobs = EncodingJob.recently_encoded @logged_in_user
   end
 end

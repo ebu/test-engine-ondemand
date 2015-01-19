@@ -9,7 +9,7 @@ class EncodingJobsController < ApplicationController
   
   # Index action shows own jobs and reference jobs.
   def index
-    @encoding_jobs = EncodingJob.owned(logged_in_user).order("created_at DESC")
+    @encoding_jobs = EncodingJob.owned(@logged_in_user).order("created_at DESC")
   end
   
   # Show a specific job.
@@ -24,7 +24,7 @@ class EncodingJobsController < ApplicationController
   # Create a new encoding job belonging to the logged in user.
   def create
     @encoding_job = EncodingJob.new(user_params)
-    @encoding_job.user = logged_in_user
+    @encoding_job.user = @logged_in_user
     @encoding_job.device_playout_tags = @encoding_job.device_playout_tags.uniq.reject { |t| t.blank? }
     @encoding_job.specification_tags = @encoding_job.specification_tags.uniq.reject { |t| t.blank? }
     
@@ -39,7 +39,7 @@ class EncodingJobsController < ApplicationController
   
   # Destroy the specified encoding job.
   def destroy
-    if @encoding_job.can_be_destroyed_by?(logged_in_user) && @encoding_job.destroy
+    if @encoding_job.can_be_destroyed_by?(@logged_in_user) && @encoding_job.destroy
       flash[:notice] = 'Encoding job removed'
     else
       flash[:warn] = "Unable to remove encoding job."

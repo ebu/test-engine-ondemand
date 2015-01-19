@@ -1,16 +1,16 @@
 module EncodingJobsHelper
   def encoder_templates_for_select
-    user = controller.logged_in_user
+    user = @logged_in_user
     PresetTemplate.encoder_preset.owned_or_referenced(user).map { |p| [p.description, p.id, {'data-preset' => p.template_text}] }
   end
 
   def post_processing_templates_for_select
-    user = controller.logged_in_user
+    user = @logged_in_user
     PresetTemplate.post_processing_preset.owned_or_referenced(user).map { |p| [p.description, p.id, {'data-preset' => p.template_text}] }
   end
   
   def source_files_for_select
-    user = controller.logged_in_user
+    user = @logged_in_user
     FileAsset.owned_or_referenced(user).map { |f| [f.resource_file_name, f.id] }
   end
   
@@ -20,7 +20,7 @@ module EncodingJobsHelper
   # +FileAsset+, a +PresetTemplate+ for the encoder and a +PresetTemplate+
   # for the post processor.
   def encoding_job_new_allowed?
-    user = controller.logged_in_user
+    user = @logged_in_user
     FileAsset.owned_or_referenced(user).any? &&
     PresetTemplate.owned_or_referenced(user).encoder_preset.any? &&
     PresetTemplate.owned_or_referenced(user).post_processing_preset.any?
