@@ -27,6 +27,9 @@ gem "paperclip", "~> 3.0"
 # Use rest-client for transcoder communication
 gem "rest-client", "~> 1.6.7"
 
+# Use OmniAuth
+gem "omniauth", "~> 1.2.2"
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
